@@ -4,7 +4,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
-// --- CLOUD GLOW SHADERS ---
+// --- CLOUD GLOW SHADERS (Unchanged) ---
 const glowVertexShader = `
   varying vec2 vUv;
   void main() {
@@ -64,6 +64,9 @@ function PerfectSpheres() {
   const posRef = useRef<THREE.BufferAttribute>(null);
   const colRef = useRef<THREE.BufferAttribute>(null);
 
+  // --- HOVER TRACKING ---
+  const mousePos = useRef(new THREE.Vector3(999, 999, 0));
+
   const uniforms = useMemo(() => ({
     uColor: { value: new THREE.Color() },
     uTime: { value: 0 }
@@ -73,11 +76,8 @@ function PerfectSpheres() {
     const numLines = 100;
     const resolution = 100;
     const size = numLines * resolution * 12;
-    
     const offsets = new Float32Array(numLines);
-    for(let i = 0; i < numLines; i++) {
-        offsets[i] = Math.random() * 0.15;
-    }
+    for(let i = 0; i < numLines; i++) offsets[i] = Math.random() * 0.15;
 
     return {
       initialPositions: new Float32Array(size),
@@ -102,11 +102,13 @@ function PerfectSpheres() {
     const colors = colRef.current.array as Float32Array;
 
     let ptIdx = 0, colIdx = 0;
-    
-    // R remains zoomed at 7.5
     const R = 9; 
     const numLines = 100, resolution = 100;
     const speed = time * 0.02; 
+
+    // --- MOUSE COORDINATES ---
+    const mx = mousePos.current.x;
+    const my = mousePos.current.y;
 
     for (let i = 0; i < numLines; i++) {
       const baseTheta = (i / numLines) * Math.PI;
@@ -123,41 +125,50 @@ function PerfectSpheres() {
       for (let j = 0; j < resolution; j++) {
         const alphaStart = 0.01;
         const alphaEndMax = Math.PI * 0.95;
-
         const alpha1 = alphaStart + (j / resolution) * (alphaEndMax - alphaStart);
         const alpha2 = alphaStart + ((j + 1) / resolution) * (alphaEndMax - alphaStart);
 
+        const rx1 = R * (1 - Math.cos(alpha1));
+        const ry1 = R * Math.sin(alpha1) * Math.sin(thetaRight);
+        const lx1 = -R * (1 - Math.cos(alpha1));
+        const ly1 = R * Math.sin(alpha1) * Math.sin(thetaLeft);
+
         /* ── Right Sphere ── */
-        positions[ptIdx++] = R * (1 - Math.cos(alpha1));
-        positions[ptIdx++] = R * Math.sin(alpha1) * Math.sin(thetaRight);
+        positions[ptIdx++] = rx1;
+        positions[ptIdx++] = ry1;
         positions[ptIdx++] = 0;
         positions[ptIdx++] = R * (1 - Math.cos(alpha2));
         positions[ptIdx++] = R * Math.sin(alpha2) * Math.sin(thetaRight);
         positions[ptIdx++] = 0;
 
-        /* ── Left Sphere (Upper) ── */
-        positions[ptIdx++] = -R * (1 - Math.cos(alpha1));
-        positions[ptIdx++] = R * Math.sin(alpha1) * Math.sin(thetaLeft);
+        /* ── Left Sphere ── */
+        positions[ptIdx++] = lx1;
+        positions[ptIdx++] = ly1;
         positions[ptIdx++] = 0;
         positions[ptIdx++] = -R * (1 - Math.cos(alpha2));
         positions[ptIdx++] = R * Math.sin(alpha2) * Math.sin(thetaLeft);
         positions[ptIdx++] = 0;
 
-        /* ── FADING LOGIC ── */
+        /* ── FADING + HOVER BOOST ── */
         const poleFade1Right = Math.max(0, 1.0 - Math.pow(alpha1 / alphaEndMax, 1.5));
-        const poleFade2Right = Math.max(0, 1.0 - Math.pow(alpha2 / alphaEndMax, 1.5));
-
         const leftFadeCutoff = (Math.PI * 0.5) - lineOffset; 
         const poleFade1Left = Math.max(0, 1.0 - Math.pow(alpha1 / leftFadeCutoff, 1.3));
-        const poleFade2Left = Math.max(0, 1.0 - Math.pow(alpha2 / leftFadeCutoff, 1.3));
 
-        const i1R = poleFade1Right * edgeFadeRight, i2R = poleFade2Right * edgeFadeRight;
-        const i1L = poleFade1Left * edgeFadeLeft, i2L = poleFade2Left * edgeFadeLeft;
+        const i1R = poleFade1Right * edgeFadeRight;
+        const i1L = poleFade1Left * edgeFadeLeft;
 
-        colors[colIdx++] = i1R; colors[colIdx++] = i1R; colors[colIdx++] = i1R;
-        colors[colIdx++] = i2R; colors[colIdx++] = i2R; colors[colIdx++] = i2R;
-        colors[colIdx++] = i1L; colors[colIdx++] = i1L; colors[colIdx++] = i1L;
-        colors[colIdx++] = i2L; colors[colIdx++] = i2L; colors[colIdx++] = i2L;
+        // --- CALCULATE HOVER BRIGHTNESS ---
+        const distR = Math.sqrt(Math.pow(rx1 - mx, 2) + Math.pow(ry1 - my, 2));
+        const distL = Math.sqrt(Math.pow(lx1 - mx, 2) + Math.pow(ly1 - my, 2));
+        
+        // Boost intensity when mouse is close (e.g., within 2 units)
+        const boostR = Math.exp(-distR * 1.5) * 0.8;
+        const boostL = Math.exp(-distL * 1.5) * 0.8;
+
+        colors[colIdx++] = i1R + boostR; colors[colIdx++] = i1R + boostR; colors[colIdx++] = i1R + boostR;
+        colors[colIdx++] = i1R + boostR; colors[colIdx++] = i1R + boostR; colors[colIdx++] = i1R + boostR;
+        colors[colIdx++] = i1L + boostL; colors[colIdx++] = i1L + boostL; colors[colIdx++] = i1L + boostL;
+        colors[colIdx++] = i1L + boostL; colors[colIdx++] = i1L + boostL; colors[colIdx++] = i1L + boostL;
       }
     }
     posRef.current.needsUpdate = true;
@@ -165,9 +176,16 @@ function PerfectSpheres() {
   });
 
   return (
-    // X POSITION PUSHED: Increased from 8.2 to 9.2
-    // Y and Rotation are preserved from your perfect setup
     <group ref={groupRef} position={[12, -0.5, 0]} rotation={[0, 0, -0.50]}>
+      {/* ── SENSING PLANE (The Fix) ── */}
+      <mesh 
+        onPointerMove={(e) => mousePos.current.copy(e.point)}
+        onPointerLeave={() => mousePos.current.set(999, 999, 0)}
+        visible={false}
+      >
+        <planeGeometry args={[30, 30]} />
+      </mesh>
+
       <mesh position={[0, 0, -0.1]}>
         <planeGeometry args={[20, 20]} />
         <shaderMaterial ref={glowMatRef} vertexShader={glowVertexShader} fragmentShader={glowFragmentShader} uniforms={uniforms} transparent depthWrite={false} blending={THREE.AdditiveBlending} />
