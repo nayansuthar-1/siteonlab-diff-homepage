@@ -1,8 +1,74 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
 import WaveScene from "@/three/WaveScene";
 
+/* ── rotating words + their gradient colours ── */
+const WORDS = [
+  {
+    text: "web 3.0 project",
+    gradient: "linear-gradient(90deg, #f97316, #fb923c, #fdba74)",
+  },
+  {
+    text: "next big thing",
+    gradient: "linear-gradient(90deg, #818cf8, #a78bfa, #c084fc)",
+  },
+  {
+    text: "AI-powered solution",
+    gradient: "linear-gradient(90deg, #38bdf8, #60a5fa, #818cf8)",
+  },
+  {
+    text: "mobile app",
+    gradient: "linear-gradient(90deg, #34d399, #4ade80, #a3e635)",
+  },
+];
+
+const TYPE_SPEED = 80;
+const DELETE_SPEED = 50;
+const PAUSE_AFTER_TYPE = 2000;
+const PAUSE_AFTER_DELETE = 400;
+
 export default function Hero() {
+  const [wordIdx, setWordIdx] = useState(0);
+  const [displayed, setDisplayed] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const tick = useCallback(() => {
+    const full = WORDS[wordIdx].text;
+
+    if (!isDeleting) {
+      /* typing forward */
+      const next = full.slice(0, displayed.length + 1);
+      setDisplayed(next);
+
+      if (next === full) {
+        /* finished typing → pause, then start deleting */
+        setTimeout(() => setIsDeleting(true), PAUSE_AFTER_TYPE);
+        return;
+      }
+    } else {
+      /* deleting */
+      const next = full.slice(0, displayed.length - 1);
+      setDisplayed(next);
+
+      if (next === "") {
+        setIsDeleting(false);
+        setWordIdx((prev) => (prev + 1) % WORDS.length);
+        /* small pause before next word */
+        setTimeout(() => {}, PAUSE_AFTER_DELETE);
+        return;
+      }
+    }
+  }, [displayed, isDeleting, wordIdx]);
+
+  useEffect(() => {
+    const speed = isDeleting ? DELETE_SPEED : TYPE_SPEED;
+    const timer = setTimeout(tick, speed);
+    return () => clearTimeout(timer);
+  }, [tick, isDeleting]);
+
+  const currentGradient = WORDS[wordIdx].gradient;
+
   return (
     <section className="relative h-screen w-full bg-black overflow-hidden">
       {/* Shader background — full width */}
@@ -11,30 +77,113 @@ export default function Hero() {
       </div>
 
       {/* Content LEFT */}
-      <div className="relative z-10 h-full flex items-center px-8 md:px-20">
-        <div className="max-w-2xl">
-          <h1 className="text-white text-5xl md:text-7xl font-semibold leading-tight">
-            We build websites that{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
-              convert
+      <div className="relative z-10 h-full flex items-start pt-[16vh] px-8 md:px-20">
+        <div className="max-w-3xl">
+          <h1
+            style={{
+              fontFamily: "var(--font-plus-jakarta), sans-serif",
+              fontSize: "clamp(1.9rem, 3.8vw, 3rem)",
+              fontWeight: 600,
+              lineHeight: 1.15,
+              color: "#fff",
+              letterSpacing: "-0.025em",
+            }}
+          >
+            Build your{" "}
+            <span
+              className="hero-gradient-text"
+              style={{ "--hero-gradient": currentGradient } as React.CSSProperties}
+            >
+              {displayed}
             </span>
+            <span
+              className="hero-cursor"
+              style={{ "--hero-gradient": currentGradient } as React.CSSProperties}
+            />
+            <br />
+            with flawless technology,
+            <br />
+            design, and execution
           </h1>
 
-          <p className="text-white/70 mt-6 text-lg">
-            High-performance, visually stunning websites for modern businesses.
+          <p
+            style={{
+              color: "rgba(255,255,255,0.45)",
+              fontSize: "clamp(1rem, 1.6vw, 1.125rem)",
+              marginTop: "1.75rem",
+              fontWeight: 400,
+              letterSpacing: "0.01em",
+              lineHeight: 1.5,
+            }}
+          >
+            Award-winning Software Engineering &amp; Consulting Company.
           </p>
 
-          <div className="mt-8 flex gap-4">
-            <button className="bg-white text-black px-6 py-3 rounded-full font-medium">
-              Get Started
-            </button>
-
-            <button className="border border-white/30 text-white px-6 py-3 rounded-full">
-              View Work
-            </button>
+          <div style={{ marginTop: "2.25rem" }}>
+            <a
+              href="#contact"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "15px 40px",
+                border: "1.5px solid rgba(255,255,255,0.3)",
+                borderRadius: "100px",
+                color: "#fff",
+                fontSize: "16px",
+                fontWeight: 500,
+                textDecoration: "none",
+                transition:
+                  "background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.15s ease",
+              }}
+              onMouseEnter={(e) => {
+                const t = e.currentTarget;
+                t.style.background = "#fff";
+                t.style.color = "#000";
+                t.style.borderColor = "#fff";
+                t.style.transform = "translateY(-1px)";
+              }}
+              onMouseLeave={(e) => {
+                const t = e.currentTarget;
+                t.style.background = "transparent";
+                t.style.color = "#fff";
+                t.style.borderColor = "rgba(255,255,255,0.3)";
+                t.style.transform = "translateY(0)";
+              }}
+            >
+              Book a call
+            </a>
           </div>
         </div>
       </div>
+
+      {/* cursor blink + gradient text styles */}
+      <style jsx global>{`
+        .hero-gradient-text {
+          background-image: var(--hero-gradient);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .hero-cursor {
+          display: inline-block;
+          width: 3px;
+          height: 1em;
+          background-image: var(--hero-gradient);
+          margin-left: 2px;
+          vertical-align: text-bottom;
+          animation: cursorBlink 0.7s steps(1) infinite;
+        }
+        @keyframes cursorBlink {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0;
+          }
+        }
+      `}</style>
     </section>
   );
 }

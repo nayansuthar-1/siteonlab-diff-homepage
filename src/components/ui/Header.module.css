@@ -8,9 +8,11 @@
   left: 0;
   right: 0;
   z-index: 100;
+  font-family: var(--font-plus-jakarta), sans-serif;
   transition: background 0.35s ease, backdrop-filter 0.35s ease,
     box-shadow 0.35s ease;
   background: transparent;
+  padding: 10px 0;
 }
 
 .header.scrolled {
@@ -28,7 +30,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 40px;
-  height: 72px;
+  height: 82px;
 }
 
 /* ─── Logo ─── */
@@ -62,19 +64,18 @@
   align-items: center;
   gap: 5px;
   padding: 8px 16px;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 14px;
+  color: #fff;
+  font-size: 18px;
   font-weight: 400;
   letter-spacing: 0.02em;
   text-decoration: none;
   border-radius: 8px;
-  transition: color 0.2s ease, background 0.2s ease;
+  transition: color 0.2s ease;
   white-space: nowrap;
 }
 
 .navLink:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .chevron {
@@ -83,7 +84,7 @@
 }
 
 .navLink:hover .chevron {
-  opacity: 0.9;
+  opacity: 0.4;
 }
 
 /* ─── CTA Button ─── */
@@ -93,21 +94,22 @@
   align-items: center;
   justify-content: center;
   padding: 10px 24px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   border-radius: 100px;
   color: #fff;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
   text-decoration: none;
   letter-spacing: 0.01em;
-  transition: background 0.25s ease, border-color 0.25s ease,
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease,
     transform 0.15s ease;
   white-space: nowrap;
 }
 
 .ctaButton:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.55);
+  background: #fff;
+  color: #000;
+  border-color: #fff;
   transform: translateY(-1px);
 }
 
@@ -140,9 +142,11 @@
 .hamburgerOpen .bar:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
+
 .hamburgerOpen .bar:nth-child(2) {
   opacity: 0;
 }
+
 .hamburgerOpen .bar:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
@@ -211,12 +215,13 @@
   font-size: 16px;
   font-weight: 500;
   text-decoration: none;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 .mobileCta:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: #fff;
+  color: #000;
+  border-color: #fff;
 }
 
 /* ─── Responsive ─── */
