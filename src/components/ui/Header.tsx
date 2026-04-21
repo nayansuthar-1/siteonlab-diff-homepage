@@ -48,10 +48,10 @@ export default function Header() {
         {/* Logo */}
         <a href="/" className={styles.logo} aria-label="siteonlab home">
           <Image
-            src="/logo.svg"
+            src="/siteon_lab-removebg-preview (1).png"
             alt="siteonlab"
-            width={140}
-            height={32}
+            width={180}
+            height={40}
             priority
           />
         </a>

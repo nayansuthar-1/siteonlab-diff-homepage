@@ -42,8 +42,7 @@
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   border-color: rgba(255, 255, 255, 0.12);
-  /* The color matches the teal/green glow in the screenshot */
-  box-shadow: 0 10px 40px -10px rgba(46, 204, 153, 0.25);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
 }
 
 /* ─── Icon Container ─── */
@@ -104,14 +103,14 @@
 }
 
 .card:hover .iconWrap {
-  background: rgba(46, 204, 153, 0.1);
-  border-color: rgba(46, 204, 153, 0.3);
-  box-shadow: 0 0 15px rgba(46, 204, 153, 0.4);
+  background: color-mix(in srgb, var(--wave-color, #2ecc99) 15%, transparent);
+  border-color: color-mix(in srgb, var(--wave-color, #2ecc99) 30%, transparent);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--wave-color, #2ecc99) 40%, transparent);
 }
 
 .card:hover .iconWrap svg {
-  color: #2ecc99;
-  filter: drop-shadow(0 0 8px rgba(46, 204, 153, 0.6));
+  color: var(--wave-color, #2ecc99);
+  filter: drop-shadow(0 0 8px var(--wave-color, #2ecc99));
 }
 
 .description {

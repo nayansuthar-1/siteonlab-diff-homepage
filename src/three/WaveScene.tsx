@@ -99,6 +99,11 @@ function PerfectSpheres() {
     const hue = (time * 0.05) % 1;
     const sharedColor = new THREE.Color().setHSL(hue, 1, 0.5);
 
+    // Sync current wave color to CSS variable for icon glows
+    if (typeof document !== "undefined") {
+      document.documentElement.style.setProperty("--wave-color", sharedColor.getStyle());
+    }
+
     if (materialRef.current) materialRef.current.color = sharedColor;
     if (glowMatRef.current) {
       glowMatRef.current.uniforms.uColor.value = sharedColor;
