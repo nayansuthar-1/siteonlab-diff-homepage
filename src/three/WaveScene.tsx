@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -58,6 +58,14 @@ const glowFragmentShader = `
 `;
 
 function PerfectSpheres() {
+  const { size, viewport } = useThree();
+  const isMobile = size.width < 768;
+  const isTablet = size.width >= 768 && size.width < 1024;
+  
+  const scale = isMobile ? 0.6 : isTablet ? 0.8 : 1;
+  const posX = isMobile ? viewport.width * 0.2 : isTablet ? 6 : 12;
+  const posY = isMobile ? -1.5 : -0.5;
+
   const groupRef = useRef<THREE.Group>(null);
   const materialRef = useRef<THREE.LineBasicMaterial>(null);
   const glowMatRef = useRef<THREE.ShaderMaterial>(null);
@@ -176,7 +184,7 @@ function PerfectSpheres() {
   });
 
   return (
-    <group ref={groupRef} position={[12, -0.5, 0]} rotation={[0, 0, -0.50]}>
+    <group ref={groupRef} position={[posX, posY, 0]} rotation={[0, 0, -0.50]} scale={[scale, scale, scale]}>
       {/* ── SENSING PLANE (The Fix) ── */}
       <mesh 
         onPointerMove={(e) => mousePos.current.copy(e.point)}
