@@ -2,23 +2,29 @@ import React from "react";
 import Image from "next/image";
 import styles from "./Footer.module.css";
 
-const Footer = () => {
+interface FooterProps {
+  showSchedule?: boolean;
+}
+
+const Footer = ({ showSchedule = true }: FooterProps) => {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
         {/* Top Section: Schedule a Call */}
-        <div className={styles.scheduleSection}>
-          <span className={styles.scheduleLabel}>Schedule a call</span>
-          <h2 className={styles.scheduleHeading}>
-            Tell us about your project idea and let us guide you
-          </h2>
-          <a href="#contact" className={styles.bookButton}>
-            <span>Book a meeting</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
-              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
-        </div>
+        {showSchedule && (
+          <div className={styles.scheduleSection}>
+            <span className={styles.scheduleLabel}>Schedule a call</span>
+            <h2 className={styles.scheduleHeading}>
+              Tell us about your project idea and let us guide you
+            </h2>
+            <a href="#contact" className={styles.bookButton}>
+              <span>Book a meeting</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          </div>
+        )}
 
         {/* Divider */}
         <div className={styles.divider} />

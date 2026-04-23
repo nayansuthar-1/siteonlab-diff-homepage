@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Header.module.css";
 
 const navLinks = [
@@ -9,14 +10,19 @@ const navLinks = [
   { label: "Services", href: "#services", hasDropdown: true },
   { label: "Expertise", href: "#expertise", hasDropdown: true },
   { label: "Industries", href: "#industries", hasDropdown: true },
-  { label: "Company", href: "#company" },
+  { label: "Company", href: "/company" },
   { label: "Careers", href: "#careers" },
 ];
 
 export default function Header() {
+  const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 20);
@@ -52,6 +58,8 @@ export default function Header() {
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
 
+  if (!mounted) return null;
+
   return (
     <>
       <header
@@ -60,7 +68,7 @@ export default function Header() {
       >
         <div className={styles.inner}>
           {/* Logo */}
-          <a href="/" className={styles.logo} aria-label="siteonlab home">
+          <Link href="/" className={styles.logo} aria-label="siteonlab home">
             <Image
               src="/siteon_lab-removebg-preview (1).png"
               alt="siteonlab"
@@ -68,14 +76,14 @@ export default function Header() {
               height={34}
               priority
             />
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className={styles.desktopNav} aria-label="Main navigation">
             <ul className={styles.navList}>
               {navLinks.map((link) => (
                 <li key={link.label} className={styles.navItem}>
-                  <a 
+                  <Link 
                     href={link.href} 
                     className={`${styles.navLink} ${activeDropdown === link.label ? styles.active : ""}`}
                     onClick={(e) => {
@@ -103,16 +111,16 @@ export default function Header() {
                         />
                       </svg>
                     )}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </nav>
 
           {/* CTA */}
-          <a href="#contact" className={styles.ctaButton}>
+          <Link href="#contact" className={styles.ctaButton}>
             Contact us
-          </a>
+          </Link>
 
           {/* Mobile Hamburger */}
           <button
@@ -149,7 +157,7 @@ export default function Header() {
 
                 {/* Right side: Service Cards */}
                 <div className={styles.megaMenuRight}>
-                  <a href="#service-1" className={`${styles.serviceCard} ${styles.serviceCard1}`} onClick={() => setActiveDropdown(null)}>
+                  <Link href="#service-1" className={`${styles.serviceCard} ${styles.serviceCard1}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
@@ -159,8 +167,8 @@ export default function Header() {
                     </div>
                     <span className={styles.serviceTitle}>Full-cycle<br/>Development</span>
                     <div className={styles.cardGlow}></div>
-                  </a>
-                  <a href="#service-2" className={`${styles.serviceCard} ${styles.serviceCard2}`} onClick={() => setActiveDropdown(null)}>
+                  </Link>
+                  <Link href="#service-2" className={`${styles.serviceCard} ${styles.serviceCard2}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -171,8 +179,8 @@ export default function Header() {
                     </div>
                     <span className={styles.serviceTitle}>Software Team<br/>Augmentation</span>
                     <div className={styles.cardGlow}></div>
-                  </a>
-                  <a href="#service-3" className={`${styles.serviceCard} ${styles.serviceCard3}`} onClick={() => setActiveDropdown(null)}>
+                  </Link>
+                  <Link href="#service-3" className={`${styles.serviceCard} ${styles.serviceCard3}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5"/>
@@ -182,8 +190,8 @@ export default function Header() {
                     </div>
                     <span className={styles.serviceTitle}>Digital Transformation<br/>Consulting</span>
                     <div className={styles.cardGlow}></div>
-                  </a>
-                  <a href="#service-4" className={`${styles.serviceCard} ${styles.serviceCard4}`} onClick={() => setActiveDropdown(null)}>
+                  </Link>
+                  <Link href="#service-4" className={`${styles.serviceCard} ${styles.serviceCard4}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 19L21 21L19 12L20.5 10.5C21.3284 9.67157 21.3284 8.32843 20.5 7.5L16.5 3.5C15.6716 2.67157 14.3284 2.67157 13.5 3.5L12 5L3 14L5 23L12 19Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
@@ -191,7 +199,7 @@ export default function Header() {
                     </div>
                     <span className={styles.serviceTitle}>Product Concept<br/>& Design</span>
                     <div className={styles.cardGlow}></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
             )}
@@ -204,26 +212,26 @@ export default function Header() {
                   <h2 className={styles.scheduleHeading}>
                     Tell us about your project idea and let us guide you
                   </h2>
-                  <a href="#contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
+                  <Link href="#contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
                     <span>Book a meeting</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
                       <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Right side: Expertise Grid */}
                 <div className={styles.megaMenuRight}>
                   <div className={styles.expertiseGrid}>
-                    <a href="#expertise-ai" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    <Link href="#expertise-ai" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                         </svg>
                       </div>
                       <span className={styles.expertiseLabel}>AI and Machine Learning</span>
-                    </a>
-                    <a href="#expertise-web" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    </Link>
+                    <Link href="#expertise-web" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
@@ -232,8 +240,8 @@ export default function Header() {
                         </svg>
                       </div>
                       <span className={styles.expertiseLabel}>Web & Mobile Apps</span>
-                    </a>
-                    <a href="#expertise-blockchain" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    </Link>
+                    <Link href="#expertise-blockchain" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
@@ -242,8 +250,8 @@ export default function Header() {
                         </svg>
                       </div>
                       <span className={styles.expertiseLabel}>Web 3.0 & Blockchain</span>
-                    </a>
-                    <a href="#expertise-data" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    </Link>
+                    <Link href="#expertise-data" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <ellipse cx="12" cy="5" rx="9" ry="3" />
@@ -252,8 +260,8 @@ export default function Header() {
                         </svg>
                       </div>
                       <span className={styles.expertiseLabel}>Big Data & Data Science</span>
-                    </a>
-                    <a href="#expertise-devops" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    </Link>
+                    <Link href="#expertise-devops" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -261,8 +269,8 @@ export default function Header() {
                         </svg>
                       </div>
                       <span className={styles.expertiseLabel}>DevOps & Security</span>
-                    </a>
-                    <a href="#expertise-qa" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    </Link>
+                    <Link href="#expertise-qa" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <circle cx="12" cy="12" r="10" />
@@ -270,8 +278,8 @@ export default function Header() {
                         </svg>
                       </div>
                       <span className={styles.expertiseLabel}>QA & Test Automation</span>
-                    </a>
-                    <a href="#expertise-refinement" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    </Link>
+                    <Link href="#expertise-refinement" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <polyline points="23 4 23 10 17 10" />
@@ -279,23 +287,23 @@ export default function Header() {
                         </svg>
                       </div>
                       <span className={styles.expertiseLabel}>Refinement & Reengineering</span>
-                    </a>
-                    <a href="#expertise-support" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    </Link>
+                    <Link href="#expertise-support" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
                         </svg>
                       </div>
                       <span className={styles.expertiseLabel}>Support & Maintenance</span>
-                    </a>
-                    <a href="#expertise-cloud" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    </Link>
+                    <Link href="#expertise-cloud" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M17.5 19c2.5 0 4.5-2 4.5-4.5 0-2.4-1.9-4.3-4.3-4.5-.4-3.1-3-5.5-6.2-5.5-2.2 0-4.1 1.2-5.1 3-2.3.3-4.1 2.3-4.1 4.6C2.3 17 4.3 19 6.8 19h10.7z" />
                         </svg>
                       </div>
                       <span className={styles.expertiseLabel}>Cloud-native Services</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -408,7 +416,7 @@ export default function Header() {
             <ul className={styles.mobileNavList}>
               {[...navLinks, { label: "Contact us", href: "#contact" }].map((link) => (
                 <li key={link.label} className={styles.mobileNavItem}>
-                  <a
+                  <Link
                     href={link.href}
                     className={styles.mobileNavLink}
                     onClick={() => setMobileOpen(false)}
@@ -431,7 +439,7 @@ export default function Header() {
                         />
                       </svg>
                     )}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -444,12 +452,12 @@ export default function Header() {
               <h2 className={styles.scheduleHeading}>
                 Tell us about your project idea and let us guide you
               </h2>
-              <a href="#contact" className={styles.bookButton} onClick={() => setMobileOpen(false)}>
+              <Link href="#contact" className={styles.bookButton} onClick={() => setMobileOpen(false)}>
                 <span>Book a meeting</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
                   <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </a>
+              </Link>
             </div>
 
             <div className={styles.bottomBar}>
