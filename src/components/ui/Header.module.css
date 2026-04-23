@@ -80,6 +80,10 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
+.navLink.active {
+  color: #f59e0b;
+}
+
 .chevron {
   opacity: 0.5;
   transition: transform 0.2s ease, opacity 0.2s ease;
@@ -87,6 +91,11 @@
 
 .navLink:hover .chevron {
   opacity: 0.4;
+}
+
+.navLink.active .chevron {
+  transform: rotate(180deg);
+  opacity: 1;
 }
 
 /* ─── CTA Button ─── */
@@ -374,5 +383,303 @@
   .bookButton {
     padding: 14px 20px;
     font-size: 16px;
+  }
+}
+
+/* ─── Mega Menu Dropdown (Desktop) ─── */
+.headerWithDropdown {
+  background: #1c1c1c !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-radius: 30px 30px 0 0 !important;
+}
+
+.megaMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #1c1c1c;
+  border-radius: 0 0 30px 30px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 290;
+}
+
+.megaMenuOpen {
+  max-height: 800px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.megaMenuInner {
+  position: relative;
+  padding: 24px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  z-index: 10;
+}
+
+/* Background Atmosphere / Smoke Blur */
+.megaMenuInner::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(
+    circle at center,
+    rgba(245, 158, 11, 0.05) 0%,
+    rgba(14, 165, 233, 0.03) 30%,
+    rgba(139, 92, 246, 0.02) 60%,
+    transparent 100%
+  );
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.megaMenuTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  margin-bottom: 32px;
+}
+
+.megaMenuLeft {
+  flex: 0 0 32%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.megaMenuRight {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.verticalSplitter {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 10px 10px;
+  flex-shrink: 0;
+}
+
+.megaMenuLeft .scheduleLabel {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+}
+
+.megaMenuLeft .scheduleHeading {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+  max-width: 300px;
+}
+
+.megaMenuLeft .bookButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 260px;
+  margin-top: 12px;
+  padding: 16px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.megaMenuLeft .bookButton:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Expertise Grid */
+.expertiseGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px 40px;
+  width: 100%;
+}
+
+.expertiseItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.expertiseItem:hover {
+  transform: translateX(4px);
+}
+
+.expertiseIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: #8e95a3;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.expertiseItem:hover .expertiseIcon {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.expertiseLabel {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.expertiseItem:hover .expertiseLabel {
+  color: #f59e0b;
+}
+
+/* Service Cards */
+.serviceCard {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+}
+
+.serviceCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.cardGlow {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  height: 100px;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.serviceCard:hover .cardGlow {
+  opacity: 0.4;
+}
+
+/* Specific Card Colors (Applied only on hover) */
+.serviceCard1 .cardGlow { background: #0d9488; }
+.serviceCard1:hover .serviceIconWrapper { color: #0d9488; }
+.serviceCard1:hover { border-color: rgba(13, 148, 136, 0.3); }
+
+.serviceCard2 .cardGlow { background: #0ea5e9; }
+.serviceCard2:hover .serviceIconWrapper { color: #0ea5e9; }
+.serviceCard2:hover { border-color: rgba(14, 165, 233, 0.3); }
+
+.serviceCard3 .cardGlow { background: #8b5cf6; }
+.serviceCard3:hover .serviceIconWrapper { color: #8b5cf6; }
+.serviceCard3:hover { border-color: rgba(139, 92, 246, 0.3); }
+
+.serviceCard4 .cardGlow { background: #f97316; }
+.serviceCard4:hover .serviceIconWrapper { color: #f97316; }
+.serviceCard4:hover { border-color: rgba(249, 115, 22, 0.3); }
+
+/* Industry Card Colors */
+.industryCard1 .cardGlow { background: #f59e0b; }
+.industryCard1:hover .serviceIconWrapper { color: #f59e0b; }
+.industryCard1:hover { border-color: rgba(245, 158, 11, 0.3); }
+
+.industryCard2 .cardGlow { background: #f43f5e; }
+.industryCard2:hover .serviceIconWrapper { color: #f43f5e; }
+.industryCard2:hover { border-color: rgba(244, 63, 94, 0.3); }
+
+.industryCard3 .cardGlow { background: #10b981; }
+.industryCard3:hover .serviceIconWrapper { color: #10b981; }
+.industryCard3:hover { border-color: rgba(16, 185, 129, 0.3); }
+
+.industryCard4 .cardGlow { background: #0ea5e9; }
+.industryCard4:hover .serviceIconWrapper { color: #0ea5e9; }
+.industryCard4:hover { border-color: rgba(14, 165, 233, 0.3); }
+
+.serviceIconWrapper {
+  position: relative;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  color: #8e95a3; /* Neutral default icon color */
+}
+
+.serviceCard:hover .serviceIconWrapper {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.serviceTitle {
+  position: relative;
+  z-index: 10;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Bottom section */
+.megaMenuBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+}
+
+/* Hide on mobile */
+@media (max-width: 1024px) {
+  .megaMenu {
+    display: none;
   }
 }
