@@ -121,7 +121,7 @@ export default function TechExpertise() {
       const viewportCenter = window.innerHeight / 2;
       
       let minDistance = Infinity;
-      let closestCard = null;
+      let closestCard: Element | null = null;
 
       cards.forEach((card) => {
         const rect = card.getBoundingClientRect();
