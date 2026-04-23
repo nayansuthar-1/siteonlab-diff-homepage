@@ -35,7 +35,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${plusJakarta.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className={`${plusJakarta.className} min-h-full flex flex-col`}>
         <Header />
         {children}
       </body>

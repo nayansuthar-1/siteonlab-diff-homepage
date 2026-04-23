@@ -89,21 +89,27 @@ export default function Hero() {
               letterSpacing: "-0.025em",
             }}
           >
-            Build your{" "}
-            <span
-              className="hero-gradient-text"
-              style={{ "--hero-gradient": currentGradient } as React.CSSProperties}
-            >
-              {displayed}
+            <span className="block md:inline">Build your </span>
+            <span className="block md:inline">
+              <span
+                className="hero-gradient-text"
+                style={{ "--hero-gradient": currentGradient } as React.CSSProperties}
+              >
+                {displayed}
+              </span>
+              <span
+                className="hero-cursor"
+                style={{ "--hero-gradient": currentGradient } as React.CSSProperties}
+              />
             </span>
-            <span
-              className="hero-cursor"
-              style={{ "--hero-gradient": currentGradient } as React.CSSProperties}
-            />
-            <br />
-            with flawless technology,
-            <br />
-            design, and execution
+            <br className="hidden md:block" />
+            <span className="block md:hidden">with flawless</span>
+            <span className="block md:hidden">technology, design,</span>
+            <span className="block md:hidden">and execution</span>
+            
+            <span className="hidden md:inline">with flawless technology,</span>
+            <br className="hidden md:block" />
+            <span className="hidden md:inline">design, and execution</span>
           </h1>
 
           <p

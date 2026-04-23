@@ -7,7 +7,7 @@
   top: 10px;
   left: 40px;
   right: 40px;
-  z-index: 100;
+  z-index: 300;
   font-family: var(--font-plus-jakarta), sans-serif;
   transition: background 0.35s ease, backdrop-filter 0.35s ease,
     box-shadow 0.35s ease, border-radius 0.35s ease;
@@ -157,22 +157,60 @@
 .mobileOverlay {
   position: fixed;
   inset: 0;
-  z-index: 99;
-  background: rgba(0, 0, 0, 0.92);
-  backdrop-filter: blur(24px) saturate(1.4);
-  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  width: 100%;
+  height: 100vh;
+  z-index: 200;
+  background: #000;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  transform: translateY(-100%);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.35s ease, visibility 0.35s ease;
+  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1),
+    opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .mobileOverlayOpen {
+  transform: translateY(0);
   opacity: 1;
   visibility: visible;
+}
+
+.headerTransparent {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.mobileMenuContent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 110px 20px 24px 20px;
+  overflow-y: auto;
+}
+
+.mobileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileNav {
+  margin-bottom: 60px;
+  text-align: left;
 }
 
 .mobileNavList {
@@ -181,49 +219,120 @@
   margin: 0;
   display: flex;
   flex-direction: column;
+  gap: 4px;
+  align-items: stretch;
+}
+
+.mobileNavLink {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.mobileChevron {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ─── Mobile Footer ─── */
+.mobileFooter {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
+  padding-bottom: 12px;
+}
+
+.scheduleSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.scheduleLabel {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.scheduleHeading {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0;
+  max-width: 280px;
+  letter-spacing: -0.01em;
+}
+
+.bookButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 420px;
+  margin-top: 8px;
+  padding: 16px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 100px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.25s ease;
+}
+
+.bookButton:active {
+  border-color: #fff;
+}
+
+.bottomBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.socialIcons {
+  display: flex;
   gap: 12px;
 }
 
-.mobileNavItem {}
-
-.mobileNavLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 12px 20px;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 20px;
-  font-weight: 400;
-  text-decoration: none;
-  border-radius: 12px;
-  transition: color 0.2s ease, background 0.2s ease;
-}
-
-.mobileNavLink:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.mobileCta {
-  margin-top: 32px;
-  display: inline-flex;
+.socialIcon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 36px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 100px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
   text-decoration: none;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.mobileCta:hover {
-  background: #fff;
-  color: #000;
-  border-color: #fff;
+.iconText {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: right;
+  margin: 0;
 }
 
 /* ─── Responsive ─── */
@@ -233,11 +342,7 @@
     height: 64px;
   }
 
-  .desktopNav {
-    display: none;
-  }
-
-  .ctaButton {
+  .desktopNav, .ctaButton {
     display: none;
   }
 
@@ -247,12 +352,27 @@
 }
 
 @media (max-width: 480px) {
+  .header {
+    left: 20px;
+    right: 20px;
+  }
+  
   .inner {
     padding: 0 16px;
     height: 58px;
   }
 
   .mobileNavLink {
-    font-size: 18px;
+    font-size: 19px;
+  }
+  
+  .scheduleHeading {
+    font-size: 17px;
+    max-width: 260px;
+  }
+
+  .bookButton {
+    padding: 14px 20px;
+    font-size: 16px;
   }
 }

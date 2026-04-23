@@ -36,7 +36,8 @@
   min-height: 220px;
 }
 
-.card:hover {
+.card:hover,
+.card.active {
   transform: translateY(-8px);
   background: #2a2a2e;
   backdrop-filter: none;
@@ -97,18 +98,21 @@
   height: 22px;
 }
 
-.card:hover .arrow {
+.card:hover .arrow,
+.card.active .arrow {
   opacity: 1;
   transform: translateX(0);
 }
 
-.card:hover .iconWrap {
+.card:hover .iconWrap,
+.card.active .iconWrap {
   background: color-mix(in srgb, var(--wave-color, #2ecc99) 15%, transparent);
   border-color: color-mix(in srgb, var(--wave-color, #2ecc99) 30%, transparent);
   box-shadow: 0 0 20px color-mix(in srgb, var(--wave-color, #2ecc99) 40%, transparent);
 }
 
-.card:hover .iconWrap svg {
+.card:hover .iconWrap svg,
+.card.active .iconWrap svg {
   color: var(--wave-color, #2ecc99);
   filter: drop-shadow(0 0 8px var(--wave-color, #2ecc99));
 }

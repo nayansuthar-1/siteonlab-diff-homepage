@@ -19,8 +19,8 @@ const categoryData = [
         cardTheme: {
           bg: "bg-[#0d9488]",
           outerGlow: "hover:shadow-[0_20px_40px_-15px_rgba(13,148,136,0.35)] hover:border-[#0d9488]/30",
-          iconBg: "group-hover:bg-[#0d9488]/10 group-hover:border-[#0d9488]/40 group-hover:shadow-[0_0_15px_rgba(13,148,136,0.4)]",
-          iconColor: "group-hover:text-[#0d9488] group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(13,148,136,0.6))]",
+          iconBg: "bg-[#0d9488]/10 border-[#0d9488]/40 shadow-[0_0_15px_rgba(13,148,136,0.4)] md:bg-[#181818] md:border-[rgba(255,255,255,0.12)] md:shadow-none md:group-hover:bg-[#0d9488]/10 md:group-hover:border-[#0d9488]/40 md:group-hover:shadow-[0_0_15px_rgba(13,148,136,0.4)]",
+          iconColor: "text-[#0d9488] [filter:drop-shadow(0_0_8px_rgba(13,148,136,0.6))] md:text-[#8e95a3] md:[filter:none] md:group-hover:text-[#0d9488] md:group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(13,148,136,0.6))]",
         },
         icon: (
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -36,8 +36,8 @@ const categoryData = [
         cardTheme: {
           bg: "bg-[#0ea5e9]",
           outerGlow: "hover:shadow-[0_20px_40px_-15px_rgba(14,165,233,0.35)] hover:border-[#0ea5e9]/30",
-          iconBg: "group-hover:bg-[#0ea5e9]/10 group-hover:border-[#0ea5e9]/40 group-hover:shadow-[0_0_15px_rgba(14,165,233,0.4)]",
-          iconColor: "group-hover:text-[#0ea5e9] group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(14,165,233,0.6))]",
+          iconBg: "bg-[#0ea5e9]/10 border-[#0ea5e9]/40 shadow-[0_0_15px_rgba(14,165,233,0.4)] md:bg-[#181818] md:border-[rgba(255,255,255,0.12)] md:shadow-none md:group-hover:bg-[#0ea5e9]/10 md:group-hover:border-[#0ea5e9]/40 md:group-hover:shadow-[0_0_15px_rgba(14,165,233,0.4)]",
+          iconColor: "text-[#0ea5e9] [filter:drop-shadow(0_0_8px_rgba(14,165,233,0.6))] md:text-[#8e95a3] md:[filter:none] md:group-hover:text-[#0ea5e9] md:group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(14,165,233,0.6))]",
         },
         icon: (
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -65,8 +65,8 @@ const categoryData = [
         cardTheme: {
           bg: "bg-[#ec4899]",
           outerGlow: "hover:shadow-[0_20px_40px_-15px_rgba(236,72,153,0.35)] hover:border-[#ec4899]/30",
-          iconBg: "group-hover:bg-[#ec4899]/10 group-hover:border-[#ec4899]/40 group-hover:shadow-[0_0_15px_rgba(236,72,153,0.4)]",
-          iconColor: "group-hover:text-[#ec4899] group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(236,72,153,0.6))]",
+          iconBg: "bg-[#ec4899]/10 border-[#ec4899]/40 shadow-[0_0_15px_rgba(236,72,153,0.4)] md:bg-[#181818] md:border-[rgba(255,255,255,0.12)] md:shadow-none md:group-hover:bg-[#ec4899]/10 md:group-hover:border-[#ec4899]/40 md:group-hover:shadow-[0_0_15px_rgba(236,72,153,0.4)]",
+          iconColor: "text-[#ec4899] [filter:drop-shadow(0_0_8px_rgba(236,72,153,0.6))] md:text-[#8e95a3] md:[filter:none] md:group-hover:text-[#ec4899] md:group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(236,72,153,0.6))]",
         },
         icon: (
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -82,8 +82,8 @@ const categoryData = [
         cardTheme: {
           bg: "bg-[#8b5cf6]",
           outerGlow: "hover:shadow-[0_20px_40px_-15px_rgba(139,92,246,0.35)] hover:border-[#8b5cf6]/30",
-          iconBg: "group-hover:bg-[#8b5cf6]/10 group-hover:border-[#8b5cf6]/40 group-hover:shadow-[0_0_15px_rgba(139,92,246,0.4)]",
-          iconColor: "group-hover:text-[#8b5cf6] group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(139,92,246,0.6))]",
+          iconBg: "bg-[#8b5cf6]/10 border-[#8b5cf6]/40 shadow-[0_0_15px_rgba(139,92,246,0.4)] md:bg-[#181818] md:border-[rgba(255,255,255,0.12)] md:shadow-none md:group-hover:bg-[#8b5cf6]/10 md:group-hover:border-[#8b5cf6]/40 md:group-hover:shadow-[0_0_15px_rgba(139,92,246,0.4)]",
+          iconColor: "text-[#8b5cf6] [filter:drop-shadow(0_0_8px_rgba(139,92,246,0.6))] md:text-[#8e95a3] md:[filter:none] md:group-hover:text-[#8b5cf6] md:group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(139,92,246,0.6))]",
         },
         icon: (
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -111,8 +111,8 @@ const categoryData = [
         cardTheme: {
           bg: "bg-[#f97316]",
           outerGlow: "hover:shadow-[0_20px_40px_-15px_rgba(249,115,22,0.35)] hover:border-[#f97316]/30",
-          iconBg: "group-hover:bg-[#f97316]/10 group-hover:border-[#f97316]/40 group-hover:shadow-[0_0_15px_rgba(249,115,22,0.4)]",
-          iconColor: "group-hover:text-[#f97316] group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(249,115,22,0.6))]",
+          iconBg: "bg-[#f97316]/10 border-[#f97316]/40 shadow-[0_0_15px_rgba(249,115,22,0.4)] md:bg-[#181818] md:border-[rgba(255,255,255,0.12)] md:shadow-none md:group-hover:bg-[#f97316]/10 md:group-hover:border-[#f97316]/40 md:group-hover:shadow-[0_0_15px_rgba(249,115,22,0.4)]",
+          iconColor: "text-[#f97316] [filter:drop-shadow(0_0_8px_rgba(249,115,22,0.6))] md:text-[#8e95a3] md:[filter:none] md:group-hover:text-[#f97316] md:group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(249,115,22,0.6))]",
         },
         icon: (
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -128,8 +128,8 @@ const categoryData = [
         cardTheme: {
           bg: "bg-[#0ea5e9]",
           outerGlow: "hover:shadow-[0_20px_40px_-15px_rgba(14,165,233,0.35)] hover:border-[#0ea5e9]/30",
-          iconBg: "group-hover:bg-[#0ea5e9]/10 group-hover:border-[#0ea5e9]/40 group-hover:shadow-[0_0_15px_rgba(14,165,233,0.4)]",
-          iconColor: "group-hover:text-[#0ea5e9] group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(14,165,233,0.6))]",
+          iconBg: "bg-[#0ea5e9]/10 border-[#0ea5e9]/40 shadow-[0_0_15px_rgba(14,165,233,0.4)] md:bg-[#181818] md:border-[rgba(255,255,255,0.12)] md:shadow-none md:group-hover:bg-[#0ea5e9]/10 md:group-hover:border-[#0ea5e9]/40 md:group-hover:shadow-[0_0_15px_rgba(14,165,233,0.4)]",
+          iconColor: "text-[#0ea5e9] [filter:drop-shadow(0_0_8px_rgba(14,165,233,0.6))] md:text-[#8e95a3] md:[filter:none] md:group-hover:text-[#0ea5e9] md:group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(14,165,233,0.6))]",
         },
         icon: (
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -157,8 +157,8 @@ const categoryData = [
         cardTheme: {
           bg: "bg-[#0d9488]",
           outerGlow: "hover:shadow-[0_20px_40px_-15px_rgba(13,148,136,0.35)] hover:border-[#0d9488]/30",
-          iconBg: "group-hover:bg-[#0d9488]/10 group-hover:border-[#0d9488]/40 group-hover:shadow-[0_0_15px_rgba(13,148,136,0.4)]",
-          iconColor: "group-hover:text-[#0d9488] group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(13,148,136,0.6))]",
+          iconBg: "bg-[#0d9488]/10 border-[#0d9488]/40 shadow-[0_0_15px_rgba(13,148,136,0.4)] md:bg-[#181818] md:border-[rgba(255,255,255,0.12)] md:shadow-none md:group-hover:bg-[#0d9488]/10 md:group-hover:border-[#0d9488]/40 md:group-hover:shadow-[0_0_15px_rgba(13,148,136,0.4)]",
+          iconColor: "text-[#0d9488] [filter:drop-shadow(0_0_8px_rgba(13,148,136,0.6))] md:text-[#8e95a3] md:[filter:none] md:group-hover:text-[#0d9488] md:group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(13,148,136,0.6))]",
         },
         icon: (
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -174,8 +174,8 @@ const categoryData = [
         cardTheme: {
           bg: "bg-[#0ea5e9]",
           outerGlow: "hover:shadow-[0_20px_40px_-15px_rgba(14,165,233,0.35)] hover:border-[#0ea5e9]/30",
-          iconBg: "group-hover:bg-[#0ea5e9]/10 group-hover:border-[#0ea5e9]/40 group-hover:shadow-[0_0_15px_rgba(14,165,233,0.4)]",
-          iconColor: "group-hover:text-[#0ea5e9] group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(14,165,233,0.6))]",
+          iconBg: "bg-[#0ea5e9]/10 border-[#0ea5e9]/40 shadow-[0_0_15px_rgba(14,165,233,0.4)] md:bg-[#181818] md:border-[rgba(255,255,255,0.12)] md:shadow-none md:group-hover:bg-[#0ea5e9]/10 md:group-hover:border-[#0ea5e9]/40 md:group-hover:shadow-[0_0_15px_rgba(14,165,233,0.4)]",
+          iconColor: "text-[#0ea5e9] [filter:drop-shadow(0_0_8px_rgba(14,165,233,0.6))] md:text-[#8e95a3] md:[filter:none] md:group-hover:text-[#0ea5e9] md:group-[&:hover]:[filter:drop-shadow(0_0_8px_rgba(14,165,233,0.6))]",
         },
         icon: (
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -212,8 +212,8 @@ export default function WhatWeDo() {
         {/* Content Area */}
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-stretch">
           
-          {/* Left Column - Categories */}
-          <div className="w-full lg:w-[35%] flex flex-col">
+          {/* Desktop Left Column - Categories */}
+          <div className="hidden lg:flex w-[35%] flex-col">
             {categoryData.map((cat, idx) => {
               const isActive = activeIdx === idx;
               return (
@@ -239,6 +239,65 @@ export default function WhatWeDo() {
             })}
           </div>
 
+          {/* Mobile Category Selector */}
+          <div className="flex flex-col lg:hidden w-full relative pt-8 pb-4">
+            {/* Top Glow Line */}
+            <div className="absolute top-0 left-[-1.5rem] right-[-1.5rem] md:left-[-3rem] md:right-[-3rem] h-[1px] bg-[rgba(255,255,255,0.06)]">
+              <div className={`absolute top-0 left-1/2 -translate-x-1/2 h-[1px] w-[60%] transition-all duration-500 ${categoryData[activeIdx].theme.bg} ${categoryData[activeIdx].theme.shadow}`} />
+              <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[40px] -translate-y-1/2 blur-[30px] rounded-full pointer-events-none transition-all duration-500 opacity-40 ${categoryData[activeIdx].theme.bg}`} />
+            </div>
+
+            <div className="relative w-full h-[60px] overflow-hidden mb-6">
+              {categoryData.map((cat, idx) => {
+                const isActive = activeIdx === idx;
+                const offset = idx - activeIdx;
+                return (
+                  <div 
+                    key={cat.id}
+                    onClick={() => setActiveIdx(idx)}
+                    className="absolute top-0 w-[85%] transition-all duration-500 ease-in-out cursor-pointer"
+                    style={{ left: `${offset * 85}%`, opacity: isActive ? 1 : 0.4 }}
+                  >
+                    <div className={`text-[11px] font-medium tracking-[0.2em] mb-2 ${isActive ? 'text-[#485564]' : 'text-[#303943]'}`}>
+                      {cat.id}
+                    </div>
+                    <div className={`text-[1.3rem] font-normal tracking-wide whitespace-nowrap transition-colors duration-300 ${isActive ? 'text-white' : 'text-[#303943]'}`}>
+                      {cat.title}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="flex items-center justify-center gap-5">
+              <button 
+                onClick={() => setActiveIdx(Math.max(0, activeIdx - 1))}
+                className={`transition-colors ${activeIdx === 0 ? 'text-[#303943] cursor-not-allowed' : 'text-[#8e95a3] hover:text-white'}`}
+                disabled={activeIdx === 0}
+              >
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+                </svg>
+              </button>
+              <div className="flex items-center gap-3">
+                {categoryData.map((_, idx) => (
+                  <button key={idx} onClick={() => setActiveIdx(idx)} className="p-1 flex items-center justify-center">
+                    <div className={`rounded-full transition-all duration-300 ${activeIdx === idx ? 'w-[6px] h-[6px] bg-white' : 'w-[6px] h-[6px] border border-[#8e95a3] bg-transparent'}`} />
+                  </button>
+                ))}
+              </div>
+              <button 
+                onClick={() => setActiveIdx(Math.min(categoryData.length - 1, activeIdx + 1))}
+                className={`transition-colors ${activeIdx === categoryData.length - 1 ? 'text-[#303943] cursor-not-allowed' : 'text-[#8e95a3] hover:text-white'}`}
+                disabled={activeIdx === categoryData.length - 1}
+              >
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
           {/* Right Column - Cards Display */}
           <div className="w-full lg:w-[65%] xl:flex-1 flex flex-col gap-6">
             <div className="flex flex-col gap-6 transition-all duration-500 opacity-100 animate-in fade-in zoom-in-95" key={activeIdx}>
@@ -249,28 +308,28 @@ export default function WhatWeDo() {
                 <div key={card.id} className={`relative w-full bg-[#111111] border border-[rgba(255,255,255,0.06)] rounded-[1rem] p-6 md:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 group overflow-hidden ${cardTheme.outerGlow}`}>
                   
                   {/* Dynamic Inner Glow (Cornered Sided, Bottom Center Origin) */}
-                  <div className={`absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[130%] sm:w-[120%] h-[200px] blur-[80px] rounded-[100%] pointer-events-none transition-opacity duration-700 opacity-0 group-hover:opacity-[0.85] z-0 ${cardTheme.bg}`} />
+                  <div className={`absolute -bottom-[80px] left-1/2 -translate-x-1/2 w-[130%] sm:w-[120%] h-[200px] blur-[80px] rounded-[100%] pointer-events-none transition-opacity duration-700 opacity-[0.85] md:opacity-0 md:group-hover:opacity-[0.85] z-0 ${cardTheme.bg}`} />
 
                   {/* Absolute Price Badge */}
-                  <div className="absolute top-6 right-6 md:top-8 md:right-8 border border-[rgba(255,255,255,0.25)] rounded-full px-3 py-1 transition-colors duration-300 group-hover:border-[rgba(255,255,255,0.5)] z-10">
+                  <div className="hidden md:block absolute top-6 right-6 md:top-8 md:right-8 border border-[rgba(255,255,255,0.25)] rounded-full px-3 py-1 transition-colors duration-300 group-hover:border-[rgba(255,255,255,0.5)] z-10">
                     <span className="text-white text-[11px] tracking-wide">{card.price}</span>
                   </div>
                   
                   {/* Icon Wrapper */}
-                  <div className={`relative z-10 w-12 h-12 border border-[rgba(255,255,255,0.12)] rounded-xl flex items-center justify-center bg-[#181818] mb-5 transition-all duration-300 ${cardTheme.iconBg}`}>
+                  <div className={`relative z-10 w-12 h-12 border border-[rgba(255,255,255,0.12)] rounded-xl flex items-center justify-center bg-[#181818] mb-4 md:mb-5 transition-all duration-300 ${cardTheme.iconBg}`}>
                     <div className={`transition-all duration-300 text-[#8e95a3] flex items-center justify-center [&>svg]:w-5 [&>svg]:h-5 ${cardTheme.iconColor}`}>
                       {card.icon}
                     </div>
                   </div>
 
                   {/* Title */}
-                  <h3 className="relative z-10 text-white text-[1.4rem] md:text-[1.5rem] leading-[1.3] font-medium mb-1 whitespace-pre-line">
+                  <h3 className="relative z-10 text-white text-[1.15rem] md:text-[1.5rem] leading-[1.3] font-normal md:font-medium mb-1 whitespace-pre-line">
                     {card.title}
                   </h3>
                   
                   {/* Description & Link row */}
-                  <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-4 mt-2">
-                    <p className="text-[#8e95a3] text-[0.85rem] leading-[1.6] max-w-[340px]">
+                  <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-4 mt-3 md:mt-2">
+                    <p className="hidden md:block text-[#8e95a3] text-[0.85rem] leading-[1.6] max-w-[340px]">
                       {card.desc}
                     </p>
                     <a href="#" className="flex items-center gap-1.5 text-white hover:text-[#f59e0b] transition-colors group-hover:text-[#f59e0b] font-semibold text-[0.9rem] whitespace-nowrap pb-1">

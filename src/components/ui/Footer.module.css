@@ -1,0 +1,222 @@
+.footer {
+  background-color: #000;
+  padding: 100px 0 40px;
+  width: 100%;
+  color: #fff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.container {
+  max-width: 1450px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ─── Schedule Section ─── */
+.scheduleSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.scheduleLabel {
+  display: block;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.scheduleHeading {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 32px;
+  max-width: 700px;
+  letter-spacing: -0.02em;
+}
+
+.bookButton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #1a1a1e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 16px 28px;
+  border-radius: 100px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bookButton:hover {
+  background: #25252a;
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.arrowIcon {
+  transition: transform 0.3s ease;
+}
+
+.bookButton:hover .arrowIcon {
+  transform: translateX(4px);
+}
+
+/* ─── Divider ─── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: 40px;
+}
+
+.footerTop {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* ─── Bottom Bar ─── */
+.bottomBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 12px;
+}
+
+.socialIcon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.socialIcon:hover {
+  transform: translateY(-5px) scale(1.05);
+  color: #fff;
+}
+
+/* ─── Brand Colors on Hover ─── */
+.socialIconX:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+.socialIconInstagram:hover {
+  border-color: #e4405f;
+  background: linear-gradient(45deg, rgba(240, 148, 51, 0.1), rgba(220, 39, 67, 0.1), rgba(188, 24, 136, 0.1));
+  box-shadow: 0 0 20px rgba(228, 64, 95, 0.2);
+}
+
+.socialIconFacebook:hover {
+  border-color: #1877f2;
+  background: rgba(24, 119, 242, 0.1);
+  box-shadow: 0 0 20px rgba(24, 119, 242, 0.2);
+}
+
+.socialIconLinkedIn:hover {
+  border-color: #0a66c2;
+  background: rgba(10, 102, 194, 0.1);
+  box-shadow: 0 0 20px rgba(10, 102, 194, 0.2);
+}
+
+.iconText {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.copyright, .address {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .footerTop, .bottomBar {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+  
+  .left, .right {
+    justify-content: center;
+  }
+
+  .scheduleHeading {
+    font-size: 32px;
+  }
+
+  .address {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 60px 0 30px;
+  }
+  
+  .container {
+    padding: 0 24px;
+  }
+
+  .scheduleHeading {
+    font-size: 26px;
+    margin-bottom: 24px;
+  }
+
+  .bottomBar {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .left, .center, .right {
+    justify-content: center;
+  }
+
+  .copyright {
+    font-size: 13px;
+  }
+}

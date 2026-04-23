@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect } from "react";
 import styles from "./ServiceCards.module.css";
 
 const services = [
@@ -51,6 +51,46 @@ const services = [
 ];
 
 export default function ServiceCards() {
+  useEffect(() => {
+    // Only run on mobile/tablet (touch devices)
+    if (typeof window === "undefined" || window.innerWidth > 1024) return;
+
+    const handleScroll = () => {
+      const cards = document.querySelectorAll(`.${styles.card}`);
+      const viewportCenter = window.innerHeight / 2;
+      
+      let closestCard: Element | null = null;
+      let minDistance = Infinity;
+
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(viewportCenter - cardCenter);
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestCard = card;
+        }
+        
+        // Remove active class from everyone initially
+        card.classList.remove(styles.active);
+      });
+
+      // Add to the one closest to center, but only if it's actually in view
+      if (closestCard) {
+        const rect = (closestCard as Element).getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          (closestCard as Element).classList.add(styles.active);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Initial check
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section className={styles.section} id="services-cards">
       <div className={styles.grid}>
