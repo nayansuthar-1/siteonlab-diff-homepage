@@ -7,8 +7,8 @@ import styles from "./Header.module.css";
 
 const navLinks = [
   { label: "Case studies", href: "#case-studies" },
-  { label: "Services", href: "#services", hasDropdown: true },
-  { label: "Expertise", href: "#expertise", hasDropdown: true },
+  { label: "Services", href: "/services", hasDropdown: true },
+  { label: "Expertise", href: "/expertise", hasDropdown: true },
   { label: "Industries", href: "#industries", hasDropdown: true },
   { label: "Company", href: "/company" },
   { label: "Careers", href: "#careers" },
@@ -157,7 +157,7 @@ export default function Header() {
 
                 {/* Right side: Service Cards */}
                 <div className={styles.megaMenuRight}>
-                  <Link href="#service-1" className={`${styles.serviceCard} ${styles.serviceCard1}`} onClick={() => setActiveDropdown(null)}>
+                  <Link href="/services" className={`${styles.serviceCard} ${styles.serviceCard1}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
@@ -168,7 +168,7 @@ export default function Header() {
                     <span className={styles.serviceTitle}>Full-cycle<br/>Development</span>
                     <div className={styles.cardGlow}></div>
                   </Link>
-                  <Link href="#service-2" className={`${styles.serviceCard} ${styles.serviceCard2}`} onClick={() => setActiveDropdown(null)}>
+                  <Link href="/services" className={`${styles.serviceCard} ${styles.serviceCard2}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -180,7 +180,7 @@ export default function Header() {
                     <span className={styles.serviceTitle}>Software Team<br/>Augmentation</span>
                     <div className={styles.cardGlow}></div>
                   </Link>
-                  <Link href="#service-3" className={`${styles.serviceCard} ${styles.serviceCard3}`} onClick={() => setActiveDropdown(null)}>
+                  <Link href="/services" className={`${styles.serviceCard} ${styles.serviceCard3}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5"/>
@@ -191,7 +191,7 @@ export default function Header() {
                     <span className={styles.serviceTitle}>Digital Transformation<br/>Consulting</span>
                     <div className={styles.cardGlow}></div>
                   </Link>
-                  <Link href="#service-4" className={`${styles.serviceCard} ${styles.serviceCard4}`} onClick={() => setActiveDropdown(null)}>
+                  <Link href="/services" className={`${styles.serviceCard} ${styles.serviceCard4}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 19L21 21L19 12L20.5 10.5C21.3284 9.67157 21.3284 8.32843 20.5 7.5L16.5 3.5C15.6716 2.67157 14.3284 2.67157 13.5 3.5L12 5L3 14L5 23L12 19Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
@@ -231,7 +231,7 @@ export default function Header() {
                       </div>
                       <span className={styles.expertiseLabel}>AI and Machine Learning</span>
                     </Link>
-                    <Link href="#expertise-web" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    <Link href="/expertise" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
@@ -241,7 +241,7 @@ export default function Header() {
                       </div>
                       <span className={styles.expertiseLabel}>Web & Mobile Apps</span>
                     </Link>
-                    <Link href="#expertise-blockchain" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    <Link href="/expertise" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
@@ -251,7 +251,7 @@ export default function Header() {
                       </div>
                       <span className={styles.expertiseLabel}>Web 3.0 & Blockchain</span>
                     </Link>
-                    <Link href="#expertise-data" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    <Link href="/expertise" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <ellipse cx="12" cy="5" rx="9" ry="3" />
@@ -261,7 +261,7 @@ export default function Header() {
                       </div>
                       <span className={styles.expertiseLabel}>Big Data & Data Science</span>
                     </Link>
-                    <Link href="#expertise-devops" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    <Link href="/expertise" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -270,7 +270,7 @@ export default function Header() {
                       </div>
                       <span className={styles.expertiseLabel}>DevOps & Security</span>
                     </Link>
-                    <Link href="#expertise-qa" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    <Link href="/expertise" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <circle cx="12" cy="12" r="10" />
@@ -279,7 +279,7 @@ export default function Header() {
                       </div>
                       <span className={styles.expertiseLabel}>QA & Test Automation</span>
                     </Link>
-                    <Link href="#expertise-refinement" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    <Link href="/expertise" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <polyline points="23 4 23 10 17 10" />
@@ -288,7 +288,7 @@ export default function Header() {
                       </div>
                       <span className={styles.expertiseLabel}>Refinement & Reengineering</span>
                     </Link>
-                    <Link href="#expertise-support" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    <Link href="/expertise" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
@@ -296,7 +296,7 @@ export default function Header() {
                       </div>
                       <span className={styles.expertiseLabel}>Support & Maintenance</span>
                     </Link>
-                    <Link href="#expertise-cloud" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    <Link href="/expertise" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M17.5 19c2.5 0 4.5-2 4.5-4.5 0-2.4-1.9-4.3-4.3-4.5-.4-3.1-3-5.5-6.2-5.5-2.2 0-4.1 1.2-5.1 3-2.3.3-4.1 2.3-4.1 4.6C2.3 17 4.3 19 6.8 19h10.7z" />

@@ -112,7 +112,15 @@ const themes: any = {
   }
 };
 
-export default function TechExpertise() {
+interface TechExpertiseProps {
+  title?: string;
+  subtitle?: string;
+}
+
+export default function TechExpertise({
+  title = "Tech Expertise",
+  subtitle = "From artificial intelligence to cloud computing, we excel in modern technology and provide the expertise that growth-focused businesses require.",
+}: TechExpertiseProps) {
   useEffect(() => {
     if (typeof window === "undefined" || window.innerWidth > 1024) return;
 
@@ -156,10 +164,10 @@ export default function TechExpertise() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-[2rem] md:text-[2.5rem] text-white font-medium mb-3 tracking-tight">
-            Tech Expertise
+            {title}
           </h2>
           <p className="text-[0.95rem] text-[#8e95a3] tracking-wide font-normal max-w-2xl mx-auto leading-relaxed">
-            From artificial intelligence to cloud computing, we excel in modern technology and provide the expertise that growth-focused businesses require.
+            {subtitle}
           </p>
         </div>
 

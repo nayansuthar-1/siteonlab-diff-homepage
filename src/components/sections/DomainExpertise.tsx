@@ -70,7 +70,15 @@ const domainData = [
   },
 ];
 
-export default function DomainExpertise() {
+interface DomainExpertiseProps {
+  title?: string;
+  subtitle?: string;
+}
+
+export default function DomainExpertise({
+  title = "Domain expertise",
+  subtitle = "Siteon Lab blends cutting-edge technologies, expert engineering skills, and domain-specific knowledge to build top-notch solutions in fintech, edtech, and medtech.",
+}: DomainExpertiseProps) {
   useEffect(() => {
     if (typeof window === "undefined" || window.innerWidth > 1024) return;
 
@@ -112,11 +120,9 @@ export default function DomainExpertise() {
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>
-          <h2 className={styles.heading}>Domain expertise</h2>
+          <h2 className={styles.heading}>{title}</h2>
           <p className={styles.subheading}>
-            Siteon Lab blends cutting-edge technologies, expert engineering
-            skills, and domain-specific knowledge to build top-notch solutions
-            in fintech, edtech, and medtech.
+            {subtitle}
           </p>
         </div>
 
