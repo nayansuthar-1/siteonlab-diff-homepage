@@ -9,17 +9,19 @@
   right: 40px;
   z-index: 300;
   font-family: var(--font-plus-jakarta), sans-serif;
-  transition: background 0.35s ease, backdrop-filter 0.35s ease,
+  transition: background 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease,
     box-shadow 0.35s ease, border-radius 0.35s ease;
   background: transparent;
   padding: 10px 0;
   border-radius: 30px;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .header.scrolled {
   background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(32px) saturate(1.6);
-  -webkit-backdrop-filter: blur(32px) saturate(1.6);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  backdrop-filter: blur(32px) saturate(160%);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
   border-radius: 30px;
 }
