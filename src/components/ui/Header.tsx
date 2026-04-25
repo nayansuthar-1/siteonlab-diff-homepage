@@ -1,5 +1,6 @@
 "use client";
 
+// Cache bust 16:55
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -93,7 +94,7 @@ export default function Header() {
                       }
                     }}
                   >
-                    {link.label}
+                    <span>{link.label}</span>
                     {link.hasDropdown && (
                       <svg
                         className={styles.chevron}
@@ -136,10 +137,11 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Desktop Mega Menu */}
+        {/* Desktop Mega Menu - Always in DOM for stability */}
         <div className={`${styles.megaMenu} ${activeDropdown ? styles.megaMenuOpen : ""}`}>
           <div className={styles.megaMenuInner}>
-            {activeDropdown === "Services" && (
+            {/* Services Dropdown */}
+            <div className={styles.dropdownContent} style={{ display: activeDropdown === "Services" ? "block" : "none" }}>
               <div className={styles.megaMenuTop}>
                 {/* Left side: Schedule a call */}
                 <div className={styles.megaMenuLeft}>
@@ -147,12 +149,12 @@ export default function Header() {
                   <h2 className={styles.scheduleHeading}>
                     Tell us about your project idea and let us guide you
                   </h2>
-                  <a href="#contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
+                  <Link href="#contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
                     <span>Book a meeting</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
                       <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Right side: Service Cards */}
@@ -202,9 +204,10 @@ export default function Header() {
                   </Link>
                 </div>
               </div>
-            )}
+            </div>
             
-            {activeDropdown === "Expertise" && (
+            {/* Expertise Dropdown */}
+            <div className={styles.dropdownContent} style={{ display: activeDropdown === "Expertise" ? "block" : "none" }}>
               <div className={styles.megaMenuTop}>
                 {/* Left side: Schedule a call */}
                 <div className={styles.megaMenuLeft}>
@@ -223,7 +226,7 @@ export default function Header() {
                 {/* Right side: Expertise Grid */}
                 <div className={styles.megaMenuRight}>
                   <div className={styles.expertiseGrid}>
-                    <Link href="#expertise-ai" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
+                    <Link href="/expertise" className={styles.expertiseItem} onClick={() => setActiveDropdown(null)}>
                       <div className={styles.expertiseIcon}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
@@ -307,9 +310,10 @@ export default function Header() {
                   </div>
                 </div>
               </div>
-            )}
+            </div>
             
-            {activeDropdown === "Industries" && (
+            {/* Industries Dropdown */}
+            <div className={styles.dropdownContent} style={{ display: activeDropdown === "Industries" ? "block" : "none" }}>
               <div className={styles.megaMenuTop}>
                 {/* Left side: Schedule a call */}
                 <div className={styles.megaMenuLeft}>
@@ -327,7 +331,7 @@ export default function Header() {
 
                 {/* Right side: Industry Cards */}
                 <div className={styles.megaMenuRight}>
-                  <a href="#industry-finance" className={`${styles.serviceCard} ${styles.industryCard1}`} onClick={() => setActiveDropdown(null)}>
+                  <Link href="#industry-finance" className={`${styles.serviceCard} ${styles.industryCard1}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -335,8 +339,8 @@ export default function Header() {
                     </div>
                     <span className={styles.serviceTitle}>Financial Services</span>
                     <div className={styles.cardGlow}></div>
-                  </a>
-                  <a href="#industry-healthcare" className={`${styles.serviceCard} ${styles.industryCard2}`} onClick={() => setActiveDropdown(null)}>
+                  </Link>
+                  <Link href="#industry-healthcare" className={`${styles.serviceCard} ${styles.industryCard2}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <path d="M22 12h-4l-3 9L9 3l-3 9H2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -344,8 +348,8 @@ export default function Header() {
                     </div>
                     <span className={styles.serviceTitle}>Healthcare</span>
                     <div className={styles.cardGlow}></div>
-                  </a>
-                  <a href="#industry-education" className={`${styles.serviceCard} ${styles.industryCard3}`} onClick={() => setActiveDropdown(null)}>
+                  </Link>
+                  <Link href="#industry-education" className={`${styles.serviceCard} ${styles.industryCard3}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
@@ -354,9 +358,8 @@ export default function Header() {
                     </div>
                     <span className={styles.serviceTitle}>Education</span>
                     <div className={styles.cardGlow}></div>
-                  </a>
-                  <div className={styles.verticalSplitter}></div>
-                  <a href="#industry-all" className={`${styles.serviceCard} ${styles.industryCard4}`} onClick={() => setActiveDropdown(null)}>
+                  </Link>
+                  <Link href="#industry-all" className={`${styles.serviceCard} ${styles.industryCard4}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <rect x="2" y="2" width="20" height="20" rx="2" ry="2"/>
@@ -365,10 +368,10 @@ export default function Header() {
                     </div>
                     <span className={styles.serviceTitle}>All Industries</span>
                     <div className={styles.cardGlow}></div>
-                  </a>
+                  </Link>
                 </div>
               </div>
-            )}
+            </div>
             
             <div className={styles.megaMenuBottom}>
               <div className={styles.socialIcons}>
