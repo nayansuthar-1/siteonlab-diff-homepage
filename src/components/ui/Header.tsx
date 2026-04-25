@@ -7,7 +7,6 @@ import Link from "next/link";
 import styles from "./Header.module.css";
 
 const navLinks = [
-  { label: "Case studies", href: "#case-studies" },
   { label: "Services", href: "/services", hasDropdown: true },
   { label: "Expertise", href: "/expertise", hasDropdown: true },
   { label: "Industries", href: "#industries", hasDropdown: true },
