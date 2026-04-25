@@ -135,6 +135,38 @@ function PerfectSpheres() {
 
       const lineOffset = randomOffsets[i];
 
+      // --- PER-LINE HOVER DISTANCE ---
+      let distR_line = 999;
+      let distL_line = 999;
+
+      // Right Sphere curve distance
+      if (mx >= 0 && mx <= 2 * R) {
+        const cosAlpha = Math.max(-1, Math.min(1, 1 - mx / R));
+        const alphaMouse = Math.acos(cosAlpha);
+        const expectedY = R * Math.sin(alphaMouse) * Math.sin(thetaRight);
+        distR_line = Math.abs(expectedY - my);
+      } else if (mx < 0) {
+        distR_line = Math.sqrt(mx * mx + my * my);
+      } else {
+        distR_line = Math.sqrt(Math.pow(mx - 2 * R, 2) + my * my);
+      }
+
+      // Left Sphere curve distance
+      if (mx <= 0 && mx >= -2 * R) {
+        const cosAlpha = Math.max(-1, Math.min(1, 1 + mx / R));
+        const alphaMouse = Math.acos(cosAlpha);
+        const expectedY = R * Math.sin(alphaMouse) * Math.sin(thetaLeft);
+        distL_line = Math.abs(expectedY - my);
+      } else if (mx > 0) {
+        distL_line = Math.sqrt(mx * mx + my * my);
+      } else {
+        distL_line = Math.sqrt(Math.pow(mx + 2 * R, 2) + my * my);
+      }
+
+      // Calculate uniform boost for the entire line - sharper decay to isolate 1-2 waves
+      const lineBoostR = Math.exp(-distR_line * 6.0);
+      const lineBoostL = Math.exp(-distL_line * 6.0);
+
       for (let j = 0; j < resolution; j++) {
         const alphaStart = 0.01;
         const alphaEndMax = Math.PI * 0.95;
@@ -151,36 +183,26 @@ function PerfectSpheres() {
         const lx2 = -R * (1 - Math.cos(alpha2));
         const ly2 = R * Math.sin(alpha2) * Math.sin(thetaLeft);
 
-        // --- CALCULATE HOVER ---
-        const distR1 = Math.sqrt(Math.pow(rx1 - mx, 2) + Math.pow(ry1 - my, 2));
-        const distL1 = Math.sqrt(Math.pow(lx1 - mx, 2) + Math.pow(ly1 - my, 2));
-        const distR2 = Math.sqrt(Math.pow(rx2 - mx, 2) + Math.pow(ry2 - my, 2));
-        const distL2 = Math.sqrt(Math.pow(lx2 - mx, 2) + Math.pow(ly2 - my, 2));
-        
-        // Tight hover radius
-        const boostR1 = Math.exp(-distR1 * 2.5);
-        const boostL1 = Math.exp(-distL1 * 2.5);
-        const boostR2 = Math.exp(-distR2 * 2.5);
-        const boostL2 = Math.exp(-distL2 * 2.5);
-
-        // Lift factor (Z axis)
-        const liftAmount = 1.5;
+        // Lift factor (Z axis) - max lift in the center, 0 at the ends
+        const liftAmount = 2.5;
+        const lift1 = Math.sin(alpha1) * liftAmount;
+        const lift2 = Math.sin(alpha2) * liftAmount;
 
         /* ── Right Sphere ── */
         positions[ptIdx++] = rx1;
         positions[ptIdx++] = ry1;
-        positions[ptIdx++] = boostR1 * liftAmount;
+        positions[ptIdx++] = lineBoostR * lift1;
         positions[ptIdx++] = rx2;
         positions[ptIdx++] = ry2;
-        positions[ptIdx++] = boostR2 * liftAmount;
+        positions[ptIdx++] = lineBoostR * lift2;
 
         /* ── Left Sphere ── */
         positions[ptIdx++] = lx1;
         positions[ptIdx++] = ly1;
-        positions[ptIdx++] = boostL1 * liftAmount;
+        positions[ptIdx++] = lineBoostL * lift1;
         positions[ptIdx++] = lx2;
         positions[ptIdx++] = ly2;
-        positions[ptIdx++] = boostL2 * liftAmount;
+        positions[ptIdx++] = lineBoostL * lift2;
 
         /* ── FADING + HOVER BOOST ── */
         const poleFade1Right = Math.max(0, 1.0 - Math.pow(alpha1 / alphaEndMax, 1.5));
@@ -191,8 +213,8 @@ function PerfectSpheres() {
         const i1L = poleFade1Left * edgeFadeLeft;
 
         // Massive color boost to force AdditiveBlending into white
-        const colorBoostR = boostR1 * 5.0; 
-        const colorBoostL = boostL1 * 5.0;
+        const colorBoostR = lineBoostR * 5.0; 
+        const colorBoostL = lineBoostL * 5.0;
 
         colors[colIdx++] = i1R + colorBoostR; colors[colIdx++] = i1R + colorBoostR; colors[colIdx++] = i1R + colorBoostR;
         colors[colIdx++] = i1R + colorBoostR; colors[colIdx++] = i1R + colorBoostR; colors[colIdx++] = i1R + colorBoostR;
