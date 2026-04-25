@@ -163,9 +163,9 @@ function PerfectSpheres() {
         distL_line = Math.sqrt(Math.pow(mx + 2 * R, 2) + my * my);
       }
 
-      // Calculate uniform boost for the entire line - sharper decay to isolate 1-2 waves
-      const lineBoostR = Math.exp(-distR_line * 6.0);
-      const lineBoostL = Math.exp(-distL_line * 6.0);
+      // Calculate uniform boost for the entire line - slightly wider hover radius
+      const lineBoostR = Math.exp(-distR_line * 4.5);
+      const lineBoostL = Math.exp(-distL_line * 4.5);
 
       for (let j = 0; j < resolution; j++) {
         const alphaStart = 0.01;
@@ -184,7 +184,7 @@ function PerfectSpheres() {
         const ly2 = R * Math.sin(alpha2) * Math.sin(thetaLeft);
 
         // Lift factor (Z axis) - max lift in the center, 0 at the ends
-        const liftAmount = 2.5;
+        const liftAmount = 0.7;
         const lift1 = Math.sin(alpha1) * liftAmount;
         const lift2 = Math.sin(alpha2) * liftAmount;
 
@@ -212,9 +212,9 @@ function PerfectSpheres() {
         const i1R = poleFade1Right * edgeFadeRight;
         const i1L = poleFade1Left * edgeFadeLeft;
 
-        // Massive color boost to force AdditiveBlending into white
-        const colorBoostR = lineBoostR * 5.0; 
-        const colorBoostL = lineBoostL * 5.0;
+        // Massive color boost to force AdditiveBlending into white, but respect natural fade so hidden parts remain hidden!
+        const colorBoostR = lineBoostR * 15.0 * i1R; 
+        const colorBoostL = lineBoostL * 15.0 * i1L;
 
         colors[colIdx++] = i1R + colorBoostR; colors[colIdx++] = i1R + colorBoostR; colors[colIdx++] = i1R + colorBoostR;
         colors[colIdx++] = i1R + colorBoostR; colors[colIdx++] = i1R + colorBoostR; colors[colIdx++] = i1R + colorBoostR;
@@ -236,7 +236,15 @@ function PerfectSpheres() {
             mousePos.current.copy(localPoint);
           }
         }}
+        onPointerDown={(e) => {
+          if (groupRef.current) {
+            const localPoint = groupRef.current.worldToLocal(e.point.clone());
+            mousePos.current.copy(localPoint);
+          }
+        }}
         onPointerLeave={() => mousePos.current.set(999, 999, 0)}
+        onPointerUp={() => mousePos.current.set(999, 999, 0)}
+        onPointerCancel={() => mousePos.current.set(999, 999, 0)}
       >
         <planeGeometry args={[30, 30]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
