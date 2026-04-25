@@ -146,21 +146,41 @@ function PerfectSpheres() {
         const lx1 = -R * (1 - Math.cos(alpha1));
         const ly1 = R * Math.sin(alpha1) * Math.sin(thetaLeft);
 
+        const rx2 = R * (1 - Math.cos(alpha2));
+        const ry2 = R * Math.sin(alpha2) * Math.sin(thetaRight);
+        const lx2 = -R * (1 - Math.cos(alpha2));
+        const ly2 = R * Math.sin(alpha2) * Math.sin(thetaLeft);
+
+        // --- CALCULATE HOVER ---
+        const distR1 = Math.sqrt(Math.pow(rx1 - mx, 2) + Math.pow(ry1 - my, 2));
+        const distL1 = Math.sqrt(Math.pow(lx1 - mx, 2) + Math.pow(ly1 - my, 2));
+        const distR2 = Math.sqrt(Math.pow(rx2 - mx, 2) + Math.pow(ry2 - my, 2));
+        const distL2 = Math.sqrt(Math.pow(lx2 - mx, 2) + Math.pow(ly2 - my, 2));
+        
+        // Tight hover radius
+        const boostR1 = Math.exp(-distR1 * 2.5);
+        const boostL1 = Math.exp(-distL1 * 2.5);
+        const boostR2 = Math.exp(-distR2 * 2.5);
+        const boostL2 = Math.exp(-distL2 * 2.5);
+
+        // Lift factor (Z axis)
+        const liftAmount = 1.5;
+
         /* ── Right Sphere ── */
         positions[ptIdx++] = rx1;
         positions[ptIdx++] = ry1;
-        positions[ptIdx++] = 0;
-        positions[ptIdx++] = R * (1 - Math.cos(alpha2));
-        positions[ptIdx++] = R * Math.sin(alpha2) * Math.sin(thetaRight);
-        positions[ptIdx++] = 0;
+        positions[ptIdx++] = boostR1 * liftAmount;
+        positions[ptIdx++] = rx2;
+        positions[ptIdx++] = ry2;
+        positions[ptIdx++] = boostR2 * liftAmount;
 
         /* ── Left Sphere ── */
         positions[ptIdx++] = lx1;
         positions[ptIdx++] = ly1;
-        positions[ptIdx++] = 0;
-        positions[ptIdx++] = -R * (1 - Math.cos(alpha2));
-        positions[ptIdx++] = R * Math.sin(alpha2) * Math.sin(thetaLeft);
-        positions[ptIdx++] = 0;
+        positions[ptIdx++] = boostL1 * liftAmount;
+        positions[ptIdx++] = lx2;
+        positions[ptIdx++] = ly2;
+        positions[ptIdx++] = boostL2 * liftAmount;
 
         /* ── FADING + HOVER BOOST ── */
         const poleFade1Right = Math.max(0, 1.0 - Math.pow(alpha1 / alphaEndMax, 1.5));
@@ -170,18 +190,14 @@ function PerfectSpheres() {
         const i1R = poleFade1Right * edgeFadeRight;
         const i1L = poleFade1Left * edgeFadeLeft;
 
-        // --- CALCULATE HOVER BRIGHTNESS ---
-        const distR = Math.sqrt(Math.pow(rx1 - mx, 2) + Math.pow(ry1 - my, 2));
-        const distL = Math.sqrt(Math.pow(lx1 - mx, 2) + Math.pow(ly1 - my, 2));
-        
-        // Boost intensity when mouse is close (e.g., within 2 units)
-        const boostR = Math.exp(-distR * 1.5) * 0.8;
-        const boostL = Math.exp(-distL * 1.5) * 0.8;
+        // Massive color boost to force AdditiveBlending into white
+        const colorBoostR = boostR1 * 5.0; 
+        const colorBoostL = boostL1 * 5.0;
 
-        colors[colIdx++] = i1R + boostR; colors[colIdx++] = i1R + boostR; colors[colIdx++] = i1R + boostR;
-        colors[colIdx++] = i1R + boostR; colors[colIdx++] = i1R + boostR; colors[colIdx++] = i1R + boostR;
-        colors[colIdx++] = i1L + boostL; colors[colIdx++] = i1L + boostL; colors[colIdx++] = i1L + boostL;
-        colors[colIdx++] = i1L + boostL; colors[colIdx++] = i1L + boostL; colors[colIdx++] = i1L + boostL;
+        colors[colIdx++] = i1R + colorBoostR; colors[colIdx++] = i1R + colorBoostR; colors[colIdx++] = i1R + colorBoostR;
+        colors[colIdx++] = i1R + colorBoostR; colors[colIdx++] = i1R + colorBoostR; colors[colIdx++] = i1R + colorBoostR;
+        colors[colIdx++] = i1L + colorBoostL; colors[colIdx++] = i1L + colorBoostL; colors[colIdx++] = i1L + colorBoostL;
+        colors[colIdx++] = i1L + colorBoostL; colors[colIdx++] = i1L + colorBoostL; colors[colIdx++] = i1L + colorBoostL;
       }
     }
     posRef.current.needsUpdate = true;
@@ -192,11 +208,16 @@ function PerfectSpheres() {
     <group ref={groupRef} position={[posX, posY, 0]} rotation={[0, 0, -0.50]} scale={[scale, scale, scale]}>
       {/* ── SENSING PLANE (The Fix) ── */}
       <mesh 
-        onPointerMove={(e) => mousePos.current.copy(e.point)}
+        onPointerMove={(e) => {
+          if (groupRef.current) {
+            const localPoint = groupRef.current.worldToLocal(e.point.clone());
+            mousePos.current.copy(localPoint);
+          }
+        }}
         onPointerLeave={() => mousePos.current.set(999, 999, 0)}
-        visible={false}
       >
         <planeGeometry args={[30, 30]} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
 
       <mesh position={[0, 0, -0.1]}>

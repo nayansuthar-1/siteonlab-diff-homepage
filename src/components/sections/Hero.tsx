@@ -78,8 +78,8 @@ export default function Hero() {
       </div>
 
       {/* Content LEFT */}
-      <div className="relative z-10 h-full flex items-start pt-[16vh] px-8 md:px-20">
-        <div className="max-w-3xl">
+      <div className="relative z-10 h-full flex items-start pt-[16vh] px-8 md:px-20 pointer-events-none">
+        <div className="max-w-3xl pointer-events-auto">
           <h1
             style={{
               fontFamily: "var(--font-plus-jakarta), sans-serif",
