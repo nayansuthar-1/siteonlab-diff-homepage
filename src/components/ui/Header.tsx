@@ -11,7 +11,7 @@ const navLinks = [
   { label: "Expertise", href: "/expertise", hasDropdown: true },
   { label: "Industries", href: "#industries", hasDropdown: true },
   { label: "Company", href: "/company" },
-  { label: "Careers", href: "#careers" },
+  { label: "Careers", href: "/careers" },
 ];
 
 export default function Header() {
@@ -72,8 +72,8 @@ export default function Header() {
             <Image
               src="/siteon_lab-removebg-preview (1).png"
               alt="siteonlab"
-              width={150}
-              height={34}
+              width={200}
+              height={45}
               priority
             />
           </Link>
