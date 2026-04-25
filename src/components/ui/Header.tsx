@@ -118,7 +118,7 @@ export default function Header() {
           </nav>
 
           {/* CTA */}
-          <Link href="#contact" className={styles.ctaButton}>
+          <Link href="/contact" className={styles.ctaButton}>
             Contact us
           </Link>
 
@@ -148,7 +148,7 @@ export default function Header() {
                   <h2 className={styles.scheduleHeading}>
                     Tell us about your project idea and let us guide you
                   </h2>
-                  <Link href="#contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
+                  <Link href="/contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
                     <span>Book a meeting</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
                       <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -214,7 +214,7 @@ export default function Header() {
                   <h2 className={styles.scheduleHeading}>
                     Tell us about your project idea and let us guide you
                   </h2>
-                  <Link href="#contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
+                  <Link href="/contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
                     <span>Book a meeting</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
                       <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -320,7 +320,7 @@ export default function Header() {
                   <h2 className={styles.scheduleHeading}>
                     Tell us about your project idea and let us guide you
                   </h2>
-                  <a href="#contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
+                  <a href="/contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
                     <span>Book a meeting</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
                       <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -416,7 +416,7 @@ export default function Header() {
           {/* Navigation Links */}
           <nav className={styles.mobileNav} aria-label="Mobile navigation">
             <ul className={styles.mobileNavList}>
-              {[...navLinks, { label: "Contact us", href: "#contact" }].map((link) => (
+              {[...navLinks, { label: "Contact us", href: "/contact" }].map((link) => (
                 <li key={link.label} className={styles.mobileNavItem}>
                   <Link
                     href={link.href}
@@ -454,7 +454,7 @@ export default function Header() {
               <h2 className={styles.scheduleHeading}>
                 Tell us about your project idea and let us guide you
               </h2>
-              <Link href="#contact" className={styles.bookButton} onClick={() => setMobileOpen(false)}>
+              <Link href="/contact" className={styles.bookButton} onClick={() => setMobileOpen(false)}>
                 <span>Book a meeting</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
                   <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

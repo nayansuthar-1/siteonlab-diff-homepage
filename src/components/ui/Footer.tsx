@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Footer.module.css";
 
 interface FooterProps {
@@ -17,12 +18,12 @@ const Footer = ({ showSchedule = true }: FooterProps) => {
             <h2 className={styles.scheduleHeading}>
               Tell us about your project idea and let us guide you
             </h2>
-            <a href="#contact" className={styles.bookButton}>
+            <Link href="/contact" className={styles.bookButton}>
               <span>Book a meeting</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
                 <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </a>
+            </Link>
           </div>
         )}
 

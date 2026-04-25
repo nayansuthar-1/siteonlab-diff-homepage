@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import WaveScene from "@/three/WaveScene";
+import Link from "next/link";
 
 /* ── rotating words + their gradient colours ── */
 const WORDS = [
@@ -126,8 +127,8 @@ export default function Hero() {
           </p>
 
           <div style={{ marginTop: "2.25rem" }}>
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -158,7 +159,7 @@ export default function Hero() {
               }}
             >
               Book a call
-            </a>
+            </Link>
           </div>
         </div>
       </div>

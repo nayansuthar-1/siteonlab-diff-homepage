@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Expertise.module.css";
 import Footer from "@/components/ui/Footer";
 
@@ -46,12 +47,12 @@ export default function ExpertisePage() {
             <p className={styles.subheading}>
               Digitize your business processes or launch new products for web and mobile platforms - we take care of the entire cycle of software development.
             </p>
-            <a href="#contact" className={styles.ctaBtn}>
+            <Link href="/contact" className={styles.ctaBtn}>
               Get in touch
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
-            </a>
+            </Link>
           </div>
 
           <div className={styles.rightContent}>
