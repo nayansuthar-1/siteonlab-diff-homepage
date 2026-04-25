@@ -25,11 +25,12 @@
   padding: 28px 24px;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.07); /* Slightly higher for visibility */
-  backdrop-filter: blur(24px) saturate(1.4);
-  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  background: rgba(255, 255, 255, 0.12); /* Increased for test */
+  backdrop-filter: blur(40px) saturate(1.6);
+  -webkit-backdrop-filter: blur(40px) saturate(1.6);
   text-decoration: none;
   color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Temporary stronger border */
   transition: transform 0.3s ease, background 0.3s ease,
     backdrop-filter 0.3s ease, border-color 0.3s ease;
   -webkit-transition: -webkit-transform 0.3s ease, background 0.3s ease,
@@ -40,6 +41,8 @@
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   will-change: backdrop-filter, -webkit-backdrop-filter, transform;
+  z-index: 1;
+  isolation: isolate;
 }
 
 .card:hover,
