@@ -25,15 +25,21 @@
   padding: 28px 24px;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.07); /* Slightly higher for visibility */
   backdrop-filter: blur(24px) saturate(1.4);
   -webkit-backdrop-filter: blur(24px) saturate(1.4);
   text-decoration: none;
   color: #fff;
   transition: transform 0.3s ease, background 0.3s ease,
     backdrop-filter 0.3s ease, border-color 0.3s ease;
+  -webkit-transition: -webkit-transform 0.3s ease, background 0.3s ease,
+    -webkit-backdrop-filter 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
   min-height: 220px;
+  /* Hardware acceleration guards */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: backdrop-filter, -webkit-backdrop-filter, transform;
 }
 
 .card:hover,
