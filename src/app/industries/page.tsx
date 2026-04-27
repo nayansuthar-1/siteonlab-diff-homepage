@@ -7,9 +7,29 @@ import Footer from "@/components/ui/Footer";
 
 export default function IndustriesPage() {
   const [mounted, setMounted] = useState(false);
+  const [activeSection, setActiveSection] = useState('finance');
 
   useEffect(() => {
     setMounted(true);
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, { 
+      threshold: 0.3,
+      rootMargin: '-100px 0px -200px 0px'
+    });
+
+    const sections = ['finance', 'healthcare', 'education', 'ecommerce', 'logistics', 'realestate', 'travel', 'manufacturing'];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   if (!mounted) return null;
@@ -214,6 +234,529 @@ export default function IndustriesPage() {
           </div>
         </div>
       </section>
+
+      <div className={styles.industriesDetailContainer}>
+        <aside className={styles.sidebarWrapper}>
+          <div className={styles.verticalSidebar}>
+            {/* Finance */}
+            <div 
+              className={`${styles.sidebarIcon} ${activeSection === 'finance' ? styles.sidebarIconActive : ''}`}
+              onClick={() => document.getElementById('finance')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 7h-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM9 5c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v2H9V5z" />
+              </svg>
+            </div>
+            {/* Healthcare */}
+            <div 
+              className={`${styles.sidebarIcon} ${activeSection === 'healthcare' ? styles.sidebarIconActive : ''}`}
+              onClick={() => document.getElementById('healthcare')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+              </svg>
+            </div>
+            {/* Education */}
+            <div 
+              className={`${styles.sidebarIcon} ${activeSection === 'education' ? styles.sidebarIconActive : ''}`}
+              onClick={() => document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
+              </svg>
+            </div>
+            {/* E-commerce */}
+            <div 
+              className={`${styles.sidebarIcon} ${activeSection === 'ecommerce' ? styles.sidebarIconActive : ''}`}
+              onClick={() => document.getElementById('ecommerce')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
+              </svg>
+            </div>
+            {/* Logistics */}
+            <div 
+              className={`${styles.sidebarIcon} ${activeSection === 'logistics' ? styles.sidebarIconActive : ''}`}
+              onClick={() => document.getElementById('logistics')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" />
+                <path d="M12 8l-4 4h3v4h2v-4h3z" />
+              </svg>
+            </div>
+            {/* Real Estate */}
+            <div 
+              className={`${styles.sidebarIcon} ${activeSection === 'realestate' ? styles.sidebarIconActive : ''}`}
+              onClick={() => document.getElementById('realestate')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+              </svg>
+            </div>
+            {/* Travel */}
+            <div 
+              className={`${styles.sidebarIcon} ${activeSection === 'travel' ? styles.sidebarIconActive : ''}`}
+              onClick={() => document.getElementById('travel')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z" />
+              </svg>
+            </div>
+            {/* Manufacturing */}
+            <div 
+              className={`${styles.sidebarIcon} ${activeSection === 'manufacturing' ? styles.sidebarIconActive : ''}`}
+              onClick={() => document.getElementById('manufacturing')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41s-.23-1.06-.59-1.42zM5.5 8.25c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z" />
+              </svg>
+            </div>
+          </div>
+        </aside>
+
+        <div className={styles.contentWrapper}>
+          <section id="finance" className={styles.detailsSection}>
+            {/* Left Feature Card */}
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 7h-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM9 5c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v2H9V5z" />
+                </svg>
+              </div>
+              <h2 className={styles.featureTitle}>Financial services</h2>
+              <p className={styles.featureDescription}>
+                Kick off an Agile transformation, build a mobile banking app, or launch the perfect fintech development. 
+                Everything you need to create a top-tier finance product is under one roof.
+              </p>
+            </div>
+
+            {/* Right Details Card */}
+            <div className={styles.detailsContainer}>
+              {/* Key Expertise */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                  Key Expertise
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Banking</div>
+                  <div className={styles.detailsItem}>Wealth management</div>
+                  <div className={styles.detailsItem}>Insurance</div>
+                  <div className={styles.detailsItem}>Security and compliance</div>
+                  <div className={styles.detailsItem}>Blockchain and cryptocurrency</div>
+                  <div className={styles.detailsItem}>Risk management & fraud prevention</div>
+                </div>
+              </div>
+
+              {/* Capabilities We Deliver */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Capabilities We Deliver
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Peer-to-peer payments</div>
+                  <div className={styles.detailsItem}>Budgeting tools</div>
+                  <div className={styles.detailsItem}>Investment insights</div>
+                  <div className={styles.detailsItem}>Fraud detection</div>
+                  <div className={styles.detailsItem}>Biometric authentication</div>
+                  <div className={styles.detailsItem}>KYC/AML</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="healthcare" className={`${styles.detailsSection} ${styles.healthcareSection}`}>
+            {/* Left Feature Card */}
+            <div className={`${styles.featureCard} ${styles.featureCardGreen}`}>
+              <div className={styles.featureIcon}>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+                </svg>
+              </div>
+              <h2 className={styles.featureTitle}>Healthcare</h2>
+              <p className={styles.featureDescription}>
+                Digitalize medical services for providers and patients. Build a custom healthcare system 
+                that manages schedules, data, and billing efficiently while keeping sensitive data secure.
+              </p>
+            </div>
+
+            {/* Right Details Card */}
+            <div className={styles.detailsContainer}>
+              {/* Key Expertise */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                  Key Expertise
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Hospital management systems (HMS)</div>
+                  <div className={styles.detailsItem}>Electronic health records (EHR)</div>
+                  <div className={styles.detailsItem}>Telemedicine and remote care</div>
+                  <div className={styles.detailsItem}>Pharmacy and laboratory software</div>
+                  <div className={styles.detailsItem}>Medical billing and insurance</div>
+                  <div className={styles.detailsItem}>Patient portals and mobile apps</div>
+                </div>
+              </div>
+
+              {/* Capabilities We Deliver */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Capabilities We Deliver
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Secure data encryption</div>
+                  <div className={styles.detailsItem}>Real-time appointment scheduling</div>
+                  <div className={styles.detailsItem}>Automated medical billing</div>
+                  <div className={styles.detailsItem}>Interoperability (HL7/FHIR)</div>
+                  <div className={styles.detailsItem}>AI-powered diagnostics support</div>
+                  <div className={styles.detailsItem}>HIPAA/GDPR compliance</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="education" className={styles.detailsSection}>
+            {/* Left Feature Card */}
+            <div className={`${styles.featureCard} ${styles.featureCardOrange}`}>
+              <div className={styles.featureIcon}>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
+                </svg>
+              </div>
+              <h2 className={styles.featureTitle}>Education</h2>
+              <p className={styles.featureDescription}>
+                Create an advanced learning solution to digitalize the academic experience, enhance self-learning, or improve corporate training. 
+                We can help bring your vision to life from scratch or by customizing an existing edtech product.
+              </p>
+            </div>
+
+            {/* Right Details Card */}
+            <div className={styles.detailsContainer}>
+              {/* Key Expertise */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                  Key Expertise
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Workflow automation</div>
+                  <div className={styles.detailsItem}>Corporate training solutions</div>
+                  <div className={styles.detailsItem}>Self-learning applications</div>
+                  <div className={styles.detailsItem}>AI recommendation systems</div>
+                  <div className={styles.detailsItem}>Learning management systems (LMS)</div>
+                  <div className={styles.detailsItem}>Customizable e-learning portals</div>
+                </div>
+              </div>
+
+              {/* Capabilities We Deliver */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Capabilities We Deliver
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Gamification features</div>
+                  <div className={styles.detailsItem}>Live streaming</div>
+                  <div className={styles.detailsItem}>AR/VR technologies</div>
+                  <div className={styles.detailsItem}>Real-time messaging</div>
+                  <div className={styles.detailsItem}>AI-powered chatbots</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="ecommerce" className={styles.detailsSection}>
+            {/* Left Feature Card */}
+            <div className={`${styles.featureCard} ${styles.featureCardPink}`}>
+              <div className={styles.featureIcon}>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
+                </svg>
+              </div>
+              <h2 className={styles.featureTitle}>E-commerce & retail</h2>
+              <p className={styles.featureDescription}>
+                Roll out a custom Shopify E-commerce platform, global marketplace, or mobile shopping app with AI-powered recommendations, 
+                smart systems, and CRM integration.
+              </p>
+            </div>
+
+            {/* Right Details Card */}
+            <div className={styles.detailsContainer}>
+              {/* Key Expertise */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                  Key Expertise
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>E-commerce platforms</div>
+                  <div className={styles.detailsItem}>Online stores</div>
+                  <div className={styles.detailsItem}>Mobile shopping applications</div>
+                  <div className={styles.detailsItem}>Multi-vendor marketplaces</div>
+                  <div className={styles.detailsItem}>Inventory and order management</div>
+                </div>
+              </div>
+
+              {/* Capabilities We Deliver */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Capabilities We Deliver
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Smart product search</div>
+                  <div className={styles.detailsItem}>Payment integrations</div>
+                  <div className={styles.detailsItem}>Promo engines</div>
+                  <div className={styles.detailsItem}>AI recommendation engines</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="logistics" className={styles.detailsSection}>
+            {/* Left Feature Card */}
+            <div className={`${styles.featureCard} ${styles.featureCardOrange}`}>
+              <div className={styles.featureIcon}>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" />
+                  <path d="M12 8l-4 4h3v4h2v-4h3z" />
+                </svg>
+              </div>
+              <h2 className={styles.featureTitle}>Transportation & delivery</h2>
+              <p className={styles.featureDescription}>
+                Deploy a smart product that streamlines logistics, reduces costs, and ensures real-time service. 
+                From food deliveries to automotive dealerships, parcel tracking, and courier apps, we help you develop a high-performing solution.
+              </p>
+            </div>
+
+            {/* Right Details Card */}
+            <div className={styles.detailsContainer}>
+              {/* Key Expertise */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                  Key Expertise
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Last-mile delivery solutioning</div>
+                  <div className={styles.detailsItem}>Automotive dealership management</div>
+                  <div className={styles.detailsItem}>Custom food delivery platforms</div>
+                  <div className={styles.detailsItem}>Courier apps</div>
+                  <div className={styles.detailsItem}>Logistics automation</div>
+                  <div className={styles.detailsItem}>Real-time tracking & route optimization</div>
+                </div>
+              </div>
+
+              {/* Capabilities We Deliver */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Capabilities We Deliver
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>AI-powered dispatch systems</div>
+                  <div className={styles.detailsItem}>GPS tracking & geofencing</div>
+                  <div className={styles.detailsItem}>Customer support tools</div>
+                  <div className={styles.detailsItem}>Performance analytics</div>
+                  <div className={styles.detailsItem}>Delivery scheduling</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="realestate" className={styles.detailsSection}>
+            {/* Left Feature Card */}
+            <div className={`${styles.featureCard} ${styles.featureCardPurple}`}>
+              <div className={styles.featureIcon}>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg>
+              </div>
+              <h2 className={styles.featureTitle}>Real estate & property management</h2>
+              <p className={styles.featureDescription}>
+                Build a property management system that automates admin tasks and improves resident experience. 
+                Tenant management, smart access, parking systems — we can implement this and more to help you create processes that enable better client satisfaction.
+              </p>
+            </div>
+
+            {/* Right Details Card */}
+            <div className={styles.detailsContainer}>
+              {/* Key Expertise */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                  Key Expertise
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Custom property management systems</div>
+                  <div className={styles.detailsItem}>Residential & commercial building solutions</div>
+                  <div className={styles.detailsItem}>Tenant and lease management tools</div>
+                  <div className={styles.detailsItem}>Facility and maintenance platforms</div>
+                  <div className={styles.detailsItem}>Rent payment systems</div>
+                </div>
+              </div>
+
+              {/* Capabilities We Deliver */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Capabilities We Deliver
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Intelligent search filters & recommendations</div>
+                  <div className={styles.detailsItem}>Integration with IoT for smart home automation</div>
+                  <div className={styles.detailsItem}>Service booking</div>
+                  <div className={styles.detailsItem}>Payment gateway integration</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="travel" className={styles.detailsSection}>
+            {/* Left Feature Card */}
+            <div className={`${styles.featureCard} ${styles.featureCardCyan}`}>
+              <div className={styles.featureIcon}>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z" />
+                </svg>
+              </div>
+              <h2 className={styles.featureTitle}>Travel & HoReCa</h2>
+              <p className={styles.featureDescription}>
+                Improve travel & hospitality management with custom solutions. From seamless booking platforms to smooth customer journeys, 
+                we help you elevate guest experiences, reduce operations, and automate routine tasks.
+              </p>
+            </div>
+
+            {/* Right Details Card */}
+            <div className={styles.detailsContainer}>
+              {/* Key Expertise */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                  Key Expertise
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Booking platforms</div>
+                  <div className={styles.detailsItem}>Sustainable tourism solutions</div>
+                  <div className={styles.detailsItem}>Mobile apps for travelers</div>
+                  <div className={styles.detailsItem}>Point of Sale (POS) systems</div>
+                </div>
+              </div>
+
+              {/* Capabilities We Deliver */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Capabilities We Deliver
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Integrations with third-party vendors</div>
+                  <div className={styles.detailsItem}>Group bookings management</div>
+                  <div className={styles.detailsItem}>Dynamic pricing & real-time availability</div>
+                  <div className={styles.detailsItem}>Automated payment processing</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="manufacturing" className={styles.detailsSection}>
+            {/* Left Feature Card */}
+            <div className={`${styles.featureCard} ${styles.featureCardGreen}`}>
+              <div className={styles.featureIcon}>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41s-.23-1.06-.59-1.42zM5.5 8.25c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z" />
+                </svg>
+              </div>
+              <h2 className={styles.featureTitle}>Manufacturing</h2>
+              <p className={styles.featureDescription}>
+                Move manufacturing operations to the digital realm with a custom-made solution. 
+                Whether you need process automation or seamless production management, we can help you transform traditional workflows into scalable systems.
+              </p>
+            </div>
+
+            {/* Right Details Card */}
+            <div className={styles.detailsContainer}>
+              {/* Key Expertise */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                  Key Expertise
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>IoT for manufacturing</div>
+                  <div className={styles.detailsItem}>Quality control systems</div>
+                  <div className={styles.detailsItem}>Predictive maintenance</div>
+                  <div className={styles.detailsItem}>Industrial automation</div>
+                </div>
+              </div>
+
+              {/* Capabilities We Deliver */}
+              <div className={styles.detailsColumn}>
+                <div className={styles.columnHeader}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Capabilities We Deliver
+                </div>
+                <div className={styles.detailsList}>
+                  <div className={styles.detailsItem}>Real-time machine monitoring</div>
+                  <div className={styles.detailsItem}>Automated production workflows</div>
+                  <div className={styles.detailsItem}>Environmental condition tracking</div>
+                  <div className={styles.detailsItem}>Integrations with ERP and MES systems</div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
 
       <Footer showSchedule={false} />
     </main>
