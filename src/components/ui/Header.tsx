@@ -9,7 +9,7 @@ import styles from "./Header.module.css";
 const navLinks = [
   { label: "Services", href: "/services", hasDropdown: true },
   { label: "Expertise", href: "/expertise", hasDropdown: true },
-  { label: "Industries", href: "#industries", hasDropdown: true },
+  { label: "Industries", href: "/industries", hasDropdown: true },
   { label: "Company", href: "/company" },
   { label: "Careers", href: "/careers" },
 ];

@@ -1,0 +1,284 @@
+.main {
+  min-height: 100vh;
+  background-color: #0a0a0a;
+  color: #fff;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+  overflow: hidden;
+}
+
+.glowContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.orangeGlow {
+  position: absolute;
+  bottom: -15%;
+  right: -5%;
+  width: 95%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 140, 0, 0.5) 0%, rgba(139, 69, 19, 0.3) 40%, rgba(0, 0, 0, 0) 75%);
+  filter: blur(120px);
+  animation: smokeMove1 15s infinite ease-in-out;
+}
+
+.orangeGlowSecondary {
+  position: absolute;
+  top: 5%;
+  right: 10%;
+  width: 75%;
+  height: 75%;
+  background: radial-gradient(circle, rgba(255, 180, 0, 0.35) 0%, rgba(218, 165, 32, 0.25) 50%, rgba(0, 0, 0, 0) 80%);
+  filter: blur(140px);
+  animation: smokeMove2 12s infinite ease-in-out;
+}
+
+.orangeGlowThird {
+  position: absolute;
+  bottom: 20%;
+  right: 30%;
+  width: 55%;
+  height: 55%;
+  background: radial-gradient(circle, rgba(255, 80, 0, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(80px);
+  animation: smokeMove1 10s infinite reverse ease-in-out;
+}
+
+.orangeGlowBase {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 70% 60%, rgba(255, 120, 0, 0.15) 0%, rgba(0, 0, 0, 0) 80%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes smokeMove1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-10%, 10%) scale(1.1); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes smokeMove2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(10%, -10%) scale(1.2); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.leftContent {
+  flex: 1;
+  max-width: 800px;
+  padding-left: 5%;
+  padding-right: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.heading {
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.subheading {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.5;
+  margin-bottom: 3rem;
+  max-width: 550px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.rightContent {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  height: 100vh;
+  align-items: center;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.robotHandWrapper {
+  position: absolute;
+  bottom: 0%;
+  right: -15%;
+  width: 120%;
+  height: 120%;
+  z-index: 10;
+  pointer-events: none; /* Ensure it doesn't block icon clicks */
+}
+
+.robotHand {
+  object-fit: contain;
+  object-position: bottom right;
+}
+
+/* Floating Icons Container */
+.iconsContainer {
+  position: absolute;
+  top: 50%;
+  margin-top: -222px; /* Center without transform to avoid stacking context */
+  right: 18%;
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(4, 100px);
+  gap: 15px;
+  pointer-events: none;
+}
+
+.floatingCard {
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 165, 0, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 165, 0, 0.35);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 165, 0, 0.15);
+  animation: floatUpAndDown 4s ease-in-out infinite;
+  z-index: 20; /* Default above hand */
+  position: relative;
+  pointer-events: auto;
+}
+
+.floatingCard svg {
+  width: 44px;
+  height: 44px;
+  color: #ff9d00;
+  filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.6));
+}
+
+@keyframes floatUpAndDown {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-30px); }
+  100% { transform: translateY(0px); }
+}
+
+/* 4x4 Grid placements for 8 icons - Corners & Center empty */
+.iconFinance { grid-row: 1; grid-column: 2; }
+.iconSecurity { grid-row: 1; grid-column: 3; }
+.iconEcommerce { grid-row: 2; grid-column: 4; }
+.iconRealEstate { grid-row: 3; grid-column: 4; }
+.iconRetail { grid-row: 4; grid-column: 3; }
+.iconTravel { grid-row: 4; grid-column: 2; }
+.iconLogistics { grid-row: 3; grid-column: 1; z-index: 5; } /* Lower than hand z-index (10) */
+.iconEducation { grid-row: 2; grid-column: 1; }
+
+/* Scroll Indicator */
+.scrollIndicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 5%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #888;
+  font-size: 0.9rem;
+  z-index: 1;
+}
+
+.scrollIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .heroContent {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 100px;
+  }
+  
+  .leftContent {
+    padding-right: 0;
+    max-width: 100%;
+    margin-bottom: 4rem;
+  }
+  
+  .rightContent {
+    width: 100%;
+    height: 60vh;
+  }
+  
+  .robotHandWrapper {
+    width: 100%;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .floatingCard {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .floatingCard svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 2.5rem;
+  }
+  
+  .subheading {
+    font-size: 1rem;
+  }
+  
+  .scrollIndicator {
+    display: none;
+  }
+}
