@@ -106,13 +106,13 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1600px; /* Increased to allow wider cards/content */
   margin: 0 auto;
 }
 
 .leftContent {
   flex: 1;
-  max-width: 800px;
+  max-width: 900px; /* Increased to match wider layout */
   padding-left: 5%;
   padding-right: 2rem;
   position: relative;
@@ -345,7 +345,7 @@
 
 /* Industry Grid Section */
 .gridSection {
-  padding: 120px 8%;
+  padding: 120px 3%; /* Reduced side padding to increase width */
   background-color: #050505;
   display: flex;
   gap: 80px;
@@ -581,7 +581,7 @@
 
 /* Detailed Feature Section */
 .detailsSection {
-  padding: 60px 8%;
+  padding: 60px 3%; /* Reduced side padding to increase card widths */
   background-color: #050505;
   display: flex;
   gap: 24px;
@@ -696,11 +696,11 @@
 @media (max-width: 1200px) {
   .detailsSection {
     flex-direction: column;
-    padding: 60px 5%;
+    padding: 60px 1% !important; /* Reduced to almost 0 to maximize card width */
   }
 
   .detailsContainer {
-    padding: 40px;
+    padding: 32px; /* Reduced from 40px by 8px */
     gap: 40px;
   }
 }
@@ -712,6 +712,10 @@
 
   .featureTitle {
     font-size: 1.75rem;
+  }
+
+  .featureCard {
+    padding: 32px 24px !important; /* Reduced by 8px from 40px/32px */
   }
 }
 
@@ -951,7 +955,7 @@
   }
 
   .industriesDetailContainer {
-    padding-left: 0 !important;
+    padding: 0 8px !important; /* Added 8px equal side padding */
   }
 
   .sidebarWrapper {
