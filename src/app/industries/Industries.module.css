@@ -408,15 +408,16 @@
 }
 
 .industryCard {
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* More prominent whitish border */
+  border-radius: 20px;
   padding: 24px;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  min-height: 120px;
+  justify-content: flex-start;
+  gap: 20px; /* Reduced gap */
+  min-height: 120px; /* Reduced height */
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -451,32 +452,33 @@
 }
 
 .cardIcon {
-  width: 38px;
-  height: 38px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.25); /* Whitish border for icon */
+  border-radius: 14px;
   transition: all 0.4s ease;
   position: relative;
   z-index: 1;
 }
 
 .cardIcon svg {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
 }
 
 .cardTitle {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #fff;
-  line-height: 1.3;
+  line-height: 1.2;
   position: relative;
   z-index: 1;
+  letter-spacing: -0.01em;
 }
 
 .iconFinance {
@@ -551,12 +553,29 @@
 
 @media (max-width: 640px) {
   .industryGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr); /* Enforce 2 columns */
+    gap: 12px; /* Narrower gap for mobile */
   }
 
   .industryCard {
-    padding: 24px;
-    min-height: auto;
+    padding: 16px;
+    min-height: 100px; /* Reduced mobile height */
+    gap: 12px; /* Reduced mobile gap */
+  }
+
+  .cardIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .cardIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .cardTitle {
+    font-size: 0.85rem;
   }
 }
 
@@ -835,55 +854,138 @@
     /* Hide sidebar on small screens or move to horizontal */
   }
 }
-@media (max-width: 768px) {
+
+@media (max-width: 1024px) {
+  .hero {
+    align-items: flex-start !important;
+    padding-left: 0 !important;
+  }
+
   .heroContent {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-top: 140px;
-    padding-left: 20px;
-    padding-right: 20px;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    padding-top: 100px !important;
+    padding-left: 10px !important;
+    padding-right: 20px !important;
+    height: 100% !important;
+    width: 100% !important;
+    position: static !important;
+    /* Allow absolute children to pin to .hero */
   }
 
   .leftContent {
-    padding-left: 0;
-    max-width: 100%;
-    text-align: left;
-    order: 1;
+    padding-left: 0 !important;
+    max-width: 100% !important;
+    text-align: left !important;
+    z-index: 10 !important;
   }
 
   .heading {
-    font-size: 2.2rem;
-    margin-bottom: 0.8rem;
-    white-space: normal;
-    text-align: left;
+    font-size: 1.75rem !important;
+    text-align: left !important;
+    white-space: normal !important;
+    margin-left: 15px !important;
+    /* Equalized gap */
   }
 
   .subheading {
-    font-size: 0.95rem;
-    max-width: 90%;
-    line-height: 1.5;
-    text-align: left;
+    font-size: 0.95rem !important;
+    text-align: left !important;
+    max-width: 90% !important;
+    margin-left: 15px !important;
+    /* Equalized gap */
+    line-height: 1.8 !important;
+    word-spacing: 2px !important;
+    /* Increased word spacing */
   }
 
   .rightContent {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 45vh;
-    order: 2;
-    z-index: 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    pointer-events: none;
+    position: absolute !important;
+    bottom: 0 !important; /* Move back to absolute bottom */
+    right: 0 !important;
+    width: 100% !important;
+    height: 52vh !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+
+  .imageContainer {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
   }
 
   .robotHandWrapper {
-    width: 120%;
-    right: -10%;
-    bottom: 0;
-    height: 100%;
+    width: 140% !important;
+    height: 100% !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    right: -35% !important;
+    z-index: 10 !important; /* Hand layer in the middle */
+  }
+
+  .robotHand {
+    object-fit: contain !important;
+    object-position: bottom right !important;
+  }
+
+  .iconsContainer {
+    position: absolute !important;
+    bottom: 120px !important;
+    right: 40px !important;
+    top: auto !important;
+    margin-top: 0 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-rows: repeat(4, 1fr) !important;
+    width: 275px !important; /* Increased to accommodate gap */
+    height: 275px !important; /* Increased to accommodate gap */
+    gap: 5px !important; /* Increased by 5px */
+    z-index: auto !important;
+  }
+
+  .industriesDetailContainer {
+    padding-left: 0 !important;
+  }
+
+  .sidebarWrapper {
+    display: none !important;
+  }
+
+  .gridHeading {
+    font-size: 1.45rem !important; /* Increased to the maximum safe size for one line */
+    white-space: nowrap !important;
+    margin-bottom: 1.5rem !important;
+    text-align: left !important;
+    padding-left: 0 !important;
+  }
+
+  .floatingCard {
+    width: 60px !important;
+    height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 20 !important;
+    border-radius: 12px !important; /* Reduced border radius */
+    /* Animation is now active as transform: scale() is removed */
+  }
+
+  /* Computer icon behind hand */
+  .iconsContainer div[class*="iconLogistics"] {
+    z-index: 5 !important;
+  }
+
+  .floatingCard svg {
+    width: 36px !important;
+    /* Larger actual icons */
+    height: 36px !important;
+    /* Larger actual icons */
   }
 }
