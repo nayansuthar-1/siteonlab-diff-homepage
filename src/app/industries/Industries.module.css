@@ -200,14 +200,14 @@
 }
 
 /* 4x4 Grid placements for 8 icons - Corners & Center empty */
-.iconFinance { grid-row: 1; grid-column: 2; }
-.iconSecurity { grid-row: 1; grid-column: 3; }
-.iconEcommerce { grid-row: 2; grid-column: 4; }
-.iconRealEstate { grid-row: 3; grid-column: 4; }
-.iconRetail { grid-row: 4; grid-column: 3; }
-.iconTravel { grid-row: 4; grid-column: 2; }
-.iconLogistics { grid-row: 3; grid-column: 1; z-index: 5; } /* Lower than hand z-index (10) */
-.iconEducation { grid-row: 2; grid-column: 1; }
+.iconsContainer .iconFinance { grid-row: 1; grid-column: 2; }
+.iconsContainer .iconSecurity { grid-row: 1; grid-column: 3; }
+.iconsContainer .iconEcommerce { grid-row: 2; grid-column: 4; }
+.iconsContainer .iconRealEstate { grid-row: 3; grid-column: 4; }
+.iconsContainer .iconRetail { grid-row: 4; grid-column: 3; }
+.iconsContainer .iconTravel { grid-row: 4; grid-column: 2; }
+.iconsContainer .iconLogistics { grid-row: 3; grid-column: 1; z-index: 5; } /* Lower than hand z-index (10) */
+.iconsContainer .iconEducation { grid-row: 2; grid-column: 1; }
 
 /* Scroll Indicator */
 .scrollIndicator {
@@ -280,5 +280,215 @@
   
   .scrollIndicator {
     display: none;
+  }
+}
+
+/* Industry Grid Section */
+.gridSection {
+  padding: 120px 8%;
+  background-color: #050505;
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  z-index: 10;
+}
+
+.gridTextContent {
+  flex: 1;
+  position: sticky;
+  top: 150px;
+}
+
+.gridHeading {
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.gridDescription {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+.industryGrid {
+  flex: 1.4;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  transform: translateY(-20px);
+}
+
+.industryCard {
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 120px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.industryCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 120% 120%, var(--hover-glow) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.industryCard:hover::before {
+  opacity: 1;
+}
+
+.industryCard:hover {
+  background: #121212;
+}
+
+.industryCard:hover .cardIcon {
+  border-color: var(--hover-glow-border);
+  color: var(--hover-glow-color);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cardIcon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.cardIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.cardTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+  position: relative;
+  z-index: 1;
+}
+
+.iconFinance { 
+  --hover-glow: rgba(0, 150, 255, 0.7); 
+  --hover-glow-border: rgba(0, 150, 255, 0.6);
+  --hover-glow-color: #0096ff;
+}
+.iconHealthcare { 
+  --hover-glow: rgba(0, 255, 150, 0.7); 
+  --hover-glow-border: rgba(0, 255, 150, 0.6);
+  --hover-glow-color: #00ff96;
+}
+.iconEducation { 
+  --hover-glow: rgba(150, 0, 255, 0.7); 
+  --hover-glow-border: rgba(150, 0, 255, 0.6);
+  --hover-glow-color: #9600ff;
+}
+.iconEcommerce { 
+  --hover-glow: rgba(255, 0, 100, 0.7); 
+  --hover-glow-border: rgba(255, 0, 100, 0.6);
+  --hover-glow-color: #ff0064;
+}
+.iconLogistics { 
+  --hover-glow: rgba(255, 100, 0, 0.7); 
+  --hover-glow-border: rgba(255, 100, 0, 0.6);
+  --hover-glow-color: #ff6400;
+}
+.iconRealEstate { 
+  --hover-glow: rgba(255, 200, 0, 0.7); 
+  --hover-glow-border: rgba(255, 200, 0, 0.6);
+  --hover-glow-color: #ffc800;
+}
+.iconTravel { 
+  --hover-glow: rgba(0, 255, 200, 0.7); 
+  --hover-glow-border: rgba(0, 255, 200, 0.6);
+  --hover-glow-color: #00ffc8;
+}
+.iconRetail { 
+  --hover-glow: rgba(255, 50, 50, 0.7); 
+  --hover-glow-border: rgba(255, 50, 50, 0.6);
+  --hover-glow-color: #ff3232;
+}
+
+@media (max-width: 1024px) {
+  .gridSection {
+    flex-direction: column;
+    padding: 80px 5%;
+    gap: 40px;
+  }
+  
+  .gridTextContent {
+    position: static;
+    margin-bottom: 20px;
+  }
+  
+  .gridHeading {
+    font-size: 2rem;
+  }
+  
+  .industryGrid {
+    width: 100%;
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .industryGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .industryCard {
+    padding: 24px;
+    min-height: auto;
   }
 }
