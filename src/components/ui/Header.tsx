@@ -330,7 +330,7 @@ export default function Header() {
 
                 {/* Right side: Industry Cards */}
                 <div className={styles.megaMenuRight}>
-                  <Link href="#industry-finance" className={`${styles.serviceCard} ${styles.industryCard1}`} onClick={() => setActiveDropdown(null)}>
+                  <Link href="/industries" className={`${styles.serviceCard} ${styles.industryCard1}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -339,7 +339,7 @@ export default function Header() {
                     <span className={styles.serviceTitle}>Financial Services</span>
                     <div className={styles.cardGlow}></div>
                   </Link>
-                  <Link href="#industry-healthcare" className={`${styles.serviceCard} ${styles.industryCard2}`} onClick={() => setActiveDropdown(null)}>
+                  <Link href="/industries" className={`${styles.serviceCard} ${styles.industryCard2}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <path d="M22 12h-4l-3 9L9 3l-3 9H2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -348,7 +348,7 @@ export default function Header() {
                     <span className={styles.serviceTitle}>Healthcare</span>
                     <div className={styles.cardGlow}></div>
                   </Link>
-                  <Link href="#industry-education" className={`${styles.serviceCard} ${styles.industryCard3}`} onClick={() => setActiveDropdown(null)}>
+                  <Link href="/industries" className={`${styles.serviceCard} ${styles.industryCard3}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
@@ -358,7 +358,7 @@ export default function Header() {
                     <span className={styles.serviceTitle}>Education</span>
                     <div className={styles.cardGlow}></div>
                   </Link>
-                  <Link href="#industry-all" className={`${styles.serviceCard} ${styles.industryCard4}`} onClick={() => setActiveDropdown(null)}>
+                  <Link href="/industries" className={`${styles.serviceCard} ${styles.industryCard4}`} onClick={() => setActiveDropdown(null)}>
                     <div className={styles.serviceIconWrapper}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <rect x="2" y="2" width="20" height="20" rx="2" ry="2"/>

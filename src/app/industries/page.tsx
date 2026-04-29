@@ -261,7 +261,7 @@ export default function IndustriesPage() {
           <div className={styles.verticalSidebar}>
             <div 
               className={styles.activeIndicator}
-              style={{ top: `${indicatorOffset}px` }}
+              style={{ transform: `translateY(${indicatorOffset}px)` }}
             ></div>
             {/* Finance */}
             <div 
