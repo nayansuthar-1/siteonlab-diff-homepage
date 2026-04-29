@@ -7,10 +7,10 @@ import Footer from "@/components/ui/Footer";
 
 export default function IndustriesPage() {
   const [mounted, setMounted] = useState(false);
-  const [activeSection, setActiveSection] = useState('finance');
+  const [activeSection, setActiveSection] = useState('');
   const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
   const indicatorRef = useRef<HTMLDivElement>(null);
-  
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -20,9 +20,11 @@ export default function IndustriesPage() {
     card.style.setProperty('--mouse-y', `${y}px`);
   };
 
+  const sections = ['finance', 'healthcare', 'education', 'ecommerce', 'logistics', 'realestate', 'travel', 'manufacturing'];
+
   useEffect(() => {
     setMounted(true);
-    
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -30,38 +32,32 @@ export default function IndustriesPage() {
         }
       });
     }, { 
-      threshold: 0.3,
-      rootMargin: '-140px 0px -200px 0px'
+      threshold: 0,
+      rootMargin: '-45% 0px -45% 0px'
     });
 
-    const sections = ['finance', 'healthcare', 'education', 'ecommerce', 'logistics', 'realestate', 'travel', 'manufacturing'];
     sections.forEach(id => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [mounted]);
 
-  const sections = ['finance', 'healthcare', 'education', 'ecommerce', 'logistics', 'realestate', 'travel', 'manufacturing'];
-  
+  const [offsets, setOffsets] = useState<Record<string, number>>({});
+
   useEffect(() => {
-    let animationFrameId: number;
-    const activeIndex = sections.indexOf(activeSection);
-    const activeIcon = iconRefs.current[activeIndex];
-    
-    if (activeIcon && indicatorRef.current) {
-      animationFrameId = requestAnimationFrame(() => {
-        if (indicatorRef.current && activeIcon) {
-          indicatorRef.current.style.transform = `translate3d(0, ${activeIcon.offsetTop}px, 0)`;
+    if (mounted) {
+      const newOffsets: Record<string, number> = {};
+      sections.forEach((id, index) => {
+        const icon = iconRefs.current[index];
+        if (icon) {
+          newOffsets[id] = icon.offsetTop;
         }
       });
+      setOffsets(newOffsets);
     }
-
-    return () => {
-      if (animationFrameId) cancelAnimationFrame(animationFrameId);
-    };
-  }, [activeSection, mounted]);
+  }, [mounted]);
 
   if (!mounted) return null;
 
@@ -176,9 +172,9 @@ export default function IndustriesPage() {
             We&apos;ve built for your industry
           </h2>
           <p className={styles.gridDescription}>
-            From finance to manufacturing, your industry is not new to us. 
-            We&apos;ve solved the kinds of challenges you&apos;re dealing with, 
-            so you can count on us to build your next product with the right tech, 
+            From finance to manufacturing, your industry is not new to us.
+            We&apos;ve solved the kinds of challenges you&apos;re dealing with,
+            so you can count on us to build your next product with the right tech,
             on budget, and on time.
           </p>
           <a href="#consultation" className={styles.ctaButton}>
@@ -271,10 +267,10 @@ export default function IndustriesPage() {
           <div className={styles.verticalSidebar}>
             <div 
               className={styles.activeIndicator}
-              ref={indicatorRef}
+              style={{ transform: `translate3d(0, ${offsets[activeSection] || 20}px, 0)` }}
             ></div>
             {/* Finance */}
-            <div 
+            <div
               className={`${styles.sidebarIcon} ${activeSection === 'finance' ? styles.sidebarIconActive : ''}`}
               ref={(el) => { iconRefs.current[0] = el; }}
               onClick={() => document.getElementById('finance')?.scrollIntoView({ behavior: 'smooth' })}
@@ -284,7 +280,7 @@ export default function IndustriesPage() {
               </svg>
             </div>
             {/* Healthcare */}
-            <div 
+            <div
               className={`${styles.sidebarIcon} ${activeSection === 'healthcare' ? styles.sidebarIconActive : ''}`}
               ref={(el) => { iconRefs.current[1] = el; }}
               onClick={() => document.getElementById('healthcare')?.scrollIntoView({ behavior: 'smooth' })}
@@ -294,7 +290,7 @@ export default function IndustriesPage() {
               </svg>
             </div>
             {/* Education */}
-            <div 
+            <div
               className={`${styles.sidebarIcon} ${activeSection === 'education' ? styles.sidebarIconActive : ''}`}
               ref={(el) => { iconRefs.current[2] = el; }}
               onClick={() => document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' })}
@@ -304,7 +300,7 @@ export default function IndustriesPage() {
               </svg>
             </div>
             {/* E-commerce */}
-            <div 
+            <div
               className={`${styles.sidebarIcon} ${activeSection === 'ecommerce' ? styles.sidebarIconActive : ''}`}
               ref={(el) => { iconRefs.current[3] = el; }}
               onClick={() => document.getElementById('ecommerce')?.scrollIntoView({ behavior: 'smooth' })}
@@ -314,7 +310,7 @@ export default function IndustriesPage() {
               </svg>
             </div>
             {/* Logistics */}
-            <div 
+            <div
               className={`${styles.sidebarIcon} ${activeSection === 'logistics' ? styles.sidebarIconActive : ''}`}
               ref={(el) => { iconRefs.current[4] = el; }}
               onClick={() => document.getElementById('logistics')?.scrollIntoView({ behavior: 'smooth' })}
@@ -325,7 +321,7 @@ export default function IndustriesPage() {
               </svg>
             </div>
             {/* Real Estate */}
-            <div 
+            <div
               className={`${styles.sidebarIcon} ${activeSection === 'realestate' ? styles.sidebarIconActive : ''}`}
               ref={(el) => { iconRefs.current[5] = el; }}
               onClick={() => document.getElementById('realestate')?.scrollIntoView({ behavior: 'smooth' })}
@@ -335,7 +331,7 @@ export default function IndustriesPage() {
               </svg>
             </div>
             {/* Travel */}
-            <div 
+            <div
               className={`${styles.sidebarIcon} ${activeSection === 'travel' ? styles.sidebarIconActive : ''}`}
               ref={(el) => { iconRefs.current[6] = el; }}
               onClick={() => document.getElementById('travel')?.scrollIntoView({ behavior: 'smooth' })}
@@ -345,7 +341,7 @@ export default function IndustriesPage() {
               </svg>
             </div>
             {/* Manufacturing */}
-            <div 
+            <div
               className={`${styles.sidebarIcon} ${activeSection === 'manufacturing' ? styles.sidebarIconActive : ''}`}
               ref={(el) => { iconRefs.current[7] = el; }}
               onClick={() => document.getElementById('manufacturing')?.scrollIntoView({ behavior: 'smooth' })}
@@ -368,7 +364,7 @@ export default function IndustriesPage() {
               </div>
               <h2 className={styles.featureTitle}>Financial services</h2>
               <p className={styles.featureDescription}>
-                Kick off an Agile transformation, build a mobile banking app, or launch the perfect fintech development. 
+                Kick off an Agile transformation, build a mobile banking app, or launch the perfect fintech development.
                 Everything you need to create a top-tier finance product is under one roof.
               </p>
             </div>
@@ -425,7 +421,7 @@ export default function IndustriesPage() {
               </div>
               <h2 className={styles.featureTitle}>Healthcare</h2>
               <p className={styles.featureDescription}>
-                Digitalize medical services for providers and patients. Build a custom healthcare system 
+                Digitalize medical services for providers and patients. Build a custom healthcare system
                 that manages schedules, data, and billing efficiently while keeping sensitive data secure.
               </p>
             </div>
@@ -482,7 +478,7 @@ export default function IndustriesPage() {
               </div>
               <h2 className={styles.featureTitle}>Education</h2>
               <p className={styles.featureDescription}>
-                Create an advanced learning solution to digitalize the academic experience, enhance self-learning, or improve corporate training. 
+                Create an advanced learning solution to digitalize the academic experience, enhance self-learning, or improve corporate training.
                 We can help bring your vision to life from scratch or by customizing an existing edtech product.
               </p>
             </div>
@@ -538,7 +534,7 @@ export default function IndustriesPage() {
               </div>
               <h2 className={styles.featureTitle}>E-commerce & retail</h2>
               <p className={styles.featureDescription}>
-                Roll out a custom Shopify E-commerce platform, global marketplace, or mobile shopping app with AI-powered recommendations, 
+                Roll out a custom Shopify E-commerce platform, global marketplace, or mobile shopping app with AI-powered recommendations,
                 smart systems, and CRM integration.
               </p>
             </div>
@@ -593,7 +589,7 @@ export default function IndustriesPage() {
               </div>
               <h2 className={styles.featureTitle}>Transportation & delivery</h2>
               <p className={styles.featureDescription}>
-                Deploy a smart product that streamlines logistics, reduces costs, and ensures real-time service. 
+                Deploy a smart product that streamlines logistics, reduces costs, and ensures real-time service.
                 From food deliveries to automotive dealerships, parcel tracking, and courier apps, we help you develop a high-performing solution.
               </p>
             </div>
@@ -649,7 +645,7 @@ export default function IndustriesPage() {
               </div>
               <h2 className={styles.featureTitle}>Real estate & property management</h2>
               <p className={styles.featureDescription}>
-                Build a property management system that automates admin tasks and improves resident experience. 
+                Build a property management system that automates admin tasks and improves resident experience.
                 Tenant management, smart access, parking systems — we can implement this and more to help you create processes that enable better client satisfaction.
               </p>
             </div>
@@ -703,7 +699,7 @@ export default function IndustriesPage() {
               </div>
               <h2 className={styles.featureTitle}>Travel & HoReCa</h2>
               <p className={styles.featureDescription}>
-                Improve travel & hospitality management with custom solutions. From seamless booking platforms to smooth customer journeys, 
+                Improve travel & hospitality management with custom solutions. From seamless booking platforms to smooth customer journeys,
                 we help you elevate guest experiences, reduce operations, and automate routine tasks.
               </p>
             </div>
@@ -756,7 +752,7 @@ export default function IndustriesPage() {
               </div>
               <h2 className={styles.featureTitle}>Manufacturing</h2>
               <p className={styles.featureDescription}>
-                Move manufacturing operations to the digital realm with a custom-made solution. 
+                Move manufacturing operations to the digital realm with a custom-made solution.
                 Whether you need process automation or seamless production management, we can help you transform traditional workflows into scalable systems.
               </p>
             </div>

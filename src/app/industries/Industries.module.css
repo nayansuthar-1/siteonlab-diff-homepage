@@ -886,7 +886,8 @@
   position: relative;
   width: 100%;
   background-color: #050505;
-  padding: 140px 5% 20px 5%; /* Aligned with sidebar top/bottom gaps */
+  padding: 140px 5% 20px 5%;
+  /* Aligned with sidebar top/bottom gaps */
   gap: 5px;
   /* Extremely close to cards */
   align-items: flex-start;
@@ -931,11 +932,19 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translate3d(0, 20px, 0);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
   z-index: 0;
 }
+
+.verticalSidebar[data-active="finance"] .activeIndicator { transform: translateY(20px); }
+.verticalSidebar[data-active="healthcare"] .activeIndicator { transform: translateY(89px); }
+.verticalSidebar[data-active="education"] .activeIndicator { transform: translateY(158px); }
+.verticalSidebar[data-active="ecommerce"] .activeIndicator { transform: translateY(227px); }
+.verticalSidebar[data-active="logistics"] .activeIndicator { transform: translateY(296px); }
+.verticalSidebar[data-active="realestate"] .activeIndicator { transform: translateY(365px); }
+.verticalSidebar[data-active="travel"] .activeIndicator { transform: translateY(434px); }
+.verticalSidebar[data-active="manufacturing"] .activeIndicator { transform: translateY(503px); }
 
 .sidebarIcon {
   width: 54px;
