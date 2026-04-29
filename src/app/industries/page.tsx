@@ -266,7 +266,7 @@ export default function IndustriesPage() {
             {/* Finance */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'finance' ? styles.sidebarIconActive : ''}`}
-              ref={(el) => (iconRefs.current[0] = el)}
+              ref={(el) => { iconRefs.current[0] = el; }}
               onClick={() => document.getElementById('finance')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -276,7 +276,7 @@ export default function IndustriesPage() {
             {/* Healthcare */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'healthcare' ? styles.sidebarIconActive : ''}`}
-              ref={(el) => (iconRefs.current[1] = el)}
+              ref={(el) => { iconRefs.current[1] = el; }}
               onClick={() => document.getElementById('healthcare')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -286,7 +286,7 @@ export default function IndustriesPage() {
             {/* Education */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'education' ? styles.sidebarIconActive : ''}`}
-              ref={(el) => (iconRefs.current[2] = el)}
+              ref={(el) => { iconRefs.current[2] = el; }}
               onClick={() => document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -296,7 +296,7 @@ export default function IndustriesPage() {
             {/* E-commerce */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'ecommerce' ? styles.sidebarIconActive : ''}`}
-              ref={(el) => (iconRefs.current[3] = el)}
+              ref={(el) => { iconRefs.current[3] = el; }}
               onClick={() => document.getElementById('ecommerce')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -306,7 +306,7 @@ export default function IndustriesPage() {
             {/* Logistics */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'logistics' ? styles.sidebarIconActive : ''}`}
-              ref={(el) => (iconRefs.current[4] = el)}
+              ref={(el) => { iconRefs.current[4] = el; }}
               onClick={() => document.getElementById('logistics')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -317,7 +317,7 @@ export default function IndustriesPage() {
             {/* Real Estate */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'realestate' ? styles.sidebarIconActive : ''}`}
-              ref={(el) => (iconRefs.current[5] = el)}
+              ref={(el) => { iconRefs.current[5] = el; }}
               onClick={() => document.getElementById('realestate')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -327,7 +327,7 @@ export default function IndustriesPage() {
             {/* Travel */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'travel' ? styles.sidebarIconActive : ''}`}
-              ref={(el) => (iconRefs.current[6] = el)}
+              ref={(el) => { iconRefs.current[6] = el; }}
               onClick={() => document.getElementById('travel')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -337,7 +337,7 @@ export default function IndustriesPage() {
             {/* Manufacturing */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'manufacturing' ? styles.sidebarIconActive : ''}`}
-              ref={(el) => (iconRefs.current[7] = el)}
+              ref={(el) => { iconRefs.current[7] = el; }}
               onClick={() => document.getElementById('manufacturing')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
