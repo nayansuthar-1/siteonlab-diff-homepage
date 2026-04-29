@@ -30,7 +30,7 @@ export default function IndustriesPage() {
       });
     }, { 
       threshold: 0.3,
-      rootMargin: '-100px 0px -200px 0px'
+      rootMargin: '-140px 0px -200px 0px'
     });
 
     const sections = ['finance', 'healthcare', 'education', 'ecommerce', 'logistics', 'realestate', 'travel', 'manufacturing'];
@@ -43,7 +43,7 @@ export default function IndustriesPage() {
   }, []);
 
   const sections = ['finance', 'healthcare', 'education', 'ecommerce', 'logistics', 'realestate', 'travel', 'manufacturing'];
-  const [indicatorOffset, setIndicatorOffset] = useState(20);
+  const [indicatorOffset, setIndicatorOffset] = useState(0);
   
   useEffect(() => {
     const activeIndex = sections.indexOf(activeSection);
@@ -348,7 +348,7 @@ export default function IndustriesPage() {
         </aside>
 
         <div className={styles.contentWrapper}>
-          <section id="finance" className={`${styles.detailsSection} ${styles.financeSection}`}>
+          <section id="finance" className={`${styles.detailsSection} ${styles.financeSection} ${styles.firstSection}`}>
             {/* Left Feature Card */}
             <div className={styles.featureCard} onMouseMove={handleMouseMove}>
               <div className={styles.featureIcon}>
@@ -736,7 +736,7 @@ export default function IndustriesPage() {
             </div>
           </section>
 
-          <section id="manufacturing" className={`${styles.detailsSection} ${styles.manufacturingSection}`}>
+          <section id="manufacturing" className={`${styles.detailsSection} ${styles.manufacturingSection} ${styles.lastSection}`}>
             {/* Left Feature Card */}
             <div className={`${styles.featureCard} ${styles.featureCardGreen}`} onMouseMove={handleMouseMove}>
               <div className={styles.featureIcon}>
