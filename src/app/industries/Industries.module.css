@@ -594,7 +594,7 @@
   flex: 1.2;
   /* Reduced flex value further to accommodate margin */
   background: linear-gradient(135deg, #111111 0%, #111111 40%, rgba(0, 102, 204, 0.4) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 24px;
   padding: 40px 32px;
   display: flex;
@@ -604,15 +604,40 @@
   overflow: hidden;
 }
 
+.featureCard::before {
+  content: "";
+  position: absolute;
+  bottom: -15%;
+  left: -15%;
+  width: 65%;
+  height: 65%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 75%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .featureCard::after {
   content: "";
   position: absolute;
-  bottom: -20%;
-  right: -20%;
-  width: 60%;
-  height: 60%;
-  background: radial-gradient(circle, rgba(0, 102, 204, 0.6) 0%, transparent 70%);
-  filter: blur(40px);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    var(--smoke-color, rgba(0, 102, 204, 0.6)) 0%,
+    transparent 80%
+  );
+  filter: blur(60px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.featureCard:hover::after {
+  opacity: 1;
 }
 
 .featureIcon {
@@ -627,7 +652,7 @@
 }
 
 .featureTitle {
-  font-size: 1.85rem;
+  font-size: 1.55rem;
   font-weight: 600;
   color: #fff;
   line-height: 1.2;
@@ -643,13 +668,13 @@
 .detailsContainer {
   flex: 3;
   /* Increased width of right cards */
-  background: #0a0a0a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 24px;
-  padding: 40px 50px;
+  padding: 20px 30px; /* Reduced to accommodate column padding */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 50px;
+  gap: 40px;
   position: relative;
 }
 
@@ -668,7 +693,18 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.detailsColumn:has(.detailsList:hover) .columnHeader,
+.detailsColumn:has(.columnHeader:hover) .columnHeader {
+  color: var(--section-theme, #fff);
+}
+
+.detailsColumn:has(.detailsList:hover) .columnHeader svg,
+.detailsColumn:has(.columnHeader:hover) .columnHeader svg {
+  color: var(--section-theme, #888);
 }
 
 .columnHeader {
@@ -681,12 +717,15 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 5px;
+  padding: 15px 0;
+  transition: all 0.3s ease;
 }
 
 .columnHeader svg {
   width: 18px;
   height: 18px;
   color: #888;
+  transition: color 0.3s ease;
 }
 
 .detailsList {
@@ -695,11 +734,20 @@
 }
 
 .detailsItem {
-  padding: 14px 0;
+  padding: 14px 15px;
+  margin: 0 -15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.95rem;
   font-weight: 400;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.detailsItem:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
 }
 
 .detailsItem:last-child {
@@ -733,11 +781,8 @@
 }
 
 .featureCardGreen {
+  --smoke-color: rgba(0, 255, 150, 0.6);
   background: linear-gradient(135deg, #111111 0%, #111111 40%, rgba(0, 255, 150, 0.4) 100%);
-}
-
-.featureCardGreen::after {
-  background: radial-gradient(circle, rgba(0, 255, 150, 0.6) 0%, transparent 70%);
 }
 
 .featureCardGreen .featureIcon {
@@ -745,11 +790,8 @@
 }
 
 .featureCardOrange {
+  --smoke-color: rgba(255, 100, 0, 0.6);
   background: linear-gradient(135deg, #111111 0%, #111111 40%, rgba(255, 100, 0, 0.4) 100%);
-}
-
-.featureCardOrange::after {
-  background: radial-gradient(circle, rgba(255, 100, 0, 0.6) 0%, transparent 70%);
 }
 
 .featureCardOrange .featureIcon {
@@ -757,11 +799,8 @@
 }
 
 .featureCardPink {
+  --smoke-color: rgba(255, 0, 100, 0.6);
   background: linear-gradient(135deg, #111111 0%, #111111 40%, rgba(255, 0, 100, 0.4) 100%);
-}
-
-.featureCardPink::after {
-  background: radial-gradient(circle, rgba(255, 0, 100, 0.6) 0%, transparent 70%);
 }
 
 .featureCardPink .featureIcon {
@@ -769,11 +808,8 @@
 }
 
 .featureCardPurple {
+  --smoke-color: rgba(150, 100, 255, 0.6);
   background: linear-gradient(135deg, #111111 0%, #111111 40%, rgba(150, 100, 255, 0.4) 100%);
-}
-
-.featureCardPurple::after {
-  background: radial-gradient(circle, rgba(150, 100, 255, 0.6) 0%, transparent 70%);
 }
 
 .featureCardPurple .featureIcon {
@@ -781,16 +817,23 @@
 }
 
 .featureCardCyan {
+  --smoke-color: rgba(0, 255, 200, 0.6);
   background: linear-gradient(135deg, #111111 0%, #111111 40%, rgba(0, 255, 200, 0.4) 100%);
-}
-
-.featureCardCyan::after {
-  background: radial-gradient(circle, rgba(0, 255, 200, 0.6) 0%, transparent 70%);
 }
 
 .featureCardCyan .featureIcon {
   color: #00ffc8;
 }
+
+/* Section Themes */
+.financeSection { --section-theme: #0084ff; }
+.healthcareSection { --section-theme: #00ff96; }
+.educationSection { --section-theme: #ff6400; }
+.ecommerceSection { --section-theme: #ff0064; }
+.logisticsSection { --section-theme: #ff6400; }
+.realestateSection { --section-theme: #9664ff; }
+.travelSection { --section-theme: #00ffc8; }
+.manufacturingSection { --section-theme: #00ff96; }
 
 /* Sticky Sidebar Layout */
 .industriesDetailContainer {

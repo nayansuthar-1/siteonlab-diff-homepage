@@ -8,6 +8,15 @@ import Footer from "@/components/ui/Footer";
 export default function IndustriesPage() {
   const [mounted, setMounted] = useState(false);
   const [activeSection, setActiveSection] = useState('finance');
+  
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -315,9 +324,9 @@ export default function IndustriesPage() {
         </aside>
 
         <div className={styles.contentWrapper}>
-          <section id="finance" className={styles.detailsSection}>
+          <section id="finance" className={`${styles.detailsSection} ${styles.financeSection}`}>
             {/* Left Feature Card */}
-            <div className={styles.featureCard}>
+            <div className={styles.featureCard} onMouseMove={handleMouseMove}>
               <div className={styles.featureIcon}>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M20 7h-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM9 5c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v2H9V5z" />
@@ -374,7 +383,7 @@ export default function IndustriesPage() {
 
           <section id="healthcare" className={`${styles.detailsSection} ${styles.healthcareSection}`}>
             {/* Left Feature Card */}
-            <div className={`${styles.featureCard} ${styles.featureCardGreen}`}>
+            <div className={`${styles.featureCard} ${styles.featureCardGreen}`} onMouseMove={handleMouseMove}>
               <div className={styles.featureIcon}>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
@@ -429,9 +438,9 @@ export default function IndustriesPage() {
             </div>
           </section>
 
-          <section id="education" className={styles.detailsSection}>
+          <section id="education" className={`${styles.detailsSection} ${styles.educationSection}`}>
             {/* Left Feature Card */}
-            <div className={`${styles.featureCard} ${styles.featureCardOrange}`}>
+            <div className={`${styles.featureCard} ${styles.featureCardOrange}`} onMouseMove={handleMouseMove}>
               <div className={styles.featureIcon}>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
@@ -485,9 +494,9 @@ export default function IndustriesPage() {
             </div>
           </section>
 
-          <section id="ecommerce" className={styles.detailsSection}>
+          <section id="ecommerce" className={`${styles.detailsSection} ${styles.ecommerceSection}`}>
             {/* Left Feature Card */}
-            <div className={`${styles.featureCard} ${styles.featureCardPink}`}>
+            <div className={`${styles.featureCard} ${styles.featureCardPink}`} onMouseMove={handleMouseMove}>
               <div className={styles.featureIcon}>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
@@ -539,9 +548,9 @@ export default function IndustriesPage() {
             </div>
           </section>
 
-          <section id="logistics" className={styles.detailsSection}>
+          <section id="logistics" className={`${styles.detailsSection} ${styles.logisticsSection}`}>
             {/* Left Feature Card */}
-            <div className={`${styles.featureCard} ${styles.featureCardOrange}`}>
+            <div className={`${styles.featureCard} ${styles.featureCardOrange}`} onMouseMove={handleMouseMove}>
               <div className={styles.featureIcon}>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" />
@@ -596,9 +605,9 @@ export default function IndustriesPage() {
             </div>
           </section>
 
-          <section id="realestate" className={styles.detailsSection}>
+          <section id="realestate" className={`${styles.detailsSection} ${styles.realestateSection}`}>
             {/* Left Feature Card */}
-            <div className={`${styles.featureCard} ${styles.featureCardPurple}`}>
+            <div className={`${styles.featureCard} ${styles.featureCardPurple}`} onMouseMove={handleMouseMove}>
               <div className={styles.featureIcon}>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
@@ -650,9 +659,9 @@ export default function IndustriesPage() {
             </div>
           </section>
 
-          <section id="travel" className={styles.detailsSection}>
+          <section id="travel" className={`${styles.detailsSection} ${styles.travelSection}`}>
             {/* Left Feature Card */}
-            <div className={`${styles.featureCard} ${styles.featureCardCyan}`}>
+            <div className={`${styles.featureCard} ${styles.featureCardCyan}`} onMouseMove={handleMouseMove}>
               <div className={styles.featureIcon}>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z" />
@@ -703,9 +712,9 @@ export default function IndustriesPage() {
             </div>
           </section>
 
-          <section id="manufacturing" className={styles.detailsSection}>
+          <section id="manufacturing" className={`${styles.detailsSection} ${styles.manufacturingSection}`}>
             {/* Left Feature Card */}
-            <div className={`${styles.featureCard} ${styles.featureCardGreen}`}>
+            <div className={`${styles.featureCard} ${styles.featureCardGreen}`} onMouseMove={handleMouseMove}>
               <div className={styles.featureIcon}>
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41s-.23-1.06-.59-1.42zM5.5 8.25c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z" />
