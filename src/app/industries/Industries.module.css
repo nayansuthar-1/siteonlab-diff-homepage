@@ -106,13 +106,15 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1600px; /* Increased to allow wider cards/content */
+  max-width: 1600px;
+  /* Increased to allow wider cards/content */
   margin: 0 auto;
 }
 
 .leftContent {
   flex: 1;
-  max-width: 900px; /* Increased to match wider layout */
+  max-width: 900px;
+  /* Increased to match wider layout */
   padding-left: 5%;
   padding-right: 2rem;
   position: relative;
@@ -345,7 +347,8 @@
 
 /* Industry Grid Section */
 .gridSection {
-  padding: 120px 3%; /* Reduced side padding to increase width */
+  padding: 120px 3%;
+  /* Reduced side padding to increase width */
   background-color: #050505;
   display: flex;
   gap: 80px;
@@ -409,15 +412,18 @@
 
 .industryCard {
   background: #141414;
-  border: 1px solid rgba(255, 255, 255, 0.2); /* More prominent whitish border */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* More prominent whitish border */
   border-radius: 20px;
   padding: 24px;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 20px; /* Reduced gap */
-  min-height: 120px; /* Reduced height */
+  gap: 20px;
+  /* Reduced gap */
+  min-height: 120px;
+  /* Reduced height */
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -459,7 +465,8 @@
   justify-content: center;
   color: #fff;
   background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.25); /* Whitish border for icon */
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  /* Whitish border for icon */
   border-radius: 14px;
   transition: all 0.4s ease;
   position: relative;
@@ -553,14 +560,18 @@
 
 @media (max-width: 640px) {
   .industryGrid {
-    grid-template-columns: repeat(2, 1fr); /* Enforce 2 columns */
-    gap: 12px; /* Narrower gap for mobile */
+    grid-template-columns: repeat(2, 1fr);
+    /* Enforce 2 columns */
+    gap: 12px;
+    /* Narrower gap for mobile */
   }
 
   .industryCard {
     padding: 16px;
-    min-height: 100px; /* Reduced mobile height */
-    gap: 12px; /* Reduced mobile gap */
+    min-height: 100px;
+    /* Reduced mobile height */
+    gap: 12px;
+    /* Reduced mobile gap */
   }
 
   .cardIcon {
@@ -581,7 +592,8 @@
 
 /* Detailed Feature Section */
 .detailsSection {
-  padding: 60px 3%; /* Reduced side padding to increase card widths */
+  padding: 60px 3%;
+  /* Reduced side padding to increase card widths */
   background-color: #050505;
   display: flex;
   gap: 24px;
@@ -624,11 +636,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    var(--smoke-color, rgba(0, 102, 204, 0.6)) 0%,
-    transparent 80%
-  );
+  background: radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--smoke-color, rgba(0, 102, 204, 0.6)) 0%,
+      transparent 80%);
   filter: blur(60px);
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -671,7 +681,8 @@
   background: #111111;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 24px;
-  padding: 20px 30px; /* Reduced to accommodate column padding */
+  padding: 20px 30px;
+  /* Reduced to accommodate column padding */
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
@@ -757,11 +768,13 @@
 @media (max-width: 1200px) {
   .detailsSection {
     flex-direction: column;
-    padding: 60px 1% !important; /* Reduced to almost 0 to maximize card width */
+    padding: 60px 1% !important;
+    /* Reduced to almost 0 to maximize card width */
   }
 
   .detailsContainer {
-    padding: 32px; /* Reduced from 40px by 8px */
+    padding: 32px;
+    /* Reduced from 40px by 8px */
     gap: 40px;
   }
 }
@@ -776,7 +789,8 @@
   }
 
   .featureCard {
-    padding: 32px 24px !important; /* Reduced by 8px from 40px/32px */
+    padding: 32px 24px !important;
+    /* Reduced by 8px from 40px/32px */
   }
 }
 
@@ -826,14 +840,37 @@
 }
 
 /* Section Themes */
-.financeSection { --section-theme: #0084ff; }
-.healthcareSection { --section-theme: #00ff96; }
-.educationSection { --section-theme: #ff6400; }
-.ecommerceSection { --section-theme: #ff0064; }
-.logisticsSection { --section-theme: #ff6400; }
-.realestateSection { --section-theme: #9664ff; }
-.travelSection { --section-theme: #00ffc8; }
-.manufacturingSection { --section-theme: #00ff96; }
+.financeSection {
+  --section-theme: #0084ff;
+}
+
+.healthcareSection {
+  --section-theme: #00ff96;
+}
+
+.educationSection {
+  --section-theme: #ff6400;
+}
+
+.ecommerceSection {
+  --section-theme: #ff0064;
+}
+
+.logisticsSection {
+  --section-theme: #ff6400;
+}
+
+.realestateSection {
+  --section-theme: #9664ff;
+}
+
+.travelSection {
+  --section-theme: #00ffc8;
+}
+
+.manufacturingSection {
+  --section-theme: #00ff96;
+}
 
 /* Sticky Sidebar Layout */
 .industriesDetailContainer {
@@ -868,13 +905,27 @@
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px;
+  border-radius: 20px;
   padding: 20px 10px;
   display: flex;
   flex-direction: column;
   gap: 15px;
   align-items: center;
-  height: 100%;
-  justify-content: center;
+  position: relative;
+}
+
+.activeIndicator {
+  position: absolute;
+  left: 10px;
+  width: 54px;
+  height: 54px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .sidebarIcon {
@@ -887,12 +938,11 @@
   color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .sidebarIconActive {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
 }
 
@@ -965,7 +1015,8 @@
 
   .rightContent {
     position: absolute !important;
-    bottom: 0 !important; /* Move back to absolute bottom */
+    bottom: 0 !important;
+    /* Move back to absolute bottom */
     right: 0 !important;
     width: 100% !important;
     height: 52vh !important;
@@ -990,7 +1041,8 @@
     position: absolute !important;
     bottom: 0 !important;
     right: -35% !important;
-    z-index: 10 !important; /* Hand layer in the middle */
+    z-index: 10 !important;
+    /* Hand layer in the middle */
   }
 
   .robotHand {
@@ -1007,14 +1059,18 @@
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
     grid-template-rows: repeat(4, 1fr) !important;
-    width: 275px !important; /* Increased to accommodate gap */
-    height: 275px !important; /* Increased to accommodate gap */
-    gap: 5px !important; /* Increased by 5px */
+    width: 275px !important;
+    /* Increased to accommodate gap */
+    height: 275px !important;
+    /* Increased to accommodate gap */
+    gap: 5px !important;
+    /* Increased by 5px */
     z-index: auto !important;
   }
 
   .industriesDetailContainer {
-    padding: 0 8px !important; /* Added 8px equal side padding */
+    padding: 0 8px !important;
+    /* Added 8px equal side padding */
   }
 
   .sidebarWrapper {
@@ -1022,7 +1078,8 @@
   }
 
   .gridHeading {
-    font-size: 1.45rem !important; /* Increased to the maximum safe size for one line */
+    font-size: 1.45rem !important;
+    /* Increased to the maximum safe size for one line */
     white-space: nowrap !important;
     margin-bottom: 1.5rem !important;
     text-align: left !important;
@@ -1036,7 +1093,8 @@
     align-items: center !important;
     justify-content: center !important;
     z-index: 20 !important;
-    border-radius: 12px !important; /* Reduced border radius */
+    border-radius: 12px !important;
+    /* Reduced border radius */
     /* Animation is now active as transform: scale() is removed */
   }
 

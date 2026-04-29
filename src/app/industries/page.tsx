@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import styles from "./Industries.module.css";
 import Footer from "@/components/ui/Footer";
@@ -8,6 +8,7 @@ import Footer from "@/components/ui/Footer";
 export default function IndustriesPage() {
   const [mounted, setMounted] = useState(false);
   const [activeSection, setActiveSection] = useState('finance');
+  const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
   
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
@@ -40,6 +41,17 @@ export default function IndustriesPage() {
 
     return () => observer.disconnect();
   }, []);
+
+  const sections = ['finance', 'healthcare', 'education', 'ecommerce', 'logistics', 'realestate', 'travel', 'manufacturing'];
+  const [indicatorOffset, setIndicatorOffset] = useState(20);
+  
+  useEffect(() => {
+    const activeIndex = sections.indexOf(activeSection);
+    const activeIcon = iconRefs.current[activeIndex];
+    if (activeIcon) {
+      setIndicatorOffset(activeIcon.offsetTop);
+    }
+  }, [activeSection]);
 
   if (!mounted) return null;
 
@@ -247,9 +259,14 @@ export default function IndustriesPage() {
       <div className={styles.industriesDetailContainer}>
         <aside className={styles.sidebarWrapper}>
           <div className={styles.verticalSidebar}>
+            <div 
+              className={styles.activeIndicator}
+              style={{ top: `${indicatorOffset}px` }}
+            ></div>
             {/* Finance */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'finance' ? styles.sidebarIconActive : ''}`}
+              ref={(el) => (iconRefs.current[0] = el)}
               onClick={() => document.getElementById('finance')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -259,6 +276,7 @@ export default function IndustriesPage() {
             {/* Healthcare */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'healthcare' ? styles.sidebarIconActive : ''}`}
+              ref={(el) => (iconRefs.current[1] = el)}
               onClick={() => document.getElementById('healthcare')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -268,6 +286,7 @@ export default function IndustriesPage() {
             {/* Education */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'education' ? styles.sidebarIconActive : ''}`}
+              ref={(el) => (iconRefs.current[2] = el)}
               onClick={() => document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -277,6 +296,7 @@ export default function IndustriesPage() {
             {/* E-commerce */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'ecommerce' ? styles.sidebarIconActive : ''}`}
+              ref={(el) => (iconRefs.current[3] = el)}
               onClick={() => document.getElementById('ecommerce')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -286,6 +306,7 @@ export default function IndustriesPage() {
             {/* Logistics */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'logistics' ? styles.sidebarIconActive : ''}`}
+              ref={(el) => (iconRefs.current[4] = el)}
               onClick={() => document.getElementById('logistics')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -296,6 +317,7 @@ export default function IndustriesPage() {
             {/* Real Estate */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'realestate' ? styles.sidebarIconActive : ''}`}
+              ref={(el) => (iconRefs.current[5] = el)}
               onClick={() => document.getElementById('realestate')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -305,6 +327,7 @@ export default function IndustriesPage() {
             {/* Travel */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'travel' ? styles.sidebarIconActive : ''}`}
+              ref={(el) => (iconRefs.current[6] = el)}
               onClick={() => document.getElementById('travel')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -314,6 +337,7 @@ export default function IndustriesPage() {
             {/* Manufacturing */}
             <div 
               className={`${styles.sidebarIcon} ${activeSection === 'manufacturing' ? styles.sidebarIconActive : ''}`}
+              ref={(el) => (iconRefs.current[7] = el)}
               onClick={() => document.getElementById('manufacturing')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <svg viewBox="0 0 24 24" fill="currentColor">
