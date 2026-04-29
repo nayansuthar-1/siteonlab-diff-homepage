@@ -591,8 +591,8 @@
 }
 
 .featureCard {
-  flex: 1.4;
-  /* Reduced flex value to decrease width */
+  flex: 1.2;
+  /* Reduced flex value further to accommodate margin */
   background: linear-gradient(135deg, #111111 0%, #111111 40%, rgba(0, 102, 204, 0.4) 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
@@ -816,6 +816,7 @@
   z-index: 100;
   transform: translateX(30px);
   /* Shift rightwards towards the cards */
+  margin-right: 30px;
   padding-bottom: 20px;
 }
 
