@@ -585,14 +585,14 @@
   background-color: #050505;
   display: flex;
   gap: 24px;
-  min-height: 580px;
-  /* Standardized height for all sections */
+  min-height: 540px;
+  /* Reduced height by 40px */
   align-items: stretch;
 }
 
 .featureCard {
-  flex: 1.7;
-  /* Increased width of left cards */
+  flex: 1.4;
+  /* Reduced flex value to decrease width */
   background: linear-gradient(135deg, #111111 0%, #111111 40%, rgba(0, 102, 204, 0.4) 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
@@ -647,8 +647,21 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 24px;
   padding: 40px 50px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 50px;
+  position: relative;
+}
+
+.detailsContainer::after {
+  content: "";
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  left: 50%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-50%);
 }
 
 .detailsColumn {
