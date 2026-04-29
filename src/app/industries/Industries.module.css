@@ -932,6 +932,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translate3d(0, 20px, 0);
   pointer-events: none;
   z-index: 0;
 }
@@ -951,7 +952,7 @@
 }
 
 .sidebarIconActive {
-  color: #fff;
+  color: var(--section-theme, #fff);
 }
 
 .sidebarIcon svg {

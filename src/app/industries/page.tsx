@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import Image from "next/image";
 import styles from "./Industries.module.css";
 import Footer from "@/components/ui/Footer";
@@ -9,6 +9,7 @@ export default function IndustriesPage() {
   const [mounted, setMounted] = useState(false);
   const [activeSection, setActiveSection] = useState('finance');
   const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const indicatorRef = useRef<HTMLDivElement>(null);
   
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
@@ -43,15 +44,24 @@ export default function IndustriesPage() {
   }, []);
 
   const sections = ['finance', 'healthcare', 'education', 'ecommerce', 'logistics', 'realestate', 'travel', 'manufacturing'];
-  const [indicatorOffset, setIndicatorOffset] = useState(0);
   
   useEffect(() => {
+    let animationFrameId: number;
     const activeIndex = sections.indexOf(activeSection);
     const activeIcon = iconRefs.current[activeIndex];
-    if (activeIcon) {
-      setIndicatorOffset(activeIcon.offsetTop);
+    
+    if (activeIcon && indicatorRef.current) {
+      animationFrameId = requestAnimationFrame(() => {
+        if (indicatorRef.current && activeIcon) {
+          indicatorRef.current.style.transform = `translate3d(0, ${activeIcon.offsetTop}px, 0)`;
+        }
+      });
     }
-  }, [activeSection]);
+
+    return () => {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+  }, [activeSection, mounted]);
 
   if (!mounted) return null;
 
@@ -257,11 +267,11 @@ export default function IndustriesPage() {
       </section>
 
       <div className={styles.industriesDetailContainer}>
-        <aside className={styles.sidebarWrapper}>
+        <aside className={`${styles.sidebarWrapper} ${styles[activeSection + 'Section']}`}>
           <div className={styles.verticalSidebar}>
             <div 
               className={styles.activeIndicator}
-              style={{ transform: `translateY(${indicatorOffset}px)` }}
+              ref={indicatorRef}
             ></div>
             {/* Finance */}
             <div 
