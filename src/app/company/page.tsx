@@ -194,12 +194,12 @@ export default function CompanyPage() {
           <div className={styles.milestoneInfo}>
             <div className={styles.milestoneYear}>2025</div>
             <h3 className={styles.milestoneHeading}>
-              Tallium today: <br />
+              SiteonLab today: <br />
               <span className={styles.orangeText}>Global reach, strong roots.</span>
             </h3>
             <div className={styles.milestoneDescription}>
               <p>
-                Today, Tallium unites global delivery with strong Ukrainian roots — helping clients worldwide build impactful, future-ready digital products.
+                Today, SiteonLab unites global delivery with strong Indian roots — helping clients worldwide build impactful, future-ready digital products.
               </p>
               <p>
                 Our journey is powered by people — talented, curious, and brave enough to shape the future together.
@@ -236,7 +236,7 @@ export default function CompanyPage() {
           <h2 className={styles.principlesTitle}>Our Principles</h2>
           <p className={styles.principlesSubtitle}>
             We are building a company where people love to work. <br />
-            Discover our key principles - they are at the core of Tallium culture.
+            Discover our key principles - they are at the core of SiteonLab culture.
           </p>
         </div>
 

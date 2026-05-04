@@ -188,7 +188,7 @@ export default function ExpertisePage() {
               Get a dedicated team for ongoing development
             </h2>
             <p className={styles.serviceCardDesc}>
-              If your product is released and you seek a dedicated partner to support and evolve it, Tallium can provide you with a ready-to-go team of experts.
+              If your product is released and you seek a dedicated partner to support and evolve it, SiteonLab can provide you with a ready-to-go team of experts.
             </p>
             <a href="#learn-more" className={styles.serviceCardBtn}>
               Learn more
