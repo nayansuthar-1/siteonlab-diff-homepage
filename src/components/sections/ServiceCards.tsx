@@ -103,6 +103,7 @@ export default function ServiceCards() {
               } as CSSProperties
             }
           >
+            <span className={styles.blurLayer} aria-hidden="true" />
             <div className={styles.iconWrap}>
               <ServiceIcon name={service.icon} />
             </div>
