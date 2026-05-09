@@ -1,151 +1,236 @@
-/* ─────────────────────────────────────
-   Service Cards — glass cards with overlap
-   ───────────────────────────────────── */
+/* Service Cards - glass cards with overlap */
 
 .section {
   position: relative;
   z-index: 50;
-  margin-top: -160px; /* 60% card overlap into hero */
-  padding: 0 40px 60px;
+  margin-top: -132px;
+  padding: 0 40px 76px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* ─── Card ─── */
+/* Card */
 .card {
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 28px 24px;
+  padding: 32px;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018) 48%, rgba(255, 255, 255, 0.035)),
+    rgba(11, 11, 14, 0.54);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   text-decoration: none;
   color: #fff;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
-  min-height: 220px;
+  min-height: 240px;
   position: relative;
   z-index: 1;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 34px rgba(0, 0, 0, 0.22);
 }
 
 .card::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -1px;
   border-radius: inherit;
-  background: rgba(255, 255, 255, 0.08);
-  -webkit-backdrop-filter: blur(32px) saturate(1.4);
-  backdrop-filter: blur(32px) saturate(1.4);
+  padding: 1px;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.42), transparent 26%, transparent 54%, color-mix(in srgb, var(--wave-color, #8b5cf6) 45%, rgba(255, 255, 255, 0.18)) 78%, transparent),
+    radial-gradient(220px 150px at 20% 0%, color-mix(in srgb, var(--wave-color, #8b5cf6) 18%, transparent), transparent 70%);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: -1;
-  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(420px 220px at 12% -14%, color-mix(in srgb, var(--wave-color, #8b5cf6) 14%, transparent), transparent 70%),
+    linear-gradient(105deg, transparent 0%, transparent 31%, rgba(255, 255, 255, 0.13) 45%, transparent 58%, transparent 100%);
+  opacity: 0.32;
+  transform: translate3d(-48%, 0, 0);
+  transition:
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .card:hover,
 .card.active {
-  transform: translateY(-8px);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+  transform: translate3d(0, -10px, 0);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.024) 46%, color-mix(in srgb, var(--wave-color, #8b5cf6) 8%, rgba(255, 255, 255, 0.04))),
+    rgba(12, 12, 16, 0.66);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-color: color-mix(in srgb, var(--wave-color, #8b5cf6) 24%, rgba(255, 255, 255, 0.24));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    0 26px 54px rgba(0, 0, 0, 0.36),
+    0 14px 46px color-mix(in srgb, var(--wave-color, #8b5cf6) 13%, transparent);
 }
 
 .card:hover::before,
 .card.active::before {
-  background: rgba(255, 255, 255, 0.12);
+  opacity: 1;
 }
 
-/* ─── Icon Container ─── */
+.card:hover::after,
+.card.active::after {
+  opacity: 0.9;
+  transform: translate3d(34%, 0, 0);
+}
+
+/* Icon Container */
 .iconWrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025)),
+    rgba(22, 22, 25, 0.82);
   flex-shrink: 0;
-  transition: all 0.3s ease;
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .iconWrap svg {
-  width: 22px;
-  height: 22px;
-  color: rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  transition:
+    color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ─── Text ─── */
+.card:hover .iconWrap,
+.card.active .iconWrap {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--wave-color, #8b5cf6) 20%, rgba(255, 255, 255, 0.12)), rgba(255, 255, 255, 0.03)),
+    rgba(22, 22, 25, 0.9);
+  border-color: color-mix(in srgb, var(--wave-color, #8b5cf6) 32%, rgba(255, 255, 255, 0.22));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 12px 28px color-mix(in srgb, var(--wave-color, #8b5cf6) 22%, transparent);
+  transform: translate3d(0, -2px, 0);
+}
+
+.card:hover .iconWrap svg,
+.card.active .iconWrap svg {
+  color: color-mix(in srgb, var(--wave-color, #8b5cf6) 30%, #fff);
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--wave-color, #8b5cf6) 46%, transparent));
+  transform: scale(1.04);
+}
+
+/* Text */
 .titleRow {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
+  margin-top: 8px;
 }
 
 .title {
   font-family: var(--font-plus-jakarta), sans-serif;
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.3;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
   color: #fff;
   margin: 0;
-  white-space: pre-line;
 }
 
 .arrow {
   flex-shrink: 0;
-  color: #f59e0b;
+  color: rgba(255, 255, 255, 0.78);
   opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transform: translate3d(-8px, 0, 0);
+  transition:
+    opacity 0.42s ease,
+    transform 0.48s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.42s ease;
 }
 
 .arrow svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 }
 
 .card:hover .arrow,
 .card.active .arrow {
   opacity: 1;
-  transform: translateX(0);
-}
-
-.card:hover .iconWrap,
-.card.active .iconWrap {
-  background: color-mix(in srgb, var(--wave-color, #2ecc99) 15%, transparent);
-  border-color: color-mix(in srgb, var(--wave-color, #2ecc99) 30%, transparent);
-  box-shadow: 0 0 20px color-mix(in srgb, var(--wave-color, #2ecc99) 40%, transparent);
-}
-
-.card:hover .iconWrap svg,
-.card.active .iconWrap svg {
-  color: var(--wave-color, #2ecc99);
-  filter: drop-shadow(0 0 8px var(--wave-color, #2ecc99));
+  color: color-mix(in srgb, var(--wave-color, #8b5cf6) 28%, #fff);
+  transform: translate3d(0, 0, 0);
 }
 
 .description {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.6;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
 }
 
-/* ─── Responsive ─── */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card::before,
+  .card::after,
+  .iconWrap,
+  .iconWrap svg,
+  .arrow {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* Responsive */
 @media (max-width: 1024px) {
   .section {
     padding: 0 24px 60px;
-    margin-top: -120px;
+    margin-top: -108px;
   }
 
   .grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
   }
 }

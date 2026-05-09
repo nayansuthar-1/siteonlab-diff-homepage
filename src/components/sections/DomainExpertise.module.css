@@ -67,7 +67,7 @@
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 20px;
   overflow: hidden;
-  transition: border-color 0.5s ease;
+  transition: border-color 0.72s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover .cardInner,
@@ -80,7 +80,7 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.82s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
   z-index: 1;
 }
@@ -106,7 +106,9 @@
 }
 
 .teal .cardInner {
-  transition: background 0.6s ease, border-color 0.5s ease;
+  transition:
+    background 0.82s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.72s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card.teal:hover .cardInner,
@@ -123,7 +125,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.76s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover .cardContent,
@@ -137,7 +139,7 @@
   color: rgba(255, 255, 255, 0.2);
   margin-bottom: 24px;
   font-weight: 400;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.76s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .titleRow {
@@ -145,7 +147,7 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 24px;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.76s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Title slides right on hover to make room for icon */
@@ -162,7 +164,10 @@
   width: 0;
   opacity: 0;
   transform: scale(0.5);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    width 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.56s ease,
+    transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 
@@ -209,7 +214,7 @@
 
 .learnMore svg {
   color: #f59e0b;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card:hover .learnMore svg,
@@ -226,7 +231,9 @@
   mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 25%, rgba(0,0,0,0.9) 60%, black 100%);
   opacity: 0;
   transform: translateX(-15px);
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+  transition:
+    opacity 0.84s cubic-bezier(0.16, 1, 0.3, 1) 0.06s,
+    transform 0.84s cubic-bezier(0.16, 1, 0.3, 1) 0.06s;
 }
 
 .card:hover .imageWrapper,

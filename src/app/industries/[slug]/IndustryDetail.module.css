@@ -1,0 +1,600 @@
+.main {
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  overflow-x: clip;
+  font-family: var(--font-plus-jakarta), sans-serif;
+}
+
+@keyframes gridMove {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-88px, -88px, 0);
+  }
+}
+
+@keyframes beamMove {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+    opacity: 0;
+  }
+  22%,
+  58% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(120%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+@keyframes edgeFlow {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
+}
+
+.container {
+  width: min(1220px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.hero {
+  position: relative;
+  padding: 148px 0 104px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 76% 16%, color-mix(in srgb, var(--industry-accent) 22%, transparent), transparent 30%),
+    radial-gradient(circle at 12% 28%, rgba(255, 255, 255, 0.055), transparent 26%),
+    linear-gradient(180deg, #050505 0%, #000 100%);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
+  background-size: 88px 88px;
+  mask-image: linear-gradient(180deg, #000 0%, transparent 76%);
+  pointer-events: none;
+  animation: gridMove 20s linear infinite;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 104px;
+  left: -22%;
+  width: 44%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.44), transparent);
+  box-shadow: 0 0 30px color-mix(in srgb, var(--industry-accent) 34%, transparent);
+  animation: beamMove 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.backLink,
+.textLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 14px;
+  font-weight: 650;
+  text-decoration: none;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.backLink {
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.backLink:hover,
+.textLink:hover {
+  color: #fff;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.68fr);
+  gap: 64px;
+  align-items: end;
+  margin-top: 54px;
+}
+
+.heroCopy {
+  max-width: 820px;
+}
+
+.iconBadge {
+  width: 66px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 26px;
+  border-radius: 14px;
+  color: var(--industry-accent);
+  background: color-mix(in srgb, var(--industry-accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--industry-accent) 28%, transparent);
+  box-shadow: 0 0 44px color-mix(in srgb, var(--industry-accent) 16%, transparent);
+}
+
+.iconBadge svg {
+  width: 34px;
+  height: 34px;
+}
+
+.kicker {
+  display: inline-flex;
+  color: var(--industry-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.heroCopy h1 {
+  max-width: 820px;
+  margin: 14px 0 0;
+  color: transparent;
+  background: linear-gradient(112deg, #fff 0%, rgba(255, 255, 255, 0.78) 50%, color-mix(in srgb, var(--industry-accent) 55%, #fff) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: clamp(2.55rem, 6.4vw, 6rem);
+  line-height: 0.96;
+  font-weight: 760;
+  letter-spacing: 0;
+}
+
+.heroCopy p {
+  max-width: 680px;
+  margin: 28px 0 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.primaryCta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 34px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 750;
+  text-decoration: none;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.primaryCta::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+  transform: translateX(-110%);
+  transition: transform 0.55s ease;
+  z-index: -1;
+}
+
+.primaryCta span {
+  color: var(--industry-accent);
+}
+
+.primaryCta:hover {
+  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.045);
+  transform: translateY(-2px);
+}
+
+.primaryCta:hover::before {
+  transform: translateX(110%);
+}
+
+.signalPanel,
+.listPanel,
+.workflowCard,
+.outcomeCard,
+.relatedCard {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.022)) padding-box,
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02), color-mix(in srgb, var(--industry-accent) 17%, transparent)) border-box;
+}
+
+.signalPanel {
+  position: relative;
+  overflow: hidden;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34), 0 0 54px color-mix(in srgb, var(--industry-accent) 9%, transparent);
+}
+
+.signalPanel::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--industry-accent), rgba(255, 255, 255, 0.5), transparent);
+  background-size: 200% 100%;
+  animation: edgeFlow 4.8s linear infinite;
+}
+
+.signalPanel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, transparent 0%, transparent 42%, rgba(255, 255, 255, 0.12) 50%, transparent 58%, transparent 100%),
+    radial-gradient(180px 140px at 85% 16%, color-mix(in srgb, var(--industry-accent) 16%, transparent), transparent 72%);
+  opacity: 0.48;
+  transform: translateX(-28%);
+  pointer-events: none;
+}
+
+.signalPanel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.signalPanel > span {
+  color: var(--industry-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.signalPanel h2 {
+  margin: 18px 0 0;
+  color: #fff;
+  font-size: 1.55rem;
+  line-height: 1.25;
+}
+
+.signalPanel p {
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, 0.58);
+  line-height: 1.72;
+}
+
+.metricGrid {
+  display: grid;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.metricGrid div {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.capabilitySection,
+.workflowSection,
+.outcomeSection,
+.relatedSection {
+  padding: 96px 0;
+  background: #000;
+}
+
+.workflowSection {
+  background:
+    linear-gradient(180deg, #030303 0%, #080808 48%, #030303 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.055);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.sectionHeader,
+.workflowHeader,
+.relatedHeader {
+  margin-bottom: 42px;
+}
+
+.sectionHeader h2,
+.workflowHeader h2,
+.relatedHeader h2 {
+  max-width: 840px;
+  margin: 12px 0 0;
+  color: #fff;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.1;
+  font-weight: 740;
+}
+
+.capabilityGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.listPanel {
+  padding: 32px;
+  border-radius: 8px;
+}
+
+.listPanel h3 {
+  margin: 0 0 24px;
+  color: #fff;
+  font-size: 1.15rem;
+}
+
+.listPanel ul {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding-left: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+.listPanel li::marker {
+  color: var(--industry-accent);
+}
+
+.workflowGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.workflowCard {
+  position: relative;
+  min-height: 180px;
+  padding: 28px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.34s cubic-bezier(0.2, 0.9, 0.2, 1), background 0.34s ease, box-shadow 0.34s ease;
+}
+
+.workflowCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, transparent 0%, transparent 42%, rgba(255, 255, 255, 0.1) 50%, transparent 58%, transparent 100%),
+    radial-gradient(circle at 14% 16%, color-mix(in srgb, var(--industry-accent) 18%, transparent), transparent 36%);
+  opacity: 0;
+  transform: translateX(-32%);
+  transition: opacity 0.34s ease, transform 0.65s ease;
+}
+
+.workflowCard:hover {
+  transform: translateY(-8px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.028)) padding-box,
+    linear-gradient(135deg, color-mix(in srgb, var(--industry-accent) 58%, rgba(255, 255, 255, 0.18)), rgba(255, 255, 255, 0.06), color-mix(in srgb, var(--industry-accent) 26%, transparent)) border-box;
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.34), 0 0 34px color-mix(in srgb, var(--industry-accent) 12%, transparent);
+}
+
+.workflowCard:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.workflowCard span,
+.workflowCard h3 {
+  position: relative;
+}
+
+.workflowCard span {
+  color: var(--industry-accent);
+  font-size: 0.9rem;
+  font-weight: 850;
+}
+
+.workflowCard h3 {
+  margin: 72px 0 0;
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+.outcomeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.outcomeCard {
+  position: relative;
+  min-height: 168px;
+  padding: 28px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.outcomeCard::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--industry-accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.outcomeCard:hover {
+  transform: translateY(-6px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.026)) padding-box,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.11), color-mix(in srgb, var(--industry-accent) 26%, transparent)) border-box;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.34);
+}
+
+.outcomeCard:hover::after {
+  opacity: 1;
+}
+
+.outcomeCard span {
+  display: block;
+  width: 36px;
+  height: 3px;
+  margin-bottom: 34px;
+  border-radius: 999px;
+  background: var(--industry-accent);
+}
+
+.outcomeCard h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.28rem;
+  line-height: 1.35;
+}
+
+.relatedHeader {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.relatedCard {
+  position: relative;
+  isolation: isolate;
+  min-height: 260px;
+  padding: 28px;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.34s cubic-bezier(0.2, 0.9, 0.2, 1), background 0.34s ease, box-shadow 0.34s ease;
+}
+
+.relatedCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, transparent 0%, transparent 38%, rgba(255, 255, 255, 0.12) 50%, transparent 62%, transparent 100%),
+    radial-gradient(150px 120px at 18% 12%, color-mix(in srgb, var(--industry-accent) 16%, transparent), transparent 72%);
+  opacity: 0;
+  transform: translateX(-34%);
+  transition: opacity 0.34s ease, transform 0.7s ease;
+  z-index: -1;
+}
+
+.relatedCard:hover {
+  transform: translateY(-8px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.028)) padding-box,
+    linear-gradient(135deg, color-mix(in srgb, var(--industry-accent) 52%, rgba(255, 255, 255, 0.18)), rgba(255, 255, 255, 0.06), color-mix(in srgb, var(--industry-accent) 22%, transparent)) border-box;
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.34);
+}
+
+.relatedCard:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.relatedCard svg {
+  width: 34px;
+  height: 34px;
+  color: var(--industry-accent);
+  transition: transform 0.34s ease, filter 0.34s ease;
+}
+
+.relatedCard:hover svg {
+  transform: translateY(-2px) rotate(-4deg) scale(1.08);
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--industry-accent) 70%, transparent));
+}
+
+.relatedCard h3 {
+  margin: 36px 0 12px;
+  color: #fff;
+  font-size: 1.22rem;
+}
+
+.relatedCard p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 1024px) {
+  .heroGrid,
+  .capabilityGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .workflowGrid,
+  .outcomeGrid,
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .container {
+    width: min(100% - 32px, 1220px);
+  }
+
+  .hero {
+    padding: 118px 0 72px;
+  }
+
+  .capabilitySection,
+  .workflowSection,
+  .outcomeSection,
+  .relatedSection {
+    padding: 68px 0;
+  }
+
+  .relatedHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .hero::after,
+  .signalPanel::before {
+    animation: none;
+  }
+
+  .primaryCta,
+  .workflowCard,
+  .workflowCard::before,
+  .outcomeCard,
+  .outcomeCard::after,
+  .relatedCard,
+  .relatedCard::before,
+  .relatedCard svg {
+    transition-duration: 0.01ms;
+  }
+}

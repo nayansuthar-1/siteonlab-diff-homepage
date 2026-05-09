@@ -6,6 +6,9 @@ import DomainExpertise from "@/components/sections/DomainExpertise";
 import Footer from "@/components/ui/Footer";
 import Link from "next/link";
 import styles from "./Services.module.css";
+import ServiceIcon from "@/components/ui/ServiceIcon";
+import ContactSection from "@/components/sections/ContactSection";
+import { services } from "@/lib/services";
 
 /* ─── Tech Stack Data ─── */
 const categories = [
@@ -135,6 +138,7 @@ export default function ServicesPage() {
       <section className={styles.heroSection}>
         <div className={styles.heroContainer}>
           <div className={styles.heroLeft}>
+            <span className={styles.heroEyebrow}>SiteOnLab service stack</span>
             <h1 className={styles.heroTitle}>Your project-specific<br/>needs covered</h1>
             <p className={styles.heroSubtitle}>Do you have a project to deliver but struggle with tech challenges? We offer the following solutions</p>
             <Link href="/contact" className={styles.heroBtn}>
@@ -145,34 +149,20 @@ export default function ServicesPage() {
             </Link>
           </div>
           <div className={styles.heroRight}>
-            <div className={styles.heroCard}>
-              <div className={`${styles.heroCardIcon} ${styles.heroCardIcon1}`}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10" strokeLinecap="round"/><path d="M15 2.5c2 3 4 7 4 9.5" strokeLinecap="round"/><path d="M22 8l-4 4 4 4" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </div>
-              <h3 className={styles.heroCardTitle}>New venture</h3>
-              <p className={styles.heroCardDesc}>Build a new software product from start to finish and test its potential in the market.</p>
-            </div>
-            <div className={styles.heroCard}>
-              <div className={`${styles.heroCardIcon} ${styles.heroCardIcon2}`}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9.5 14.5L3 21M14.5 9.5L21 3" strokeLinecap="round"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" strokeLinecap="round"/></svg>
-              </div>
-              <h3 className={styles.heroCardTitle}>Rescue mission</h3>
-              <p className={styles.heroCardDesc}>Identify tech bottlenecks in your existing solution, resolve them, or rebuild your product from scratch.</p>
-            </div>
-            <div className={styles.heroCard}>
-              <div className={`${styles.heroCardIcon} ${styles.heroCardIcon3}`}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </div>
-              <h3 className={styles.heroCardTitle}>Dedicated team</h3>
-              <p className={styles.heroCardDesc}>Build your product with our dedicated team while retaining full control over management.</p>
-            </div>
-            <div className={styles.heroCard}>
-              <div className={`${styles.heroCardIcon} ${styles.heroCardIcon4}`}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 3v18h18" strokeLinecap="round" strokeLinejoin="round"/><path d="M7 17l4-8 4 4 5-9" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </div>
-              <h3 className={styles.heroCardTitle}>Project takeover</h3>
-              <p className={styles.heroCardDesc}>Considering switching your current team? Seamlessly transition your project and ensure its growth.</p>
-            </div>
+            {services.map((service) => (
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className={styles.heroCard}
+                style={{ "--service-accent": service.accent } as React.CSSProperties}
+              >
+                <div className={styles.heroCardIcon}>
+                  <ServiceIcon name={service.icon} />
+                </div>
+                <h3 className={styles.heroCardTitle}>{service.title}</h3>
+                <p className={styles.heroCardDesc}>{service.description}</p>
+              </Link>
+            ))}
           </div>
         </div>
         <div className={styles.heroGlow} />
@@ -213,7 +203,6 @@ export default function ServicesPage() {
           {/* Tech Grid */}
           <div className={styles.techGrid}>
             {filteredTech.map((tech) => {
-              const iconKey = tech.name.toLowerCase().replace(/[.# ]/g, "").replace("reactnative","reactnative").replace("kotlinmp","kotlinmp").replace("woocommerce","woo");
               const mappedKey = tech.name === "C#" ? "csharp" : tech.name === "React Native" ? "reactnative" : tech.name === "Kotlin MP" ? "kotlinmp" : tech.name === "WooCommerce" ? "woo" : tech.name === "Next.js" ? "nextjs" : tech.name === "Node.js" ? "node" : tech.name === "Vue.js" ? "vue" : tech.name.toLowerCase();
               return (
                 <div key={tech.name} className={styles.techItem}>
@@ -313,6 +302,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <ContactSection />
       <Footer showSchedule={false} />
     </main>
   );

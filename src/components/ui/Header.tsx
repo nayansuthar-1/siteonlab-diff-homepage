@@ -2,16 +2,33 @@
 
 // Cache bust 16:55
 import { useState, useEffect, useCallback } from "react";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Header.module.css";
+import ServiceIcon from "@/components/ui/ServiceIcon";
+import IndustryIcon from "@/components/ui/IndustryIcon";
+import { services } from "@/lib/services";
+import { industries } from "@/lib/industries";
 
 const navLinks = [
   { label: "Services", href: "/services", hasDropdown: true },
   { label: "Expertise", href: "/expertise", hasDropdown: true },
   { label: "Industries", href: "/industries", hasDropdown: true },
+  { label: "Locations", href: "/locations", hasDropdown: true },
   { label: "Company", href: "/company" },
   { label: "Careers", href: "/careers" },
+];
+
+const locations = [
+  { name: "Bangalore", slug: "bangalore" },
+  { name: "Chennai", slug: "chennai" },
+  { name: "Delhi", slug: "delhi" },
+  { name: "Hyderabad", slug: "hyderabad" },
+  { name: "Jaipur", slug: "jaipur" },
+  { name: "Kolkata", slug: "kolkata" },
+  { name: "Mumbai", slug: "mumbai" },
+  { name: "Pune", slug: "pune" },
 ];
 
 export default function Header() {
@@ -157,50 +174,22 @@ export default function Header() {
                 </div>
 
                 {/* Right side: Service Cards */}
-                <div className={styles.megaMenuRight}>
-                  <Link href="/services" className={`${styles.serviceCard} ${styles.serviceCard1}`} onClick={() => setActiveDropdown(null)}>
-                    <div className={styles.serviceIconWrapper}>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                         <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-                         <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                         <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </div>
-                    <span className={styles.serviceTitle}>Full-cycle<br/>Development</span>
-                    <div className={styles.cardGlow}></div>
-                  </Link>
-                  <Link href="/services" className={`${styles.serviceCard} ${styles.serviceCard2}`} onClick={() => setActiveDropdown(null)}>
-                    <div className={styles.serviceIconWrapper}>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </div>
-                    <span className={styles.serviceTitle}>Software Team<br/>Augmentation</span>
-                    <div className={styles.cardGlow}></div>
-                  </Link>
-                  <Link href="/services" className={`${styles.serviceCard} ${styles.serviceCard3}`} onClick={() => setActiveDropdown(null)}>
-                    <div className={styles.serviceIconWrapper}>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5"/>
-                        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5"/>
-                        <path d="M12 3V1M12 23V21M3 12H1M23 12H21M5.636 5.636L4.222 4.222M19.778 19.778L18.364 18.364M5.636 18.364L4.222 19.778M19.778 5.636L18.364 4.222" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                      </svg>
-                    </div>
-                    <span className={styles.serviceTitle}>Digital Transformation<br/>Consulting</span>
-                    <div className={styles.cardGlow}></div>
-                  </Link>
-                  <Link href="/services" className={`${styles.serviceCard} ${styles.serviceCard4}`} onClick={() => setActiveDropdown(null)}>
-                    <div className={styles.serviceIconWrapper}>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 19L21 21L19 12L20.5 10.5C21.3284 9.67157 21.3284 8.32843 20.5 7.5L16.5 3.5C15.6716 2.67157 14.3284 2.67157 13.5 3.5L12 5L3 14L5 23L12 19Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-                      </svg>
-                    </div>
-                    <span className={styles.serviceTitle}>Product Concept<br/>& Design</span>
-                    <div className={styles.cardGlow}></div>
-                  </Link>
+                <div className={`${styles.megaMenuRight} ${styles.servicesMegaGrid}`}>
+                  {services.map((service) => (
+                    <Link
+                      key={service.slug}
+                      href={`/services/${service.slug}`}
+                      className={styles.serviceCard}
+                      style={{ "--service-accent": service.accent } as CSSProperties}
+                      onClick={() => setActiveDropdown(null)}
+                    >
+                      <div className={styles.serviceIconWrapper}>
+                        <ServiceIcon name={service.icon} />
+                      </div>
+                      <span className={styles.serviceTitle}>{service.navTitle}</span>
+                      <div className={styles.cardGlow}></div>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>
@@ -329,45 +318,63 @@ export default function Header() {
                 </div>
 
                 {/* Right side: Industry Cards */}
-                <div className={styles.megaMenuRight}>
-                  <Link href="/industries" className={`${styles.serviceCard} ${styles.industryCard1}`} onClick={() => setActiveDropdown(null)}>
-                    <div className={styles.serviceIconWrapper}>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </div>
-                    <span className={styles.serviceTitle}>Financial Services</span>
-                    <div className={styles.cardGlow}></div>
+                <div className={`${styles.megaMenuRight} ${styles.industriesMegaGrid}`}>
+                  {industries.map((industry) => (
+                    <Link
+                      key={industry.slug}
+                      href={`/industries/${industry.slug}`}
+                      className={styles.serviceCard}
+                      style={{ "--service-accent": industry.accent } as CSSProperties}
+                      onClick={() => setActiveDropdown(null)}
+                    >
+                      <div className={styles.serviceIconWrapper}>
+                        <IndustryIcon name={industry.icon} />
+                      </div>
+                      <span className={styles.serviceTitle}>{industry.navTitle}</span>
+                      <div className={styles.cardGlow}></div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* Locations Dropdown */}
+            <div className={styles.dropdownContent} style={{ display: activeDropdown === "Locations" ? "block" : "none" }}>
+              <div className={styles.megaMenuTop}>
+                {/* Left side: Schedule a call */}
+                <div className={styles.megaMenuLeft}>
+                  <span className={styles.scheduleLabel}>Visit our offices</span>
+                  <h2 className={styles.scheduleHeading}>
+                    Find us in your city and let's build something great together
+                  </h2>
+                  <Link href="/contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
+                    <span>Contact local office</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   </Link>
-                  <Link href="/industries" className={`${styles.serviceCard} ${styles.industryCard2}`} onClick={() => setActiveDropdown(null)}>
-                    <div className={styles.serviceIconWrapper}>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </div>
-                    <span className={styles.serviceTitle}>Healthcare</span>
-                    <div className={styles.cardGlow}></div>
-                  </Link>
-                  <Link href="/industries" className={`${styles.serviceCard} ${styles.industryCard3}`} onClick={() => setActiveDropdown(null)}>
-                    <div className={styles.serviceIconWrapper}>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                      </svg>
-                    </div>
-                    <span className={styles.serviceTitle}>Education</span>
-                    <div className={styles.cardGlow}></div>
-                  </Link>
-                  <Link href="/industries" className={`${styles.serviceCard} ${styles.industryCard4}`} onClick={() => setActiveDropdown(null)}>
-                    <div className={styles.serviceIconWrapper}>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <rect x="2" y="2" width="20" height="20" rx="2" ry="2"/>
-                        <path d="M7 2v20M17 2v20M2 7h20M2 17h20"/>
-                      </svg>
-                    </div>
-                    <span className={styles.serviceTitle}>All Industries</span>
-                    <div className={styles.cardGlow}></div>
-                  </Link>
+                </div>
+
+                {/* Right side: Location Cards */}
+                <div className={`${styles.megaMenuRight} ${styles.servicesMegaGrid}`}>
+                  {locations.map((location) => (
+                    <Link
+                      key={location.slug}
+                      href={`/locations/${location.slug}`}
+                      className={styles.serviceCard}
+                      style={{ "--service-accent": "#f59e0b" } as CSSProperties}
+                      onClick={() => setActiveDropdown(null)}
+                    >
+                      <div className={styles.serviceIconWrapper}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                          <circle cx="12" cy="10" r="3" />
+                        </svg>
+                      </div>
+                      <span className={styles.serviceTitle}>{location.name}</span>
+                      <div className={styles.cardGlow}></div>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>

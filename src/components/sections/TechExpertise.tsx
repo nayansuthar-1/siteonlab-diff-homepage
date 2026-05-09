@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 const techExpertiseData = [
   {
@@ -121,44 +121,87 @@ export default function TechExpertise({
   title = "Tech Expertise",
   subtitle = "From artificial intelligence to cloud computing, we excel in modern technology and provide the expertise that growth-focused businesses require.",
 }: TechExpertiseProps) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const activeCardsRef = useRef<Set<HTMLElement>>(new Set());
+
   useEffect(() => {
-    if (typeof window === "undefined" || window.innerWidth > 1024) return;
+    if (typeof window === "undefined") return;
 
-    const handleScroll = () => {
-      const cards = document.querySelectorAll(".tech-expertise-card");
-      const viewportCenter = window.innerHeight / 2;
-      
-      let minDistance = Infinity;
-      let closestCard: Element | null = null;
+    let frameId = 0;
+    const mobileQuery = window.matchMedia("(max-width: 1024px)");
 
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(viewportCenter - cardCenter);
-        
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestCard = card;
-        }
+    const updateActiveCard = () => {
+      frameId = 0;
+
+      const cards = sectionRef.current?.querySelectorAll<HTMLElement>(".tech-expertise-card");
+      if (!cards?.length) return;
+
+      if (!mobileQuery.matches) {
+        activeCardsRef.current.forEach((card) => card.classList.remove("is-active"));
+        activeCardsRef.current.clear();
+        return;
+      }
+
+      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+      const viewportTop = window.visualViewport?.offsetTop ?? 0;
+      const viewportBottom = viewportTop + viewportHeight;
+      const viewportCenter = viewportTop + viewportHeight / 2;
+
+      const closestCards = Array.from(cards)
+        .map((card) => {
+          const rect = card.getBoundingClientRect();
+          const cardCenter = rect.top + rect.height / 2;
+          const distance = Math.abs(viewportCenter - cardCenter);
+          const isVisible = rect.bottom > viewportTop && rect.top < viewportBottom;
+
+          return { card, distance, isVisible };
+        })
+        .filter((item) => item.isVisible)
+        .sort((a, b) => a.distance - b.distance)
+        .slice(0, 2)
+        .map((item) => item.card);
+
+      const nextActiveCards = new Set(closestCards);
+      const activeCardsChanged =
+        nextActiveCards.size !== activeCardsRef.current.size ||
+        closestCards.some((card) => !activeCardsRef.current.has(card));
+
+      if (!activeCardsChanged) return;
+
+      activeCardsRef.current.forEach((card) => {
+        if (!nextActiveCards.has(card)) card.classList.remove("is-active");
       });
-
-      cards.forEach((card) => {
-        if (card === closestCard) {
-          card.classList.add("is-active");
-        } else {
-          card.classList.remove("is-active");
-        }
-      });
+      nextActiveCards.forEach((card) => card.classList.add("is-active"));
+      activeCardsRef.current = nextActiveCards;
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); 
+    const scheduleUpdate = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(updateActiveCard);
+    };
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    scheduleUpdate();
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("orientationchange", scheduleUpdate);
+    window.visualViewport?.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.visualViewport?.addEventListener("resize", scheduleUpdate);
+    mobileQuery.addEventListener("change", scheduleUpdate);
+
+    return () => {
+      if (frameId) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      window.removeEventListener("orientationchange", scheduleUpdate);
+      window.visualViewport?.removeEventListener("scroll", scheduleUpdate);
+      window.visualViewport?.removeEventListener("resize", scheduleUpdate);
+      mobileQuery.removeEventListener("change", scheduleUpdate);
+    };
   }, []);
 
   return (
-    <section className="relative w-full py-20 bg-black overflow-hidden" style={{ fontFamily: "var(--font-plus-jakarta), sans-serif" }}>
+    <section ref={sectionRef} className="relative w-full py-20 bg-black overflow-hidden" style={{ fontFamily: "var(--font-plus-jakarta), sans-serif" }}>
       <div className="relative z-10 w-full max-w-[1450px] mx-auto px-6 md:px-12 lg:px-20">
         
         {/* Header */}
@@ -202,33 +245,33 @@ export default function TechExpertise({
               return (
                 <div 
                   key={idx} 
-                  className="relative p-10 flex flex-col transition-all duration-500 cursor-pointer group overflow-hidden tech-expertise-card"
+                  className="relative p-10 flex flex-col transition-all duration-700 ease-out cursor-pointer group overflow-hidden tech-expertise-card"
                 >
                   <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 group-[.is-active]:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 group-[.is-active]:opacity-100 transition-opacity duration-700 ease-out pointer-events-none"
                     style={{ background: theme.smokeGradient }}
                   />
 
                   <div className="relative h-[135px] w-full z-10">
-                    <div className={`absolute top-0 left-0 flex items-center justify-center rounded-full bg-[#111111] transition-all duration-500 
+                    <div className={`absolute top-0 left-0 flex items-center justify-center rounded-full bg-[#111111] transition-all duration-700 ease-out
                       w-[64px] h-[64px] group-hover:w-[42px] group-hover:h-[42px] group-[.is-active]:w-[42px] group-[.is-active]:h-[42px] ${theme.iconBg}`}>
-                      <div className={`text-white transition-colors duration-500 ${theme.iconText} 
-                        [&>svg]:transition-all [&>svg]:duration-500 [&>svg]:w-[28px] [&>svg]:h-[28px] group-hover:[&>svg]:w-[18px] group-hover:[&>svg]:h-[18px] group-[.is-active]:[&>svg]:w-[18px] group-[.is-active]:[&>svg]:h-[18px]`}>
+                      <div className={`text-white transition-colors duration-700 ease-out ${theme.iconText}
+                        [&>svg]:transition-all [&>svg]:duration-700 [&>svg]:ease-out [&>svg]:w-[28px] [&>svg]:h-[28px] group-hover:[&>svg]:w-[18px] group-hover:[&>svg]:h-[18px] group-[.is-active]:[&>svg]:w-[18px] group-[.is-active]:[&>svg]:h-[18px]`}>
                         {item.icon}
                       </div>
                     </div>
                     
-                    <div className="absolute transition-all duration-500 flex items-center gap-2
+                    <div className="absolute transition-all duration-700 ease-out flex items-center gap-2
                       top-[84px] left-0 group-hover:top-[9px] group-hover:left-[56px] group-[.is-active]:top-[9px] group-[.is-active]:left-[56px]">
                       <h3 className="text-white text-[1.05rem] font-bold tracking-tight">
                         {item.title}
                       </h3>
-                      <svg className="w-[18px] h-[18px] text-[#f59e0b] opacity-0 -translate-x-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 group-[.is-active]:opacity-100 group-[.is-active]:translate-x-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <svg className="w-[18px] h-[18px] text-[#f59e0b] opacity-0 -translate-x-2 transition-all duration-700 ease-out group-hover:opacity-100 group-hover:translate-x-0 group-[.is-active]:opacity-100 group-[.is-active]:translate-x-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </div>
 
-                    <div className="absolute top-[110px] left-0 w-full opacity-0 translate-y-4 transition-all duration-500 group-hover:top-[60px] group-hover:opacity-100 group-hover:translate-y-0 group-[.is-active]:top-[60px] group-[.is-active]:opacity-100 group-[.is-active]:translate-y-0 pointer-events-none">
+                    <div className="absolute top-[110px] left-0 w-full opacity-0 translate-y-4 transition-all duration-700 ease-out group-hover:top-[60px] group-hover:opacity-100 group-hover:translate-y-0 group-[.is-active]:top-[60px] group-[.is-active]:opacity-100 group-[.is-active]:translate-y-0 pointer-events-none">
                       <p className="text-[#a1a1aa] text-[0.95rem] leading-[1.6] max-w-[280px]">
                         {item.desc}
                       </p>

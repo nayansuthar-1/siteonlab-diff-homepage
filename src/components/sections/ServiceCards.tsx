@@ -1,102 +1,99 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import type { CSSProperties } from "react";
+import Link from "next/link";
 import styles from "./ServiceCards.module.css";
-
-const services = [
-  {
-    title: "AI, Data & Digital\nTransformation.",
-    description:
-      "Unlock the innovation with AI/ML and Data-driven intelligent solutions",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Software Development,\nWinning Apps.",
-    description:
-      "Build secure, scalable products end-to-end. From the blueprint to winning the competition",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Product Concept,\nDesign & Easy Start.",
-    description:
-      "Turn your idea into validated, tangible product concepts within weeks, not months",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 19l-7-7 1.41-1.41L12 16.17l5.59-5.58L19 12z" />
-        <circle cx="12" cy="5" r="3" />
-        <path d="M5 21h14" />
-      </svg>
-    ),
-  },
-  {
-    title: "Expert IT Teams,\nOn-Demand.",
-    description:
-      "Hire the required talents to ramp up your team and close the skills gap",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </svg>
-    ),
-  },
-];
+import ServiceIcon from "@/components/ui/ServiceIcon";
+import { services } from "@/lib/services";
 
 export default function ServiceCards() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const activeCardRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
-    // Only run on mobile/tablet (touch devices)
-    if (typeof window === "undefined" || window.innerWidth > 1024) return;
+    if (typeof window === "undefined") return;
 
-    const handleScroll = () => {
-      const cards = document.querySelectorAll(`.${styles.card}`);
-      const viewportCenter = window.innerHeight / 2;
-      
-      let closestCard: Element | null = null;
-      let minDistance = Infinity;
+    let frameId = 0;
+    const mobileQuery = window.matchMedia("(max-width: 1024px)");
 
-      cards.forEach((card) => {
+    const updateActiveCard = () => {
+      frameId = 0;
+
+      const cards = sectionRef.current?.querySelectorAll<HTMLElement>(`.${styles.card}`);
+      if (!cards?.length) return;
+
+      if (!mobileQuery.matches) {
+        activeCardRef.current?.classList.remove(styles.active);
+        activeCardRef.current = null;
+        return;
+      }
+
+      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+      const viewportTop = window.visualViewport?.offsetTop ?? 0;
+      const viewportBottom = viewportTop + viewportHeight;
+      const viewportCenter = viewportTop + viewportHeight / 2;
+
+      const closestCard = Array.from(cards).reduce<{
+        card: HTMLElement | null;
+        distance: number;
+      }>((closest, card) => {
         const rect = card.getBoundingClientRect();
         const cardCenter = rect.top + rect.height / 2;
         const distance = Math.abs(viewportCenter - cardCenter);
+        const isVisible = rect.bottom > viewportTop && rect.top < viewportBottom;
 
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestCard = card;
+        if (isVisible && distance < closest.distance) {
+          return { card, distance };
         }
-        
-        // Remove active class from everyone initially
-        card.classList.remove(styles.active);
-      });
 
-      // Add to the one closest to center, but only if it's actually in view
-      if (closestCard) {
-        const rect = (closestCard as Element).getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          (closestCard as Element).classList.add(styles.active);
-        }
-      }
+        return closest;
+      }, { card: null, distance: Infinity }).card;
+
+      if (closestCard === activeCardRef.current) return;
+
+      activeCardRef.current?.classList.remove(styles.active);
+      closestCard?.classList.add(styles.active);
+      activeCardRef.current = closestCard;
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    const scheduleUpdate = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(updateActiveCard);
+    };
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    scheduleUpdate();
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("orientationchange", scheduleUpdate);
+    window.visualViewport?.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.visualViewport?.addEventListener("resize", scheduleUpdate);
+    mobileQuery.addEventListener("change", scheduleUpdate);
+
+    return () => {
+      if (frameId) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      window.removeEventListener("orientationchange", scheduleUpdate);
+      window.visualViewport?.removeEventListener("scroll", scheduleUpdate);
+      window.visualViewport?.removeEventListener("resize", scheduleUpdate);
+      mobileQuery.removeEventListener("change", scheduleUpdate);
+    };
   }, []);
 
   return (
-    <section className={styles.section} id="services-cards">
+    <section ref={sectionRef} className={styles.section} id="services-cards">
       <div className={styles.grid}>
-        {services.map((service, i) => (
-          <a key={i} href="#" className={styles.card}>
-            <div className={styles.iconWrap}>{service.icon}</div>
+        {services.map((service) => (
+          <Link
+            key={service.slug}
+            href={`/services/${service.slug}`}
+            className={styles.card}
+            style={{ "--wave-color": service.accent } as CSSProperties}
+          >
+            <div className={styles.iconWrap}>
+              <ServiceIcon name={service.icon} />
+            </div>
             <div className={styles.titleRow}>
               <h3 className={styles.title}>{service.title}</h3>
               <span className={styles.arrow}>
@@ -107,7 +104,7 @@ export default function ServiceCards() {
               </span>
             </div>
             <p className={styles.description}>{service.description}</p>
-          </a>
+          </Link>
         ))}
       </div>
     </section>

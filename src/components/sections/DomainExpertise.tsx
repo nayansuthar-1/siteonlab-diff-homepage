@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import styles from "./DomainExpertise.module.css";
 
@@ -79,44 +79,82 @@ export default function DomainExpertise({
   title = "Domain expertise",
   subtitle = "Siteon Lab blends cutting-edge technologies, expert engineering skills, and domain-specific knowledge to build top-notch solutions in fintech, edtech, and medtech.",
 }: DomainExpertiseProps) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const activeCardRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
-    if (typeof window === "undefined" || window.innerWidth > 1024) return;
+    if (typeof window === "undefined") return;
 
-    const handleScroll = () => {
-      const cards = document.querySelectorAll(`.${styles.card}`);
-      const viewportCenter = window.innerHeight / 2;
+    let frameId = 0;
+    const mobileQuery = window.matchMedia("(max-width: 1024px)");
 
-      let minDistance = Infinity;
-      let closestCard: Element | null = null;
+    const updateActiveCard = () => {
+      frameId = 0;
 
-      cards.forEach((card) => {
+      const cards = sectionRef.current?.querySelectorAll<HTMLElement>(`.${styles.card}`);
+      if (!cards?.length) return;
+
+      if (!mobileQuery.matches) {
+        activeCardRef.current?.classList.remove(styles.active);
+        activeCardRef.current = null;
+        return;
+      }
+
+      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+      const viewportTop = window.visualViewport?.offsetTop ?? 0;
+      const viewportBottom = viewportTop + viewportHeight;
+      const viewportCenter = viewportTop + viewportHeight / 2;
+
+      const closestCard = Array.from(cards).reduce<{
+        card: HTMLElement | null;
+        distance: number;
+      }>((closest, card) => {
         const rect = card.getBoundingClientRect();
         const cardCenter = rect.top + rect.height / 2;
         const distance = Math.abs(viewportCenter - cardCenter);
+        const isVisible = rect.bottom > viewportTop && rect.top < viewportBottom;
 
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestCard = card;
+        if (isVisible && distance < closest.distance) {
+          return { card, distance };
         }
-      });
 
-      cards.forEach((card) => {
-        if (card === closestCard) {
-          card.classList.add(styles.active);
-        } else {
-          card.classList.remove(styles.active);
-        }
-      });
+        return closest;
+      }, { card: null, distance: Infinity }).card;
+
+      if (closestCard === activeCardRef.current) return;
+
+      activeCardRef.current?.classList.remove(styles.active);
+      closestCard?.classList.add(styles.active);
+      activeCardRef.current = closestCard;
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
+    const scheduleUpdate = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(updateActiveCard);
+    };
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    scheduleUpdate();
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("orientationchange", scheduleUpdate);
+    window.visualViewport?.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.visualViewport?.addEventListener("resize", scheduleUpdate);
+    mobileQuery.addEventListener("change", scheduleUpdate);
+
+    return () => {
+      if (frameId) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      window.removeEventListener("orientationchange", scheduleUpdate);
+      window.visualViewport?.removeEventListener("scroll", scheduleUpdate);
+      window.visualViewport?.removeEventListener("resize", scheduleUpdate);
+      mobileQuery.removeEventListener("change", scheduleUpdate);
+    };
   }, []);
 
   return (
-    <section className={styles.section}>
+    <section ref={sectionRef} className={styles.section}>
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>
