@@ -333,22 +333,53 @@
 }
 
 .statCard {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 18px;
   min-height: 118px;
   padding: 24px 28px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid transparent;
   border-radius: 8px;
-  background: #fff;
-  color: #050505;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.26);
-  transition: transform 0.34s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.34s ease;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.032)) padding-box,
+    linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.025), color-mix(in srgb, var(--wl-accent) 22%, transparent)) border-box;
+  color: #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    0 20px 48px rgba(0, 0, 0, 0.28);
+  transition: transform 0.34s cubic-bezier(0.16, 1, 0.3, 1), background 0.34s ease, box-shadow 0.34s ease;
+}
+
+.statCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(130px 90px at 12% 50%, color-mix(in srgb, var(--wl-accent) 18%, transparent), transparent 72%),
+    linear-gradient(105deg, transparent 0%, transparent 36%, rgba(255, 255, 255, 0.14) 50%, transparent 64%, transparent 100%);
+  opacity: 0;
+  transform: translateX(-36%);
+  transition: opacity 0.35s ease, transform 0.65s ease;
 }
 
 .statCard:hover {
   transform: translateY(-8px);
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.32);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045)) padding-box,
+    linear-gradient(135deg, color-mix(in srgb, var(--wl-accent) 52%, rgba(255, 255, 255, 0.18)), rgba(255, 255, 255, 0.06), color-mix(in srgb, var(--wl-accent) 26%, transparent)) border-box;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    0 28px 70px rgba(0, 0, 0, 0.34),
+    0 0 34px color-mix(in srgb, var(--wl-accent) 11%, transparent);
+}
+
+.statCard:hover::before {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .statIcon {
@@ -360,7 +391,7 @@
 
 .statCard strong {
   display: block;
-  color: #020202;
+  color: #fff;
   font-size: clamp(2.35rem, 4vw, 3.05rem);
   line-height: 1;
   font-weight: 850;
@@ -369,7 +400,7 @@
 .statCard span {
   display: block;
   margin-top: 8px;
-  color: rgba(0, 0, 0, 0.72);
+  color: rgba(255, 255, 255, 0.66);
   font-size: 0.94rem;
 }
 
@@ -416,16 +447,6 @@
   font-weight: 760;
   letter-spacing: 0;
   line-height: 1.08;
-}
-
-.lightSection .sectionHeader h2,
-.lightSection .sectionHeader p,
-.lightSection .kicker {
-  color: #050505;
-}
-
-.lightSection .kicker {
-  color: var(--wl-accent);
 }
 
 .sectionHeader p {
@@ -558,6 +579,11 @@
   height: 24px;
 }
 
+.brandServiceIcon {
+  width: 28px;
+  height: 28px;
+}
+
 .glassCard:hover .iconBox,
 .serviceCard:hover .iconBox {
   color: color-mix(in srgb, var(--wl-accent) 35%, #fff);
@@ -613,23 +639,22 @@
   font-size: 0.95rem;
 }
 
-.lightSection {
-  background: #f3f6fb;
-  color: #050505;
-}
-
 .packageCard,
 .toolCard {
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 18px 46px rgba(15, 23, 42, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.022)) padding-box,
+    linear-gradient(145deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.022), color-mix(in srgb, var(--wl-accent) 15%, transparent)) border-box;
+  border: 1px solid transparent;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 18px 48px rgba(0, 0, 0, 0.22);
 }
 
 .packageCard {
   overflow: visible;
   min-height: 370px;
   padding: 72px 30px 30px;
-  color: #050505;
+  color: #fff;
 }
 
 .packageRibbon {
@@ -648,19 +673,46 @@
   box-shadow: 0 16px 32px color-mix(in srgb, var(--package-color) 22%, transparent);
 }
 
+.packageIcon {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  border: 1px solid color-mix(in srgb, var(--package-color) 38%, rgba(255, 255, 255, 0.14));
+  border-radius: 8px;
+  color: color-mix(in srgb, var(--package-color) 42%, #fff);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.02)),
+    #08090b;
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--package-color) 18%, transparent);
+  transition: transform 0.32s ease, box-shadow 0.32s ease;
+}
+
+.packageIcon svg {
+  width: 23px;
+  height: 23px;
+}
+
+.packageCard:hover .packageIcon {
+  transform: translateY(-2px) rotate(-2deg);
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--package-color) 24%, transparent);
+}
+
 .packageCard h3 {
-  color: var(--package-color);
+  color: color-mix(in srgb, var(--package-color) 35%, #fff);
 }
 
 .packageCard p,
 .toolCard p {
-  color: rgba(0, 0, 0, 0.72);
+  color: rgba(255, 255, 255, 0.64);
 }
 
 .packageCard strong {
   display: block;
   margin-bottom: 12px;
-  color: #050505;
+  color: rgba(255, 255, 255, 0.84);
   font-size: 0.82rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -669,7 +721,7 @@
 .packageDivider {
   height: 1px;
   margin: 26px 0;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .packageNote {
@@ -677,7 +729,8 @@
   margin: 52px auto 0;
   padding: 14px 22px;
   border-radius: 999px;
-  background: #050505;
+  border: 1px solid color-mix(in srgb, var(--wl-accent) 42%, rgba(255, 255, 255, 0.16));
+  background: color-mix(in srgb, var(--wl-accent) 10%, rgba(255, 255, 255, 0.04));
   color: #fff;
   font-weight: 760;
 }
@@ -687,19 +740,33 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   max-width: 1050px;
   margin: 0 auto 42px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-.toolsTabs span {
+.toolsTabs button {
+  appearance: none;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
   padding: 18px 12px 24px;
-  color: rgba(0, 0, 0, 0.72);
+  color: rgba(255, 255, 255, 0.62);
   text-align: center;
+  font: inherit;
   font-weight: 680;
+  cursor: pointer;
+  transition: color 0.28s ease, border-color 0.28s ease, background 0.28s ease;
 }
 
-.toolsTabs span:first-child {
-  color: #050505;
-  border-bottom: 1px solid #050505;
+.toolsTabs button:hover,
+.toolsTabs button:focus-visible {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.035);
+  outline: none;
+}
+
+.toolsTabs .activeToolTab {
+  color: #fff;
+  border-bottom: 1px solid var(--wl-accent);
 }
 
 .toolCard {
@@ -713,31 +780,51 @@
 .toolMark {
   width: 46px;
   height: 46px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: 0 0 auto;
   border-radius: 8px;
-  background: color-mix(in srgb, var(--tool-color) 14%, #fff);
+  border: 1px solid color-mix(in srgb, var(--tool-color) 34%, rgba(255, 255, 255, 0.14));
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.018)),
+    color-mix(in srgb, var(--tool-color) 8%, #08090b);
   color: var(--tool-color);
-  font-size: 1.15rem;
-  font-weight: 900;
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--tool-color) 16%, transparent);
+  transition: transform 0.32s ease, box-shadow 0.32s ease, color 0.32s ease;
+}
+
+.toolLogo {
+  width: 28px;
+  height: 28px;
+}
+
+.toolCard:hover .toolMark {
+  color: color-mix(in srgb, var(--tool-color) 52%, #fff);
+  transform: translateY(-2px) rotate(-2deg);
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--tool-color) 22%, transparent);
 }
 
 .toolCard h3 {
   margin: 0;
-  color: #111827;
+  color: #fff;
   font-size: 1.28rem;
 }
 
 .packageCard:hover,
 .toolCard:hover {
-  background: #fff;
-  box-shadow: 0 26px 62px rgba(15, 23, 42, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.078), rgba(255, 255, 255, 0.03)) padding-box,
+    linear-gradient(135deg, color-mix(in srgb, var(--wl-accent) 46%, rgba(255, 255, 255, 0.18)), rgba(255, 255, 255, 0.06), color-mix(in srgb, var(--wl-accent) 20%, transparent)) border-box;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 26px 58px rgba(0, 0, 0, 0.34),
+    0 0 34px color-mix(in srgb, var(--wl-accent) 10%, transparent);
 }
 
 .packageCard:hover::before,
 .toolCard:hover::before {
-  opacity: 0;
+  opacity: 1;
 }
 
 .workCard {
@@ -758,6 +845,27 @@
   background: #08090b;
   box-shadow: 0 0 22px color-mix(in srgb, var(--wl-accent) 18%, transparent);
   font-weight: 850;
+  transition: transform 0.32s ease, color 0.32s ease, box-shadow 0.32s ease;
+}
+
+.workNumber svg {
+  width: 24px;
+  height: 24px;
+}
+
+.workCard:hover .workNumber {
+  color: color-mix(in srgb, var(--wl-accent) 35%, #fff);
+  transform: translateY(-2px) rotate(-2deg);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--wl-accent) 24%, transparent);
+}
+
+.workCard b {
+  position: absolute;
+  right: 22px;
+  bottom: 18px;
+  color: color-mix(in srgb, var(--wl-accent) 22%, rgba(255, 255, 255, 0.28));
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
 }
 
 .confidentialNote {
@@ -884,60 +992,304 @@
 
 @media (max-width: 720px) {
   .container {
-    width: min(100% - 32px, 1180px);
+    width: min(100% - 28px, 1180px);
   }
 
   .hero {
-    padding-top: 118px;
+    padding-top: 104px;
   }
 
   .heroInner {
-    gap: 36px;
-    padding-bottom: 92px;
+    gap: 30px;
+    padding-bottom: 42px;
+  }
+
+  .eyebrow,
+  .kicker {
+    font-size: 0.7rem;
+    line-height: 1.35;
+  }
+
+  .title {
+    max-width: 100%;
+    font-size: clamp(2.08rem, 12vw, 3.15rem);
+    line-height: 1.03;
+  }
+
+  .subtitle {
+    margin-top: 20px;
+    font-size: 0.96rem;
+    line-height: 1.68;
+  }
+
+  .ctaRow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 26px;
+  }
+
+  .primaryCta,
+  .secondaryCta {
+    width: 100%;
+    min-height: 48px;
+    padding: 13px 18px;
+    font-size: 0.92rem;
   }
 
   .heroVisual {
-    min-height: 420px;
+    min-height: 348px;
+    animation: none;
   }
 
   .visualChrome {
-    inset: 18px;
+    inset: 14px;
+    gap: 12px;
   }
 
-  .timelinePanel,
+  .browserBar {
+    padding: 10px;
+  }
+
+  .handoffPanel {
+    padding: 16px;
+  }
+
+  .handoffCard {
+    padding: 20px;
+  }
+
+  .handoffCard strong {
+    font-size: 1.08rem;
+  }
+
+  .handoffCard p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .timelinePanel {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .timelinePanel span {
+    min-height: 54px;
+    padding: 9px 7px;
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+
   .statsGrid,
-  .workGrid,
-  .toolsTabs {
+  .workGrid {
     grid-template-columns: 1fr;
   }
 
   .statsWrap {
     transform: none;
-    margin-top: 24px;
+    margin-top: 0;
+  }
+
+  .statCard {
+    min-height: 104px;
+    padding: 20px;
+  }
+
+  .statIcon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .statCard strong {
+    font-size: clamp(2rem, 12vw, 2.55rem);
+  }
+
+  .statCard span {
+    font-size: 0.88rem;
   }
 
   .firstSection,
   .section,
   .glowSection {
-    padding: 68px 0;
+    padding: 62px 0;
+  }
+
+  .firstSection {
+    padding-top: 62px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 30px;
+    text-align: left;
+  }
+
+  .sectionHeader h2 {
+    font-size: clamp(1.65rem, 9vw, 2.35rem);
+    line-height: 1.12;
+  }
+
+  .sectionHeader p {
+    margin-top: 14px;
+    font-size: 0.92rem;
+    line-height: 1.65;
   }
 
   .glassCard,
   .serviceCard,
   .packageCard,
+  .toolCard,
   .workCard,
   .overviewCard {
     min-height: auto;
-    padding: 24px;
+    padding: 22px;
+  }
+
+  .iconBox {
+    width: 44px;
+    height: 44px;
+  }
+
+  .serviceRail {
+    height: 72px;
+    margin: 16px 0;
   }
 
   .packageCard {
+    margin-top: 10px;
     padding-top: 72px;
+  }
+
+  .packageRibbon {
+    left: 22px;
+    right: 22px;
+    padding: 15px;
+    font-size: 1rem;
+    border-radius: 0 0 14px 14px;
+  }
+
+  .packageIcon,
+  .toolMark {
+    width: 42px;
+    height: 42px;
+  }
+
+  .toolsTabs {
+    display: flex;
+    gap: 8px;
+    max-width: none;
+    margin: 0 -14px 28px;
+    padding: 0 14px 10px;
+    overflow-x: auto;
+    border-bottom: 0;
+    scrollbar-width: none;
+  }
+
+  .toolsTabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .toolsTabs button {
+    flex: 0 0 auto;
+    min-width: max-content;
+    padding: 11px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.035);
+    font-size: 0.84rem;
+  }
+
+  .toolsTabs .activeToolTab {
+    border-color: color-mix(in srgb, var(--wl-accent) 42%, rgba(255, 255, 255, 0.18));
+    background: color-mix(in srgb, var(--wl-accent) 12%, rgba(255, 255, 255, 0.04));
+  }
+
+  .toolCard {
+    gap: 14px;
+  }
+
+  .toolCard h3 {
+    font-size: 1.08rem;
+  }
+
+  .workCard {
+    text-align: left;
+  }
+
+  .workNumber {
+    width: 46px;
+    height: 46px;
+  }
+
+  .workCard b {
+    top: 22px;
+    right: 22px;
+    bottom: auto;
   }
 
   .packageNote,
   .confidentialNote {
     border-radius: 8px;
+    width: 100%;
+    margin-top: 34px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .pillCta {
+    width: 100%;
+    margin-top: 32px;
+    padding: 13px 18px;
+    text-align: center;
+    font-size: 0.88rem;
+  }
+
+  .faqItem summary {
+    align-items: flex-start;
+    padding: 18px;
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .faqItem p {
+    padding: 0 18px 18px;
+    font-size: 0.9rem;
+  }
+
+  .overviewIntro {
+    padding-bottom: 42px;
+    text-align: left;
+  }
+
+  .overviewIntro .ctaRow {
+    justify-content: stretch;
+  }
+}
+
+@media (max-width: 390px) {
+  .container {
+    width: min(100% - 22px, 1180px);
+  }
+
+  .title {
+    font-size: clamp(1.9rem, 11.5vw, 2.75rem);
+  }
+
+  .heroVisual {
+    min-height: 332px;
+  }
+
+  .timelinePanel span {
+    font-size: 0.62rem;
+  }
+
+  .statCard {
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .statCard strong {
+    font-size: 2rem;
   }
 }
 

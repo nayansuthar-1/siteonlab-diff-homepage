@@ -27,6 +27,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -48,6 +49,7 @@ export default function Header() {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
+      setMobileExpanded(null);
     }
     return () => {
       document.body.style.overflow = "";
@@ -67,6 +69,42 @@ export default function Header() {
   }, []);
 
   if (!mounted) return null;
+
+  const getMobileDropdownItems = (label: string) => {
+    if (label === "Services") {
+      return services.map((service) => ({
+        title: service.navTitle,
+        href: `/services/${service.slug}`,
+        accent: service.accent,
+      }));
+    }
+
+    if (label === "White Label Services") {
+      return whiteLabelServices.map((service) => ({
+        title: `White Label ${service.navTitle}`,
+        href: `/white-label-services/${service.slug}`,
+        accent: service.accent,
+      }));
+    }
+
+    if (label === "Industries") {
+      return industries.map((industry) => ({
+        title: industry.navTitle,
+        href: `/industries/${industry.slug}`,
+        accent: industry.accent,
+      }));
+    }
+
+    if (label === "Locations") {
+      return locations.map((location) => ({
+        title: location.name,
+        href: `/locations/${location.slug}`,
+        accent: location.accent,
+      }));
+    }
+
+    return [];
+  };
 
   return (
     <>
@@ -266,7 +304,7 @@ export default function Header() {
                 <div className={styles.megaMenuLeft}>
                   <span className={styles.scheduleLabel}>Visit our offices</span>
                   <h2 className={styles.scheduleHeading}>
-                    Find us in your city and let's build something great together
+                    Find us in your city and let&apos;s build something great together
                   </h2>
                   <Link href="/contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
                     <span>Contact local office</span>
@@ -346,30 +384,60 @@ export default function Header() {
             <ul className={styles.mobileNavList}>
               {[...navLinks, { label: "Contact us", href: "/contact" }].map((link) => (
                 <li key={link.label} className={styles.mobileNavItem}>
-                  <Link
-                    href={link.href}
-                    className={styles.mobileNavLink}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    <span>{link.label}</span>
-                    {link.hasDropdown && (
-                      <svg
-                        className={styles.mobileChevron}
-                        width="12"
-                        height="8"
-                        viewBox="0 0 10 6"
-                        fill="none"
+                  {link.hasDropdown ? (
+                    <>
+                      <button
+                        type="button"
+                        className={`${styles.mobileNavLink} ${styles.mobileNavButton} ${mobileExpanded === link.label ? styles.mobileNavLinkOpen : ""}`}
+                        onClick={() => setMobileExpanded(mobileExpanded === link.label ? null : link.label)}
+                        aria-expanded={mobileExpanded === link.label}
+                        aria-controls={`mobile-${link.label.replace(/\s+/g, "-").toLowerCase()}`}
                       >
-                        <path
-                          d="M1 1L5 5L9 1"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    )}
-                  </Link>
+                        <span>{link.label}</span>
+                        <svg
+                          className={styles.mobileChevron}
+                          width="12"
+                          height="8"
+                          viewBox="0 0 10 6"
+                          fill="none"
+                        >
+                          <path
+                            d="M1 1L5 5L9 1"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+
+                      <div
+                        id={`mobile-${link.label.replace(/\s+/g, "-").toLowerCase()}`}
+                        className={`${styles.mobileSubmenu} ${mobileExpanded === link.label ? styles.mobileSubmenuOpen : ""}`}
+                      >
+                        {getMobileDropdownItems(link.label).map((item) => (
+                          <Link
+                            href={item.href}
+                            className={styles.mobileSubmenuLink}
+                            style={{ "--mobile-accent": item.accent } as CSSProperties}
+                            onClick={() => setMobileOpen(false)}
+                            key={item.href}
+                          >
+                            <span className={styles.mobileSubmenuDot} />
+                            <span>{item.title}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className={styles.mobileNavLink}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <span>{link.label}</span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

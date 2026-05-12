@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/ui/Footer";
 import ServiceIcon, { type ServiceIconName } from "@/components/ui/ServiceIcon";
+import { AnimatedStats, ToolsExpertise } from "../WhiteLabelInteractive";
 import {
   getWhiteLabelServiceBySlug,
   whiteLabelServices,
@@ -19,6 +20,7 @@ type Card = {
   title: string;
   description: string;
   icon: ServiceIconName;
+  brandIcon?: "figma" | "wordpress" | "plugin" | "woo";
 };
 
 const whyCards: Card[] = [
@@ -66,24 +68,28 @@ const serviceCards: Card[] = [
     description:
       "Create visually polished, brand-aligned websites that match client goals and deliver a professional online presence.",
     icon: "layout",
+    brandIcon: "figma",
   },
   {
     title: "WordPress Website Design",
     description:
       "Responsive WordPress builds, theme customization, content setup, and maintenance workflows for agency clients.",
     icon: "wordpress",
+    brandIcon: "wordpress",
   },
   {
     title: "Landing Page & Conversion Design",
     description:
       "Campaign landing pages optimized for leads, conversions, speed, clarity, and client-specific messaging.",
     icon: "spark",
+    brandIcon: "plugin",
   },
   {
     title: "Ecommerce Website Design",
     description:
       "Shopify, WooCommerce, and custom ecommerce experiences designed to improve product discovery and checkout flow.",
     icon: "cart",
+    brandIcon: "woo",
   },
 ];
 
@@ -115,15 +121,6 @@ const packages = [
     color: "#d97706",
     icon: "layout" as const,
   },
-];
-
-const toolCards = [
-  { title: "Astra", logo: "astra", color: "#7c3aed" },
-  { title: "Avada", logo: "avada", color: "#54b879" },
-  { title: "GeneratePress", logo: "generatepress", color: "#94a3b8" },
-  { title: "Kadence WP", logo: "kadence", color: "#0073e6" },
-  { title: "OceanWP", logo: "oceanwp", color: "#0891b2" },
-  { title: "Elementor", logo: "elementor", color: "#a10050" },
 ];
 
 const workSteps = [
@@ -186,50 +183,7 @@ const faqs = [
   },
 ];
 
-function StatIcon({ type }: { type: "team" | "code" | "star" | "globe" }) {
-  const common = {
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.9,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-  };
-
-  return (
-    <svg className={styles.statIcon} viewBox="0 0 24 24" aria-hidden="true">
-      {type === "team" && (
-        <>
-          <circle {...common} cx="8" cy="8" r="3" />
-          <circle {...common} cx="16" cy="8" r="3" />
-          <path {...common} d="M4 20v-2a4 4 0 0 1 4-4h1" />
-          <path {...common} d="M15 14h1a4 4 0 0 1 4 4v2" />
-          <path {...common} d="M12 4l1 2 2 .2-1.5 1.4.4 2.1L12 8.7l-1.9 1 .4-2.1L9 6.2 11 6l1-2Z" />
-        </>
-      )}
-      {type === "code" && (
-        <>
-          <rect {...common} x="4" y="5" width="16" height="14" rx="2" />
-          <path {...common} d="M9 10l-2 2 2 2" />
-          <path {...common} d="M15 10l2 2-2 2" />
-          <path {...common} d="M13 9l-2 6" />
-        </>
-      )}
-      {type === "star" && (
-        <path {...common} d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1-4.4-4.3 6.1-.9L12 3Z" />
-      )}
-      {type === "globe" && (
-        <>
-          <circle {...common} cx="12" cy="12" r="9" />
-          <path {...common} d="M3 12h18" />
-          <path {...common} d="M12 3a14 14 0 0 1 0 18" />
-          <path {...common} d="M12 3a14 14 0 0 0 0 18" />
-        </>
-      )}
-    </svg>
-  );
-}
-
-function ToolLogo({ logo }: { logo: string }) {
+function BrandServiceIcon({ icon }: { icon: NonNullable<Card["brandIcon"]> }) {
   const common = {
     fill: "none",
     stroke: "currentColor",
@@ -239,54 +193,30 @@ function ToolLogo({ logo }: { logo: string }) {
   };
 
   return (
-    <svg className={styles.toolLogo} viewBox="0 0 32 32" aria-hidden="true">
-      {logo === "astra" && (
+    <svg className={styles.brandServiceIcon} viewBox="0 0 32 32" aria-hidden="true">
+      {icon === "figma" && (
         <>
-          <circle cx="16" cy="16" r="13" fill="currentColor" opacity="0.16" />
-          <path {...common} d="M8 23 16 7l8 16" />
-          <path {...common} d="M12.2 18.2h7.6" />
-          <path {...common} d="M16 7v16" />
+          <circle cx="13" cy="8" r="4" fill="#f97316" />
+          <circle cx="19" cy="8" r="4" fill="#ef4444" />
+          <circle cx="13" cy="16" r="4" fill="#a855f7" />
+          <circle cx="19" cy="16" r="4" fill="#3b82f6" />
+          <circle cx="13" cy="24" r="4" fill="#22c55e" />
         </>
       )}
-      {logo === "avada" && (
+      {icon === "wordpress" && (
         <>
-          <path {...common} d="M16 5 27 25H5L16 5Z" />
-          <path {...common} d="M16 12 21 22H11l5-10Z" />
-          <circle cx="25" cy="10" r="2" fill="currentColor" />
-          <circle cx="25" cy="17" r="2" fill="currentColor" opacity="0.65" />
+          <circle {...common} cx="16" cy="16" r="12" />
+          <path {...common} d="M8 11h4M20 11h4M10 11l4.2 12M22 11l-4.2 12M14.5 11l3 9" />
+          <path {...common} d="M20.5 9.5c1.1 1.3.6 2.6-.9 4.5" />
         </>
       )}
-      {logo === "generatepress" && (
+      {icon === "plugin" && (
         <>
-          <circle {...common} cx="16" cy="16" r="11" />
-          <path {...common} d="M21 13a6 6 0 1 0 1 6" />
-          <path {...common} d="M16 16h10" />
-          <path {...common} d="M21 16l3 3" />
+          <path {...common} d="M13 5h6v6h5v6h-5v6h-6v-6H8v-6h5V5Z" />
+          <circle cx="16" cy="14" r="2" fill="currentColor" />
         </>
       )}
-      {logo === "kadence" && (
-        <>
-          <path {...common} d="M8 6v20" />
-          <path {...common} d="M24 7 12 16l12 9" />
-          <path {...common} d="M14 16h10" />
-          <path {...common} d="M7 10h5M7 16h5M7 22h5" />
-        </>
-      )}
-      {logo === "oceanwp" && (
-        <>
-          <path {...common} d="M5 18c3.4-5 7.4-5 11.8 0 3 3.4 6 3.4 10.2 0" />
-          <path {...common} d="M5 23c3.4-4 7.4-4 11.8 0 3 3 6 3 10.2 0" />
-          <circle cx="22" cy="9" r="3" fill="currentColor" opacity="0.22" />
-        </>
-      )}
-      {logo === "elementor" && (
-        <>
-          <circle cx="16" cy="16" r="12" fill="currentColor" opacity="0.16" />
-          <rect {...common} x="10" y="9" width="12" height="14" rx="2" />
-          <path {...common} d="M14 13v6" />
-          <path {...common} d="M18 13h2M18 16h2M18 19h2" />
-        </>
-      )}
+      {icon === "woo" && <path {...common} d="M4 11h24v10H4zM8 15l2 3 2-3 2 3 2-3M21 16h5" />}
     </svg>
   );
 }
@@ -374,17 +304,7 @@ export default async function WhiteLabelDetailPage({ params }: WhiteLabelPagePro
           </div>
 
           <div className={styles.statsWrap}>
-            <div className={styles.statsGrid}>
-              {stats.map((stat) => (
-                <article className={styles.statCard} key={stat.label}>
-                  <StatIcon type={stat.icon} />
-                  <div>
-                    <strong>{stat.metric}</strong>
-                    <span>{stat.label}</span>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <AnimatedStats stats={stats} />
           </div>
         </div>
       </section>
@@ -425,7 +345,11 @@ export default async function WhiteLabelDetailPage({ params }: WhiteLabelPagePro
             {serviceCards.map((card) => (
               <article className={styles.serviceCard} key={card.title}>
                 <div className={styles.iconBox}>
-                  <ServiceIcon name={card.icon} />
+                  {card.brandIcon ? (
+                    <BrandServiceIcon icon={card.brandIcon} />
+                  ) : (
+                    <ServiceIcon name={card.icon} />
+                  )}
                 </div>
                 <div className={styles.serviceRail} />
                 <h3>{card.title}</h3>
@@ -484,27 +408,7 @@ export default async function WhiteLabelDetailPage({ params }: WhiteLabelPagePro
             <p>We work with major platforms, frameworks, themes, builders, plugins, apps, and hosting stacks to deliver professional websites that perform.</p>
           </div>
 
-          <div className={styles.toolsTabs}>
-            <span>Themes & Frameworks</span>
-            <span>Page Builders</span>
-            <span>Plugins & Extensions</span>
-            <span>Hosting Solutions</span>
-          </div>
-
-          <div className={styles.toolsGrid}>
-            {toolCards.map((tool) => (
-              <article
-                className={styles.toolCard}
-                key={tool.title}
-                style={{ "--tool-color": tool.color } as CSSProperties}
-              >
-                <span className={styles.toolMark}>
-                  <ToolLogo logo={tool.logo} />
-                </span>
-                <h3>{tool.title}</h3>
-              </article>
-            ))}
-          </div>
+          <ToolsExpertise />
         </div>
       </section>
 
