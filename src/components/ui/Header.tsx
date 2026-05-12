@@ -11,9 +11,11 @@ import IndustryIcon from "@/components/ui/IndustryIcon";
 import { services } from "@/lib/services";
 import { industries } from "@/lib/industries";
 import { locations } from "@/lib/locations";
+import { whiteLabelServices } from "@/lib/white-label-services";
 
 const navLinks = [
   { label: "Services", href: "/services", hasDropdown: true },
+  { label: "White Label Services", href: "/white-label-services", hasDropdown: true },
   { label: "Industries", href: "/industries", hasDropdown: true },
   { label: "Locations", href: "/locations", hasDropdown: true },
   { label: "Company", href: "/company" },
@@ -176,6 +178,42 @@ export default function Header() {
                         <ServiceIcon name={service.icon} />
                       </div>
                       <span className={styles.serviceTitle}>{service.navTitle}</span>
+                      <div className={styles.cardGlow}></div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* White Label Services Dropdown */}
+            <div className={styles.dropdownContent} style={{ display: activeDropdown === "White Label Services" ? "block" : "none" }}>
+              <div className={styles.megaMenuTop}>
+                <div className={styles.megaMenuLeft}>
+                  <span className={styles.scheduleLabel}>White label delivery</span>
+                  <h2 className={styles.scheduleHeading}>
+                    Add senior web delivery capacity without adding overhead
+                  </h2>
+                  <Link href="/contact" className={styles.bookButton} onClick={() => setActiveDropdown(null)}>
+                    <span>Become a partner</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </Link>
+                </div>
+
+                <div className={`${styles.megaMenuRight} ${styles.whiteLabelMegaGrid}`}>
+                  {whiteLabelServices.map((service) => (
+                    <Link
+                      key={service.slug}
+                      href={`/white-label-services/${service.slug}`}
+                      className={styles.serviceCard}
+                      style={{ "--service-accent": service.accent } as CSSProperties}
+                      onClick={() => setActiveDropdown(null)}
+                    >
+                      <div className={styles.serviceIconWrapper}>
+                        <ServiceIcon name={service.icon} />
+                      </div>
+                      <span className={styles.serviceTitle}>White Label {service.navTitle}</span>
                       <div className={styles.cardGlow}></div>
                     </Link>
                   ))}

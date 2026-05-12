@@ -531,6 +531,12 @@
   gap: 10px;
 }
 
+.whiteLabelMegaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 12px;
+}
+
 .verticalSplitter {
   width: 1px;
   background: rgba(255, 255, 255, 0.1);
