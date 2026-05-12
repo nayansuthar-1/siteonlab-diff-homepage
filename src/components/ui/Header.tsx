@@ -10,6 +10,7 @@ import ServiceIcon from "@/components/ui/ServiceIcon";
 import IndustryIcon from "@/components/ui/IndustryIcon";
 import { services } from "@/lib/services";
 import { industries } from "@/lib/industries";
+import { locations } from "@/lib/locations";
 
 const navLinks = [
   { label: "Services", href: "/services", hasDropdown: true },
@@ -17,17 +18,6 @@ const navLinks = [
   { label: "Locations", href: "/locations", hasDropdown: true },
   { label: "Company", href: "/company" },
   { label: "Careers", href: "/careers" },
-];
-
-const locations = [
-  { name: "Bangalore", slug: "bangalore" },
-  { name: "Chennai", slug: "chennai" },
-  { name: "Delhi", slug: "delhi" },
-  { name: "Hyderabad", slug: "hyderabad" },
-  { name: "Jaipur", slug: "jaipur" },
-  { name: "Kolkata", slug: "kolkata" },
-  { name: "Mumbai", slug: "mumbai" },
-  { name: "Pune", slug: "pune" },
 ];
 
 export default function Header() {
