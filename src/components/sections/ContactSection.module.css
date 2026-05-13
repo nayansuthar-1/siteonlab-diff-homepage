@@ -185,37 +185,12 @@
   }
 }
 
-.tabs {
-  display: flex;
-  gap: 32px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 40px;
-}
-
-.tab {
-  background: none;
-  border: none;
-  padding: 0 0 16px 0;
-  font-size: 1rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  position: relative;
-  transition: color 0.2s ease;
-}
-
-.tab.active {
-  color: #f59e0b;
-}
-
-.tab.active::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #f59e0b;
+.formTitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 32px;
+  color: #fff;
+  letter-spacing: -0.02em;
 }
 
 .form {
@@ -234,6 +209,10 @@
   .inputGrid {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.inputGroup.fullWidth {
+  grid-column: 1 / -1;
 }
 
 .inputGroup {
@@ -259,9 +238,10 @@
 }
 
 .input,
+.countrySelect,
 .textarea {
   width: 100%;
-  background: transparent;
+  background: #0d0d0d;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   padding: 16px;
@@ -269,10 +249,44 @@
   font-size: 1rem;
   font-family: inherit;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  appearance: none;
+}
+
+.selectInput,
+.countrySelect {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.countrySelect {
+  flex: 0 0 140px;
+  font-size: 0.9rem;
+}
+
+.phoneInput {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.input option,
+.countrySelect option {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 12px;
 }
 
 .input:focus,
-.textarea:focus {
+.textarea:focus,
+.countrySelect:focus {
   outline: none;
   border-color: #f59e0b;
   box-shadow: 0 0 0 1px #f59e0b;
@@ -281,33 +295,6 @@
 .input::placeholder,
 .textarea::placeholder {
   color: rgba(255, 255, 255, 0.2);
-}
-
-.textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-.phoneInput {
-  display: flex;
-  gap: 12px;
-}
-
-.countryCode {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
-  padding: 0 12px;
-  color: #fff;
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-}
-
-.countryCode:hover {
-  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .formFooter {
@@ -322,22 +309,6 @@
     align-items: center;
     justify-content: space-between;
   }
-}
-
-.attachBtn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  font-size: 0.875rem;
-  transition: color 0.2s ease;
-}
-
-.attachBtn:hover {
-  color: #fff;
 }
 
 .submitBtn {
