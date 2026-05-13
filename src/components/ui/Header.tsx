@@ -19,7 +19,6 @@ const navLinks = [
   { label: "Industries", href: "/industries", hasDropdown: true },
   { label: "Locations", href: "/locations", hasDropdown: true },
   { label: "Company", href: "/company" },
-  { label: "Careers", href: "/careers" },
 ];
 
 export default function Header() {
@@ -321,7 +320,7 @@ export default function Header() {
                       key={location.slug}
                       href={`/locations/${location.slug}`}
                       className={styles.serviceCard}
-                      style={{ "--service-accent": "#f59e0b" } as CSSProperties}
+                      style={{ "--service-accent": location.accent } as CSSProperties}
                       onClick={() => setActiveDropdown(null)}
                     >
                       <div className={styles.serviceIconWrapper}>
