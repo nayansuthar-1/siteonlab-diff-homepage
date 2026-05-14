@@ -57,6 +57,7 @@ export default function BlogsPage() {
 
                 <div className={styles.content}>
                   <h2 className={styles.cardTitle}>{blog.title}</h2>
+                  <p className={styles.cardExcerpt}>{blog.excerpt}</p>
                   <span className={styles.readMore}>Read More »</span>
                 </div>
 
