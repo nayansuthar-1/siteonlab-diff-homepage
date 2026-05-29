@@ -781,6 +781,49 @@
   transform: translateX(1px);
 }
 
+/* ─── Expertise Mega Menu ─── */
+.expertiseMegaContainer {
+  display: flex;
+  flex: 1;
+  gap: 40px;
+}
+
+.expertiseColumnGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.expertiseColumnTitle {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.expertiseLinksGrid {
+  display: grid;
+  gap: 12px 24px;
+}
+
+.expertiseTextLink {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.expertiseTextLink:hover {
+  color: #f59e0b;
+  transform: translateX(4px);
+}
+
 /* Bottom section */
 .megaMenuBottom {
   display: flex;
