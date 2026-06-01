@@ -104,19 +104,26 @@ export default function ServiceCards() {
             }
           >
             <span className={styles.blurLayer} aria-hidden="true" />
-            <div className={styles.iconWrap}>
-              <ServiceIcon name={service.icon} />
-            </div>
-            <div className={styles.titleRow}>
+            
+            <div className={styles.cardHeader}>
+              <div className={styles.iconWrap}>
+                <ServiceIcon name={service.icon} />
+              </div>
               <h3 className={styles.title}>{service.title}</h3>
-              <span className={styles.arrow}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14" />
-                  <path d="M12 5l7 7-7 7" />
-                </svg>
-              </span>
             </div>
-            <p className={styles.description}>{service.description}</p>
+            
+            <div className={styles.cardBody}>
+              <p className={styles.description}>{service.description}</p>
+              <div className={styles.learnMore}>
+                <span>Learn More</span>
+                <span className={styles.arrow}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14" />
+                    <path d="M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </div>
           </Link>
         ))}
       </div>

@@ -69,32 +69,7 @@ export const services: Service[] = [
     process: ["Discover", "Position", "Design", "Document"],
     outcomes: ["Sharper recall", "Consistent communication", "Higher trust"],
   },
-  {
-    slug: "content-writing",
-    title: "Content Writing",
-    navTitle: "Content Writing",
-    description:
-      "Website copy, blogs, landing pages, and campaign content written to explain your value clearly and support search visibility.",
-    accent: "#ec4899",
-    icon: "pen",
-    promise: "Clear content that sounds human and helps buyers move forward.",
-    focusTitle: "Content that educates, persuades, and ranks",
-    focusIntro:
-      "We write around real customer intent, so every page has a job: explain, build confidence, answer objections, or drive action.",
-    focusBullets: [
-      "SEO-informed briefs matched to search intent.",
-      "Conversion-focused copy for pages and funnels.",
-      "Readable blog and resource content with practical depth.",
-    ],
-    deliverables: [
-      "Website copy",
-      "SEO blogs",
-      "Landing page copy",
-      "Content calendars",
-    ],
-    process: ["Research", "Outline", "Write", "Refine"],
-    outcomes: ["Clearer messaging", "More organic reach", "Stronger conversion paths"],
-  },
+
   {
     slug: "ecommerce-development",
     title: "Ecommerce Development",
