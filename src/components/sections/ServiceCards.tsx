@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import styles from "./ServiceCards.module.css";
@@ -16,6 +16,11 @@ function hexToRgb(hex: string) {
 export default function ServiceCards() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const activeCardRef = useRef<HTMLElement | null>(null);
+  const [visibleCount, setVisibleCount] = useState(3);
+
+  const handleSeeMore = () => {
+    setVisibleCount((prev) => Math.min(prev + 3, services.length));
+  };
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -91,11 +96,11 @@ export default function ServiceCards() {
   return (
     <section ref={sectionRef} className={styles.section} id="services-cards">
       <div className={styles.grid}>
-        {services.map((service) => (
+        {services.map((service, index) => (
           <Link
             key={service.slug}
             href={`/services/${service.slug}`}
-            className={styles.card}
+            className={`${styles.card} ${index >= visibleCount ? styles.hiddenMobile : ""}`}
             style={
               {
                 "--wave-color": service.accent,
@@ -127,6 +132,17 @@ export default function ServiceCards() {
           </Link>
         ))}
       </div>
+
+      {visibleCount < services.length && (
+        <div className={styles.seeMoreContainer}>
+          <button onClick={handleSeeMore} className={styles.seeMoreBtn}>
+            See More 
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+      )}
     </section>
   );
 }

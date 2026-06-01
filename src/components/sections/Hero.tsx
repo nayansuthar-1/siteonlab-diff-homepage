@@ -83,8 +83,8 @@ export default function Hero() {
               letterSpacing: "-0.025em",
             }}
           >
-            <span className="block">
-              AI Powered{" "}
+            <span className="block md:inline">AI Powered </span>
+            <span className="block md:inline">
               <span
                 className="hero-gradient-text"
                 style={{ "--hero-gradient": currentGradient } as React.CSSProperties}
