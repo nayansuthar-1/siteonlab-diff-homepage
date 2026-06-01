@@ -218,25 +218,7 @@ export default function DomainExpertise({
             </div>
           ))}
         </div>
-        {/* Secondary Domains List */}
-        <div className={styles.secondaryGrid}>
-          {secondaryDomains.map((item, idx) => (
-            <div key={idx} className={styles.secondaryItem}>
-              <div className={styles.topLine} />
-              <span className={styles.secNumber}>{item.number}</span>
-              <h4 className={styles.secTitle}>{item.title}</h4>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
 }
-
-const secondaryDomains = [
-  { number: "04", title: "E-commerce" },
-  { number: "05", title: "Retail" },
-  { number: "06", title: "Prof. Services" },
-  { number: "07", title: "Logistics" },
-  { number: "08", title: "Manufacturing" },
-];
