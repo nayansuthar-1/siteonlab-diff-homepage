@@ -1,26 +1,20 @@
 "use client";
-
 import { useState, useEffect, useCallback } from "react";
 import WaveScene from "@/three/WaveScene";
 import Link from "next/link";
 
-/* ── rotating words + their gradient colours ── */
 const WORDS = [
   {
-    text: "web 3.0 project",
+    text: "Digital Marketing",
     gradient: "linear-gradient(90deg, #f97316, #fb923c, #fdba74)",
   },
   {
-    text: "next big thing",
-    gradient: "linear-gradient(90deg, #818cf8, #a78bfa, #c084fc)",
+    text: "Web Development",
+    gradient: "linear-gradient(90deg, #06b6d4, #22d3ee, #67e8f9)",
   },
   {
-    text: "AI-powered solution",
-    gradient: "linear-gradient(90deg, #38bdf8, #60a5fa, #818cf8)",
-  },
-  {
-    text: "mobile app",
-    gradient: "linear-gradient(90deg, #34d399, #4ade80, #a3e635)",
+    text: "SEO",
+    gradient: "linear-gradient(90deg, #22c55e, #4ade80, #86efac)",
   },
 ];
 
@@ -56,7 +50,7 @@ export default function Hero() {
         setIsDeleting(false);
         setWordIdx((prev) => (prev + 1) % WORDS.length);
         /* small pause before next word */
-        setTimeout(() => {}, PAUSE_AFTER_DELETE);
+        setTimeout(() => { }, PAUSE_AFTER_DELETE);
         return;
       }
     }
@@ -69,7 +63,6 @@ export default function Hero() {
   }, [tick, isDeleting]);
 
   const currentGradient = WORDS[wordIdx].gradient;
-
   return (
     <section className="relative h-screen w-full bg-black overflow-hidden">
       {/* Shader background — full width */}
@@ -90,8 +83,8 @@ export default function Hero() {
               letterSpacing: "-0.025em",
             }}
           >
-            <span className="block md:inline">Build your </span>
-            <span className="block md:inline">
+            <span className="block">
+              AI Powered{" "}
               <span
                 className="hero-gradient-text"
                 style={{ "--hero-gradient": currentGradient } as React.CSSProperties}
@@ -103,14 +96,7 @@ export default function Hero() {
                 style={{ "--hero-gradient": currentGradient } as React.CSSProperties}
               />
             </span>
-            <br className="hidden md:block" />
-            <span className="block md:hidden">with flawless</span>
-            <span className="block md:hidden">technology, design,</span>
-            <span className="block md:hidden">and execution</span>
-            
-            <span className="hidden md:inline">with flawless technology,</span>
-            <br className="hidden md:block" />
-            <span className="hidden md:inline">design, and execution</span>
+            <span className="block">Agency in Ahmedabad</span>
           </h1>
 
           <p
@@ -123,8 +109,32 @@ export default function Hero() {
               lineHeight: 1.5,
             }}
           >
-            Award-winning Software Engineering &amp; Consulting Company.
+            We are a leading digital marketing agency in Ahmedabad, helping businesses grow online with tailored SEO, PPC, social media, and web development solutions. Our focus is on measurable results, brand growth, and ROI-driven campaigns.
           </p>
+
+          <div className="flex flex-wrap items-center gap-4 md:gap-8 mt-8 text-white/90 text-sm md:text-base font-medium">
+            <div className="flex items-center gap-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span>100+ Projects Done</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span>Trusted by 50+ Businesses</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span>20+ Expert Team</span>
+            </div>
+          </div>
 
           <div style={{ marginTop: "2.25rem" }}>
             <Link
@@ -164,7 +174,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* cursor blink + gradient text styles */}
       <style jsx global>{`
         .hero-gradient-text {
           background-image: var(--hero-gradient);
