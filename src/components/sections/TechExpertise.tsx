@@ -1,6 +1,151 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 
+const locationsData = [
+  {
+    title: "Bangalore",
+    desc: "Performance marketing for ambitious Bangalore companies.",
+    themeId: "orange",
+    icon: (
+      <svg fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M12 2a4 4 0 0 0-4 4v2H4v14h16V8h-4V6a4 4 0 0 0-4-4z" />
+        <path d="M6 12v6M10 12v6M14 12v6M18 12v6" />
+        <path d="M12 2v-1M8 8h8M2 22h20" />
+        <path d="M12 12v6" />
+        <circle cx="12" cy="5" r="1" />
+      </svg>
+    ),
+  },
+  {
+    title: "Chennai",
+    desc: "Digital campaigns built for Chennai's growth-minded brands.",
+    themeId: "blue",
+    icon: (
+      <svg fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M11 2h2l-1 3H9z" />
+        <path d="M10 5h4l1 4H9z" />
+        <path d="M9 9h6l1 4H8z" />
+        <path d="M8 13h8l1 4H7z" />
+        <path d="M7 17h10l2 5H5z" />
+        <path d="M10 22v-3a2 2 0 0 1 4 0v3" />
+        <path d="M3 22h18" />
+      </svg>
+    ),
+  },
+  {
+    title: "Delhi",
+    desc: "Visibility, leads, and authority for Delhi businesses.",
+    themeId: "pink",
+    icon: (
+      <svg fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M6 22V6a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v16" />
+        <path d="M9 22v-8a3 3 0 0 1 6 0v8" />
+        <path d="M2 22h20" />
+        <path d="M7 5h10M8 3h8" />
+        <circle cx="12" cy="7" r="1" />
+      </svg>
+    ),
+  },
+  {
+    title: "Hyderabad",
+    desc: "Conversion-first digital marketing for Hyderabad brands.",
+    themeId: "orange",
+    icon: (
+      <svg fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M5 22V3c0-.6.4-1 1-1h2c.6 0 1 .4 1 1v7h6V3c0-.6.4-1 1-1h2c.6 0 1 .4 1 1v19" />
+        <path d="M9 12a3 3 0 0 1 6 0" />
+        <path d="M9 22v-6a3 3 0 0 1 6 0v6" />
+        <path d="M2 22h20" />
+        <path d="M4 6h6M14 6h6M4 9h6M14 9h6" />
+        <path d="M12 12v3" />
+      </svg>
+    ),
+  },
+  {
+    title: "Ahmedabad",
+    desc: "Driving local and global growth from the heart of Gujarat.",
+    themeId: "blue",
+    icon: (
+      <svg fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M4 22V10a8 8 0 0 1 16 0v12" />
+        <path d="M2 22h20" />
+        <path d="M4 10c2 2 4-2 6 0 2-2 4 2 6 0" />
+        <path d="M4 14c2-2 4 2 6 0 2 2 4-2 6 0" />
+        <path d="M4 18c2 2 4-2 6 0 2-2 4 2 6 0" />
+        <circle cx="12" cy="6" r="2" />
+      </svg>
+    ),
+  },
+  {
+    title: "Jaipur",
+    desc: "Premium marketing for Jaipur brands with wider ambitions.",
+    themeId: "pink",
+    icon: (
+      <svg fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M4 22V10l4-6h8l4 6v12" />
+        <path d="M10 2l2-1 2 1v2h-4z" />
+        <path d="M2 22h20" />
+        <path d="M6 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zM10 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zM14 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0z" />
+        <path d="M6 16a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zM10 16a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zM14 16a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0z" />
+        <path d="M10 6a1 1 0 0 1 2 0v1a1 1 0 0 1-2 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Kolkata",
+    desc: "Search, social, and content growth for Kolkata businesses.",
+    themeId: "orange",
+    icon: (
+      <svg fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M4 22L6 2l1.5 20" />
+        <path d="M20 22L18 2l-1.5 20" />
+        <path d="M4 14h16" />
+        <path d="M5.5 10l3.5 4M15 14l3.5-4" />
+        <path d="M7 6l8 8M17 6l-8 8" />
+        <path d="M6 2h12" />
+        <path d="M2 22h20" />
+      </svg>
+    ),
+  },
+  {
+    title: "Mumbai",
+    desc: "High-intent digital marketing for Mumbai's competitive markets.",
+    themeId: "blue",
+    icon: (
+      <svg fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M4 22V9a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v13" />
+        <path d="M9 22v-6a3 3 0 0 1 6 0v6" />
+        <path d="M2 22h20" />
+        <path d="M5 8V6a2 2 0 0 1 4 0v2" />
+        <path d="M15 8V6a2 2 0 0 1 4 0v2" />
+        <path d="M7 6a1 1 0 1 0 2 0 1 1 0 1 0-2 0" />
+        <path d="M17 6a1 1 0 1 0 2 0 1 1 0 1 0-2 0" />
+        <path d="M6 14h1M17 14h1" />
+        <path d="M6 18h1M17 18h1" />
+      </svg>
+    ),
+  },
+  {
+    title: "Pune",
+    desc: "Smart growth systems for scaling Pune companies.",
+    themeId: "pink",
+    icon: (
+      <svg fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+        <path d="M3 22V6c0-1 1-2 2-2h3v18" />
+        <path d="M21 22V6c0-1-1-2-2-2h-3v18" />
+        <path d="M8 12h8v10H8z" />
+        <path d="M10 22v-4a2 2 0 0 1 4 0v4" />
+        <path d="M5 4l1-2 1 2M17 4l1-2 1 2" />
+        <path d="M2 22h20" />
+        <path d="M5 10h1M5 14h1M5 18h1" />
+        <path d="M18 10h1M18 14h1M18 18h1" />
+      </svg>
+    ),
+  },
+];
+
+/*
 const techExpertiseData = [
   {
     title: "Web Apps",
@@ -93,6 +238,7 @@ const techExpertiseData = [
     ),
   },
 ];
+*/
 
 const themes: any = {
   orange: {
@@ -118,8 +264,8 @@ interface TechExpertiseProps {
 }
 
 export default function TechExpertise({
-  title = "Tech Expertise",
-  subtitle = "From artificial intelligence to cloud computing, we excel in modern technology and provide the expertise that growth-focused businesses require.",
+  title = "Locations",
+  subtitle = "Find us in your city and let's build something great together. We operate across major tech and business hubs.",
 }: TechExpertiseProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const activeCardsRef = useRef<Set<HTMLElement>>(new Set());
@@ -239,12 +385,13 @@ export default function TechExpertise({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {techExpertiseData.map((item: any, idx) => {
+            {locationsData.map((item: any, idx) => {
               const theme = themes[item.themeId] || themes.pink;
               
               return (
-                <div 
+                <Link 
                   key={idx} 
+                  href={`/locations/${item.title.toLowerCase()}`}
                   className="relative p-10 flex flex-col transition-all duration-700 ease-out cursor-pointer group overflow-hidden tech-expertise-card"
                 >
                   <div 
@@ -277,7 +424,7 @@ export default function TechExpertise({
                       </p>
                     </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
