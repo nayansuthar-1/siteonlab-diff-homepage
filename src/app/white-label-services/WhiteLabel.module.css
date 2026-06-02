@@ -107,7 +107,7 @@
   background: linear-gradient(112deg, #fff 0%, rgba(255, 255, 255, 0.78) 50%, color-mix(in srgb, var(--wl-accent) 58%, #fff) 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  font-size: clamp(2.55rem, 5.8vw, 5.7rem);
+  font-size: clamp(2.1rem, 5vw, 4.2rem);
   font-weight: 780;
   letter-spacing: 0;
   line-height: 0.98;
