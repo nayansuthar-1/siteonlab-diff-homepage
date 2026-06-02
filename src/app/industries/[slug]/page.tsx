@@ -52,10 +52,13 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
     >
       <section className={styles.hero}>
         <div className={styles.container}>
-          <Link href="/industries" className={styles.backLink}>
-            <span aria-hidden="true">&lt;</span>
-            Industries
-          </Link>
+          <div className={styles.breadcrumb}>
+            <Link href="/">Home</Link>
+            <span aria-hidden="true" style={{ opacity: 0.5 }}>&gt;</span>
+            <Link href="/industries">Industries</Link>
+            <span aria-hidden="true" style={{ opacity: 0.5 }}>&gt;</span>
+            <span>{industry.title}</span>
+          </div>
 
           <div className={styles.heroGrid}>
             <div className={styles.heroCopy}>

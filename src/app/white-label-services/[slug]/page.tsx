@@ -263,6 +263,14 @@ export default async function WhiteLabelDetailPage({ params }: WhiteLabelPagePro
     >
       <section className={styles.hero}>
         <div className={styles.container}>
+          <div className={styles.breadcrumb}>
+            <Link href="/">Home</Link>
+            <span aria-hidden="true" style={{ opacity: 0.5 }}>&gt;</span>
+            <Link href="/white-label-services">White Label Services</Link>
+            <span aria-hidden="true" style={{ opacity: 0.5 }}>&gt;</span>
+            <span>{service.title}</span>
+          </div>
+
           <div className={styles.heroInner}>
             <div>
               <span className={styles.eyebrow}>{service.title}</span>

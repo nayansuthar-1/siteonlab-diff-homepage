@@ -1387,10 +1387,13 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     >
       <section className={styles.hero}>
         <div className={styles.container}>
-          <Link href="/services" className={styles.backLink}>
-            <span aria-hidden="true">&lt;</span>
-            Services
-          </Link>
+          <div className={styles.breadcrumb}>
+            <Link href="/">Home</Link>
+            <span aria-hidden="true" style={{ opacity: 0.5 }}>&gt;</span>
+            <Link href="/services">Services</Link>
+            <span aria-hidden="true" style={{ opacity: 0.5 }}>&gt;</span>
+            <span>{service.title}</span>
+          </div>
 
           <div className={styles.heroGrid}>
             <div>

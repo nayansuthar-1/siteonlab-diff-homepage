@@ -80,6 +80,35 @@
   pointer-events: none;
 }
 
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  margin-bottom: 54px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 13px;
+  font-weight: 650;
+  position: relative;
+  z-index: 1;
+}
+
+.breadcrumb a {
+  color: rgba(255, 255, 255, 0.62);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.breadcrumb a:hover {
+  color: #fff;
+}
+
+.breadcrumb span {
+  color: #fff;
+}
+
 .heroInner {
   position: relative;
   z-index: 1;
