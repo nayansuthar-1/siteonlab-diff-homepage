@@ -145,7 +145,7 @@
   background: linear-gradient(112deg, #fff 0%, rgba(255, 255, 255, 0.74) 48%, #f5c542 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  font-size: clamp(2.1rem, 5vw, 4.2rem);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
   line-height: 0.96;
   font-weight: 760;
   letter-spacing: 0;

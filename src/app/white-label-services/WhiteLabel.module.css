@@ -107,7 +107,7 @@
   background: linear-gradient(112deg, #fff 0%, rgba(255, 255, 255, 0.78) 50%, color-mix(in srgb, var(--wl-accent) 58%, #fff) 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  font-size: clamp(2.1rem, 5vw, 4.2rem);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
   font-weight: 780;
   letter-spacing: 0;
   line-height: 0.98;
@@ -1012,7 +1012,7 @@
 
   .title {
     max-width: 100%;
-    font-size: clamp(2.08rem, 12vw, 3.15rem);
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
     line-height: 1.03;
   }
 
@@ -1272,7 +1272,7 @@
   }
 
   .title {
-    font-size: clamp(1.9rem, 11.5vw, 2.75rem);
+    font-size: clamp(1.4rem, 8vw, 2rem);
   }
 
   .heroVisual {

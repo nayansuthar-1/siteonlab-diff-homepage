@@ -113,7 +113,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.68fr);
   gap: 64px;
-  align-items: end;
+  align-items: start;
   margin-top: 54px;
 }
 
@@ -156,7 +156,7 @@
   background: linear-gradient(112deg, #fff 0%, rgba(255, 255, 255, 0.78) 50%, color-mix(in srgb, var(--industry-accent) 55%, #fff) 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  font-size: clamp(2.1rem, 5vw, 4.2rem);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
   line-height: 0.96;
   font-weight: 760;
   letter-spacing: 0;
@@ -296,7 +296,11 @@
   font-weight: 650;
 }
 
-.capabilitySection,
+.capabilitySection {
+  padding: 56px 0;
+  background: #000;
+}
+
 .workflowSection,
 .outcomeSection,
 .relatedSection {
@@ -567,7 +571,10 @@
     padding: 118px 0 72px;
   }
 
-  .capabilitySection,
+  .capabilitySection {
+    padding: 40px 0;
+  }
+
   .workflowSection,
   .outcomeSection,
   .relatedSection {
