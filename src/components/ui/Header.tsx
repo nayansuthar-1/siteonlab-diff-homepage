@@ -205,7 +205,14 @@ export default function Header() {
 
                 <div className={styles.expertiseMegaContainer}>
                   <div className={styles.expertiseColumnGroup} style={{ flex: 2 }}>
-                    <h3 className={styles.expertiseColumnTitle} style={{ textAlign: 'center' }}>Services</h3>
+                    <Link href="/services" onClick={() => setActiveDropdown(null)} style={{ textDecoration: 'none' }} className={styles.columnTitleLink}>
+                      <h3 className={styles.expertiseColumnTitle} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                        Services
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5, transition: 'transform 0.2s' }}>
+                          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                      </h3>
+                    </Link>
                     <div className={styles.expertiseLinksGrid} style={{ gridTemplateColumns: 'max-content max-content', justifyContent: 'center', gap: '12px 60px' }}>
                       {services.map((service) => (
                         <Link
@@ -220,7 +227,14 @@ export default function Header() {
                     </div>
                   </div>
                   <div className={styles.expertiseColumnGroup} style={{ flex: 1 }}>
-                    <h3 className={styles.expertiseColumnTitle} style={{ textAlign: 'center' }}>White Label Services</h3>
+                    <Link href="/white-label-services" onClick={() => setActiveDropdown(null)} style={{ textDecoration: 'none' }} className={styles.columnTitleLink}>
+                      <h3 className={styles.expertiseColumnTitle} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                        White Label Services
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5, transition: 'transform 0.2s' }}>
+                          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                      </h3>
+                    </Link>
                     <div className={styles.expertiseLinksGrid} style={{ gridTemplateColumns: 'max-content', justifyContent: 'center' }}>
                       {whiteLabelServices.map((service) => (
                         <Link
@@ -235,7 +249,14 @@ export default function Header() {
                     </div>
                   </div>
                   <div className={styles.expertiseColumnGroup} style={{ flex: 1 }}>
-                    <h3 className={styles.expertiseColumnTitle} style={{ textAlign: 'center' }}>Industries</h3>
+                    <Link href="/industries" onClick={() => setActiveDropdown(null)} style={{ textDecoration: 'none' }} className={styles.columnTitleLink}>
+                      <h3 className={styles.expertiseColumnTitle} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                        Industries
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5, transition: 'transform 0.2s' }}>
+                          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                      </h3>
+                    </Link>
                     <div className={styles.expertiseLinksGrid} style={{ gridTemplateColumns: 'max-content', justifyContent: 'center' }}>
                       {industries.map((industry) => (
                         <Link

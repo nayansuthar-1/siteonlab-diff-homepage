@@ -803,6 +803,18 @@
   margin: 0;
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.columnTitleLink:hover .expertiseColumnTitle {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.columnTitleLink:hover svg {
+  transform: translate(2px, -2px);
+  color: #f59e0b;
+  opacity: 1 !important;
 }
 
 .expertiseLinksGrid {
