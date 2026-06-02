@@ -4,7 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import styles from "./ContactSection.module.css";
 
-export default function ContactSection() {
+interface ContactSectionProps {
+  hideLocation?: boolean;
+}
+
+export default function ContactSection({ hideLocation = false }: ContactSectionProps) {
   const [activeTab, setActiveTab] = useState<"project" | "cv">("project");
 
   return (
@@ -22,22 +26,24 @@ export default function ContactSection() {
             We would love to learn more about your project idea. Contact us and we will get back to you within a few business hours.
           </p>
 
-          <div className={styles.locationSection}>
-            <span className={styles.label}>Head Office</span>
-            <h3 className={styles.city}>Ahmedabad, India</h3>
-            <p className={styles.address}>
-              F1, Bhagawati Complex, Vejalpur,<br />
-              Ahmedabad, Gujarat 380051
-            </p>
+          {!hideLocation && (
+            <div className={styles.locationSection}>
+              <span className={styles.label}>Head Office</span>
+              <h3 className={styles.city}>Ahmedabad, India</h3>
+              <p className={styles.address}>
+                F1, Bhagawati Complex, Vejalpur,<br />
+                Ahmedabad, Gujarat 380051
+              </p>
 
-            <div className={styles.countries}>
-              <div className={styles.country}>Mumbai</div>
-              <div className={styles.country}>Hyderabad</div>
-              <div className={styles.country}>Chennai</div>
-              <div className={styles.country}>Bangalore</div>
-              <div className={styles.country}>Pune</div>
+              <div className={styles.countries}>
+                <div className={styles.country}>Mumbai</div>
+                <div className={styles.country}>Hyderabad</div>
+                <div className={styles.country}>Chennai</div>
+                <div className={styles.country}>Bangalore</div>
+                <div className={styles.country}>Pune</div>
+              </div>
             </div>
-          </div>
+          )}
 
           <div className={styles.contactList}>
             <div className={styles.contactItem}>

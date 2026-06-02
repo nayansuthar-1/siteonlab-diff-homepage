@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import TechExpertise from "@/components/sections/TechExpertise";
 import DomainExpertise from "@/components/sections/DomainExpertise";
 import Footer from "@/components/ui/Footer";
 import Link from "next/link";
@@ -168,12 +167,6 @@ export default function ServicesPage() {
         <div className={styles.heroGlow} />
       </section>
 
-      {/* What We Do — using TechExpertise grid */}
-      <TechExpertise
-        title="What We Do"
-        subtitle="Strong expertise. Flexible capacity. Predictable delivery."
-      />
-
       {/* Experience & Skills Section */}
       <section className={styles.techSection}>
         <div className={styles.techContainer}>
@@ -302,7 +295,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <ContactSection />
+      <ContactSection hideLocation={true} />
       <Footer showSchedule={false} />
     </main>
   );
