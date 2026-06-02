@@ -210,9 +210,9 @@
 .robotFrame {
   position: absolute;
   inset: 4% -14% -10% 4%;
-  opacity: 0.84;
   filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.56));
   pointer-events: none;
+  z-index: 10;
 }
 
 .robotHand {
@@ -243,6 +243,7 @@
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 20px 52px rgba(0, 0, 0, 0.38), 0 0 32px color-mix(in srgb, var(--industry-accent) 12%, transparent);
   animation: orbitFloat 5s ease-in-out infinite;
+  z-index: 20;
 }
 
 .orbitCard svg {
@@ -258,32 +259,33 @@
 }
 
 .orbitCard1 {
-  top: 4%;
-  left: 28%;
+  left: calc(50% - 80px);
+  top: 5%;
 }
 
 .orbitCard2 {
-  top: 27%;
-  right: 4%;
+  right: 12%;
+  top: 28%;
   animation-delay: 0.35s;
 }
 
 .orbitCard3 {
-  left: 6%;
-  top: 36%;
+  left: 12%;
+  top: 28%;
   animation-delay: 0.7s;
 }
 
 .orbitCard4 {
-  right: 12%;
-  bottom: 22%;
+  right: 18%;
+  top: 58%;
   animation-delay: 1.05s;
 }
 
 .orbitCard5 {
-  left: 28%;
-  bottom: 2%;
+  left: 16%;
+  top: 55%;
   animation-delay: 1.4s;
+  z-index: 5;
 }
 
 .selectorSection,
