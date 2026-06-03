@@ -54,9 +54,9 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
         <div className={styles.container}>
           <div className={styles.breadcrumb}>
             <Link href="/">Home</Link>
-            <span aria-hidden="true" style={{ opacity: 0.5 }}>&gt;</span>
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             <Link href="/industries">Industries</Link>
-            <span aria-hidden="true" style={{ opacity: 0.5 }}>&gt;</span>
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             <span>{industry.title}</span>
           </div>
 

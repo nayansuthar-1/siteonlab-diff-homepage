@@ -73,6 +73,28 @@ export default function Hero() {
       {/* Content LEFT */}
       <div className="relative z-10 h-full flex items-start pt-[16vh] px-8 md:px-20 pointer-events-none">
         <div className="max-w-3xl pointer-events-auto">
+          {/* Trust Badges */}
+          <div className="flex flex-wrap items-center gap-6 mb-6 text-[15px] font-medium" style={{ color: "rgba(255, 255, 255, 0.95)" }}>
+            <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-0.5" style={{ color: "#0ea5e9" }}>
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                ))}
+              </div>
+              <span>5.0 Stars &middot; 200+ Reviews</span>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="8" r="6"></circle>
+                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+              </svg>
+              <span>Award-Winning Agency</span>
+            </div>
+          </div>
+
           <h1
             style={{
               fontFamily: "var(--font-plus-jakarta), sans-serif",
