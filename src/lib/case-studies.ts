@@ -1,7 +1,16 @@
+import "server-only";
+import { ObjectId, type Collection, type WithId, type Document } from "mongodb";
+import { getDb } from "./mongodb";
+
 export interface CaseStudySection {
   title: string;
   content: string;
   list?: string[];
+}
+
+export interface CaseStudyMetric {
+  label: string;
+  value: string;
 }
 
 export interface CaseStudy {
@@ -13,18 +22,93 @@ export interface CaseStudy {
   description: string;
   imageUrl: string;
   accent: string;
-  metrics: {
-    label: string;
-    value: string;
-  }[];
+  metrics: CaseStudyMetric[];
   challenge: string;
   solution: string;
   sections: CaseStudySection[];
 }
 
-export const caseStudies: CaseStudy[] = [
+export type CaseStudyInput = Omit<CaseStudy, "id">;
+
+const COLLECTION = "case_studies";
+
+async function caseStudiesCollection(): Promise<Collection<Document>> {
+  const db = await getDb();
+  return db.collection(COLLECTION);
+}
+
+function serialize(doc: WithId<Document>): CaseStudy {
+  return {
+    id: doc._id.toString(),
+    slug: doc.slug,
+    title: doc.title,
+    client: doc.client,
+    category: doc.category,
+    description: doc.description,
+    imageUrl: doc.imageUrl,
+    accent: doc.accent,
+    metrics: doc.metrics ?? [],
+    challenge: doc.challenge ?? "",
+    solution: doc.solution ?? "",
+    sections: doc.sections ?? [],
+  };
+}
+
+async function ensureSeeded(col: Collection<Document>): Promise<void> {
+  const count = await col.estimatedDocumentCount();
+  if (count > 0) return;
+  const now = Date.now();
+  await col.insertMany(
+    seedCaseStudies.map((c, i) => ({ ...c, createdAt: new Date(now - i * 1000) }))
+  );
+}
+
+export async function getAllCaseStudies(): Promise<CaseStudy[]> {
+  const col = await caseStudiesCollection();
+  await ensureSeeded(col);
+  const docs = await col.find({}).sort({ createdAt: -1 }).toArray();
+  return docs.map(serialize);
+}
+
+export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null> {
+  const col = await caseStudiesCollection();
+  await ensureSeeded(col);
+  const doc = await col.findOne({ slug });
+  return doc ? serialize(doc) : null;
+}
+
+export async function getCaseStudyById(id: string): Promise<CaseStudy | null> {
+  if (!ObjectId.isValid(id)) return null;
+  const col = await caseStudiesCollection();
+  const doc = await col.findOne({ _id: new ObjectId(id) });
+  return doc ? serialize(doc) : null;
+}
+
+export async function createCaseStudy(input: CaseStudyInput): Promise<string> {
+  const col = await caseStudiesCollection();
+  const res = await col.insertOne({ ...input, createdAt: new Date() });
+  return res.insertedId.toString();
+}
+
+export async function updateCaseStudy(id: string, input: CaseStudyInput): Promise<boolean> {
+  if (!ObjectId.isValid(id)) return false;
+  const col = await caseStudiesCollection();
+  const res = await col.updateOne({ _id: new ObjectId(id) }, { $set: { ...input } });
+  return res.matchedCount > 0;
+}
+
+export async function deleteCaseStudy(id: string): Promise<boolean> {
+  if (!ObjectId.isValid(id)) return false;
+  const col = await caseStudiesCollection();
+  const res = await col.deleteOne({ _id: new ObjectId(id) });
+  return res.deletedCount > 0;
+}
+
+// ---------------------------------------------------------------------------
+// Starter content (seeded into MongoDB on first run, then managed via /admin)
+// ---------------------------------------------------------------------------
+export const seedCaseStudies: CaseStudyInput[] = [
   {
-    id: "1",
     slug: "fintech-app-redesign",
     title: "Revolutionizing Digital Banking Experience",
     client: "FinBank Global",
@@ -35,14 +119,14 @@ export const caseStudies: CaseStudy[] = [
     metrics: [
       { label: "User Retention", value: "+45%" },
       { label: "Transaction Speed", value: "2.4s" },
-      { label: "CSAT Score", value: "4.9/5" }
+      { label: "CSAT Score", value: "4.9/5" },
     ],
     challenge: "The existing app was cluttered, slow, and had a high churn rate among younger users.",
     solution: "We implemented a minimalist design system, optimized API responses, and introduced biometric authentication.",
     sections: [
       {
         title: "The Challenge",
-        content: "FinBank Global faced a significant decline in mobile app engagement. Younger demographics found the interface unintuitive, while older users struggled with performance issues. The core challenge was to modernize the app without alienating the existing user base."
+        content: "FinBank Global faced a significant decline in mobile app engagement. Younger demographics found the interface unintuitive, while older users struggled with performance issues. The core challenge was to modernize the app without alienating the existing user base.",
       },
       {
         title: "Our Approach",
@@ -50,21 +134,20 @@ export const caseStudies: CaseStudy[] = [
         list: [
           "Information Architecture: Simplifying the navigation to 3 core actions.",
           "Performance Engineering: Reducing app launch time by 60%.",
-          "Visual Identity: Transitioning from a clinical corporate look to a vibrant, trust-centric design."
-        ]
+          "Visual Identity: Transitioning from a clinical corporate look to a vibrant, trust-centric design.",
+        ],
       },
       {
         title: "Implementation",
-        content: "Using React Native, we built a cross-platform solution that shared 90% of the codebase, ensuring feature parity between iOS and Android. We integrated advanced security features like FaceID and TouchID while maintaining a friction-less experience."
+        content: "Using React Native, we built a cross-platform solution that shared 90% of the codebase, ensuring feature parity between iOS and Android. We integrated advanced security features like FaceID and TouchID while maintaining a friction-less experience.",
       },
       {
         title: "The Outcome",
-        content: "Within three months of launch, FinBank saw a 45% increase in user retention. The app's rating on the App Store jumped from 3.2 to 4.8 stars."
-      }
-    ]
+        content: "Within three months of launch, FinBank saw a 45% increase in user retention. The app's rating on the App Store jumped from 3.2 to 4.8 stars.",
+      },
+    ],
   },
   {
-    id: "2",
     slug: "ecommerce-ai-integration",
     title: "AI-Powered Personalization for E-commerce",
     client: "StyleHub",
@@ -75,35 +158,34 @@ export const caseStudies: CaseStudy[] = [
     metrics: [
       { label: "Conversion Rate", value: "+30%" },
       { label: "Average Order Value", value: "+22%" },
-      { label: "Support Tickets", value: "-60%" }
+      { label: "Support Tickets", value: "-60%" },
     ],
     challenge: "StyleHub struggled with low engagement on product pages and high support costs.",
     solution: "We deployed a custom recommendation engine and a GPT-powered shopping assistant.",
     sections: [
       {
         title: "The Problem",
-        content: "With over 50,000 SKUs, StyleHub users were overwhelmed. The bounce rate on the homepage was nearly 70% because users couldn't find what they wanted quickly. Support agents were bogged down by simple order status queries."
+        content: "With over 50,000 SKUs, StyleHub users were overwhelmed. The bounce rate on the homepage was nearly 70% because users couldn't find what they wanted quickly. Support agents were bogged down by simple order status queries.",
       },
       {
         title: "AI Transformation",
         content: "We implemented a two-pronged AI strategy using agentic workflows:",
         list: [
           "Personalized Discovery: A neural network that analyzes real-time browsing behavior to serve relevant product 'lookbooks'.",
-          "Automated Support Agent: An AI agent capable of handling returns, tracking, and sizing advice without human intervention."
-        ]
+          "Automated Support Agent: An AI agent capable of handling returns, tracking, and sizing advice without human intervention.",
+        ],
       },
       {
         title: "Technical Execution",
-        content: "We utilized a vector database (Pinecone) to power semantic search and recommendation, ensuring results were served in under 100ms. The support agent was built using LangChain and integrated directly into the Shopify checkout flow."
+        content: "We utilized a vector database (Pinecone) to power semantic search and recommendation, ensuring results were served in under 100ms. The support agent was built using LangChain and integrated directly into the Shopify checkout flow.",
       },
       {
         title: "Results",
-        content: "The average order value increased by 22% as users were successfully upsold through personalized recommendations. Support overhead dropped by 60% in the first quarter."
-      }
-    ]
+        content: "The average order value increased by 22% as users were successfully upsold through personalized recommendations. Support overhead dropped by 60% in the first quarter.",
+      },
+    ],
   },
   {
-    id: "3",
     slug: "healthcare-telemedicine-platform",
     title: "Scalable Telemedicine Solution",
     client: "HealthConnect",
@@ -114,14 +196,14 @@ export const caseStudies: CaseStudy[] = [
     metrics: [
       { label: "Monthly Consultations", value: "50k+" },
       { label: "Patient Wait Time", value: "<5min" },
-      { label: "Provider Efficiency", value: "+40%" }
+      { label: "Provider Efficiency", value: "+40%" },
     ],
     challenge: "The client needed a highly secure platform that could handle a massive surge in users.",
     solution: "We built a microservices architecture on AWS with end-to-end encryption and real-time video scaling.",
     sections: [
       {
         title: "Context",
-        content: "HealthConnect needed to scale from a local clinic tool to a nationwide telemedicine provider. Security was paramount, as the platform handled sensitive patient data protected by HIPAA and GDPR."
+        content: "HealthConnect needed to scale from a local clinic tool to a nationwide telemedicine provider. Security was paramount, as the platform handled sensitive patient data protected by HIPAA and GDPR.",
       },
       {
         title: "Architecture & Security",
@@ -129,21 +211,17 @@ export const caseStudies: CaseStudy[] = [
         list: [
           "End-to-End Encryption: All video streams and messages are encrypted client-side.",
           "Scalable Video: WebRTC integration with automated scaling via AWS Elemental.",
-          "Patient Portal: A secure dashboard for managing records, prescriptions, and appointments."
-        ]
+          "Patient Portal: A secure dashboard for managing records, prescriptions, and appointments.",
+        ],
       },
       {
         title: "The Build",
-        content: "The platform was built using a Next.js frontend and a Go-based backend for high concurrency. We automated the compliance auditing process by logging all access attempts in an immutable database."
+        content: "The platform was built using a Next.js frontend and a Go-based backend for high concurrency. We automated the compliance auditing process by logging all access attempts in an immutable database.",
       },
       {
         title: "Impact",
-        content: "HealthConnect successfully onboarded 200+ clinics in 6 months, facilitating over 50,000 consultations monthly with zero security incidents."
-      }
-    ]
-  }
+        content: "HealthConnect successfully onboarded 200+ clinics in 6 months, facilitating over 50,000 consultations monthly with zero security incidents.",
+      },
+    ],
+  },
 ];
-
-export function getCaseStudyBySlug(slug: string) {
-  return caseStudies.find((cs) => cs.slug === slug);
-}

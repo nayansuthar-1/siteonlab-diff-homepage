@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Blogs.module.css";
 import ContactSection from "@/components/sections/ContactSection";
-import { blogs } from "@/lib/blogs";
+import { getAllBlogs } from "@/lib/blogs";
 import type { CSSProperties } from "react";
 
 export const metadata: Metadata = {
@@ -11,7 +11,11 @@ export const metadata: Metadata = {
   description: "Insights, news, and deep dives into our latest work and industry trends.",
 };
 
-export default function BlogsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function BlogsPage() {
+  const blogs = await getAllBlogs();
+
   return (
     <main>
       <section className={styles.blogsPage}>

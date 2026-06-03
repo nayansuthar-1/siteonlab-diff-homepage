@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./CaseStudies.module.css";
 import ContactSection from "@/components/sections/ContactSection";
-import { caseStudies } from "@/lib/case-studies";
+import { getAllCaseStudies } from "@/lib/case-studies";
 import type { CSSProperties } from "react";
 
 export const metadata: Metadata = {
@@ -11,7 +11,11 @@ export const metadata: Metadata = {
   description: "Explore our success stories and see how we help businesses grow through technology and design.",
 };
 
-export default function CaseStudiesPage() {
+export const dynamic = "force-dynamic";
+
+export default async function CaseStudiesPage() {
+  const caseStudies = await getAllCaseStudies();
+
   return (
     <main>
       <section className={styles.caseStudiesPage}>
