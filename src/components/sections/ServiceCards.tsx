@@ -1,22 +1,40 @@
 "use client";
 
-import type { CSSProperties } from "react";
+import { useRef, useEffect, useCallback, useState } from "react";
 import Link from "next/link";
 import styles from "./ServiceCards.module.css";
 import ServiceIcon from "@/components/ui/ServiceIcon";
 import { services } from "@/lib/services";
 
-function hexToRgb(hex: string) {
-  const normalized = hex.replace("#", "");
-  const value = parseInt(normalized, 16);
-  return `${(value >> 16) & 255}, ${(value >> 8) & 255}, ${value & 255}`;
-}
-
 export default function ServiceCards() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [paused, setPaused] = useState(false);
+
+  const handleCardClick = useCallback((e: React.MouseEvent) => {
+    // Only on touch / non-hover devices
+    if (window.matchMedia("(hover: hover)").matches) return;
+    e.preventDefault();
+    setPaused(true);
+  }, []);
+
+  useEffect(() => {
+    if (!paused) return;
+    const resume = (e: MouseEvent) => {
+      if (trackRef.current && !trackRef.current.contains(e.target as Node)) {
+        setPaused(false);
+      }
+    };
+    document.addEventListener("click", resume);
+    return () => document.removeEventListener("click", resume);
+  }, [paused]);
+
   return (
     <section className={styles.section} id="services-cards">
       <div className={styles.sliderContainer}>
-        <div className={styles.sliderTrack}>
+        <div
+          ref={trackRef}
+          className={`${styles.sliderTrack} ${paused ? styles.sliderTrackPaused : ""}`}
+        >
           {/* Group 1 */}
           <div className={styles.slideGroup}>
             {services.map((service) => (
@@ -24,15 +42,8 @@ export default function ServiceCards() {
                 key={`g1-${service.slug}`}
                 href={`/services/${service.slug}`}
                 className={styles.card}
-                style={
-                  {
-                    "--wave-color": service.accent,
-                    "--wave-rgb": hexToRgb(service.accent),
-                  } as CSSProperties
-                }
+                onClick={handleCardClick}
               >
-                <span className={styles.blurLayer} aria-hidden="true" />
-                
                 <div className={styles.cardHeader}>
                   <div className={styles.iconWrap}>
                     <ServiceIcon name={service.icon} />
@@ -55,16 +66,9 @@ export default function ServiceCards() {
                 key={`g2-${service.slug}`}
                 href={`/services/${service.slug}`}
                 className={styles.card}
+                onClick={handleCardClick}
                 tabIndex={-1}
-                style={
-                  {
-                    "--wave-color": service.accent,
-                    "--wave-rgb": hexToRgb(service.accent),
-                  } as CSSProperties
-                }
               >
-                <span className={styles.blurLayer} aria-hidden="true" />
-                
                 <div className={styles.cardHeader}>
                   <div className={styles.iconWrap}>
                     <ServiceIcon name={service.icon} />
