@@ -39,6 +39,11 @@ export default function ServiceCards() {
                   </div>
                   <h3 className={styles.title}>{service.title}</h3>
                 </div>
+
+                <div className={styles.hoverContent}>
+                  <p>{service.description}</p>
+                  <span className={styles.learnMore}>Learn More</span>
+                </div>
               </Link>
             ))}
           </div>
@@ -65,6 +70,11 @@ export default function ServiceCards() {
                     <ServiceIcon name={service.icon} />
                   </div>
                   <h3 className={styles.title}>{service.title}</h3>
+                </div>
+
+                <div className={styles.hoverContent}>
+                  <p>{service.description}</p>
+                  <span className={styles.learnMore}>Learn More</span>
                 </div>
               </Link>
             ))}

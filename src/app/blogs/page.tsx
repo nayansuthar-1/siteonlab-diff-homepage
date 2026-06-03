@@ -50,11 +50,11 @@ export default async function BlogsPage() {
                   
                   <div className={styles.avatarWrapper}>
                     <Image
-                      src="/siteon_lab-removebg-preview (1).png"
-                      alt="SiteonLab"
-                      width={40}
-                      height={40}
-                      style={{ objectFit: "contain", padding: "4px" }}
+                      src="/siteonlab-logo.png"
+                      alt="SiteOnLab"
+                      width={2438}
+                      height={813}
+                      className={styles.avatarLogo}
                     />
                   </div>
                 </div>

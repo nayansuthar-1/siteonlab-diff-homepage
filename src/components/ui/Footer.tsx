@@ -36,10 +36,10 @@ const Footer = ({ showSchedule = true }: FooterProps) => {
           <div className={styles.footerColumn}>
             <Link href="/" className={styles.logo}>
               <Image
-                src="/siteon_lab-removebg-preview (1).png"
-                alt="siteonlab"
-                width={160}
-                height={36}
+                src="/siteonlab-logo.png"
+                alt="SiteOnLab"
+                width={2438}
+                height={813}
                 className={styles.footerLogo}
               />
             </Link>

@@ -117,10 +117,11 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className={styles.logo} aria-label="siteonlab home">
             <Image
-              src="/siteon_lab-removebg-preview (1).png"
-              alt="siteonlab"
-              width={200}
-              height={45}
+              src="/siteonlab-logo.png"
+              alt="SiteOnLab"
+              width={2438}
+              height={813}
+              className={styles.logoImage}
               priority
             />
           </Link>

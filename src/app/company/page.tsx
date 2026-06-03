@@ -305,10 +305,10 @@ export default function CompanyPage() {
 
             <div className={styles.logoVisual}>
               <Image 
-                src="/Siteon_logo-removebg-preview.png" 
-                alt="Siteon Lab Logo" 
-                width={400} 
-                height={250}
+                src="/siteonlab-logo.png" 
+                alt="SiteOnLab logo" 
+                width={2438} 
+                height={813}
                 className={styles.contactLogo}
                 priority
               />
