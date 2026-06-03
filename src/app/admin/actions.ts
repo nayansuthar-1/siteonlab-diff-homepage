@@ -11,7 +11,7 @@ export async function login(_prev: LoginState, formData: FormData): Promise<Logi
   const email = String(formData.get("email") || "").trim();
   const password = String(formData.get("password") || "");
 
-  const expectedEmail = process.env.ADMIN_EMAIL || "admin@siteonlab";
+  const expectedEmail = process.env.ADMIN_EMAIL || "admin@siteonlab.com";
   const expectedPassword = process.env.ADMIN_PASSWORD || "siteonlabadmin";
 
   if (email !== expectedEmail || password !== expectedPassword) {

@@ -4,7 +4,10 @@
   min-height: 100vh;
   padding: 110px 0 70px;
   position: relative;
-  overflow: hidden;
+  /* overflow-x: clip keeps the decorative glow from causing horizontal scroll
+     WITHOUT turning this element into a scroll container — which would break
+     the sticky positioning of the TOC / form columns below. */
+  overflow-x: clip;
 }
 
 .bgPattern {
@@ -119,7 +122,9 @@
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr) 360px;
   gap: 40px;
-  align-items: start;
+  /* Columns stretch to the full row (article) height so the sticky elements
+     inside them can travel all the way down to the end of the article. */
+  align-items: stretch;
 }
 
 .sticky {

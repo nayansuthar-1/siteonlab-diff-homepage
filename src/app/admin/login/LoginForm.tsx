@@ -16,7 +16,6 @@ export default function LoginForm() {
           name="email"
           type="email"
           className={styles.input}
-          placeholder="admin@siteonlab"
           autoComplete="username"
           required
         />
@@ -29,7 +28,6 @@ export default function LoginForm() {
           name="password"
           type="password"
           className={styles.input}
-          placeholder="••••••••"
           autoComplete="current-password"
           required
         />
