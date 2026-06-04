@@ -10,6 +10,15 @@ export type Location = {
 
 export const locations: Location[] = [
   {
+    name: "Ahmedabad",
+    slug: "ahmedabad",
+    accent: "#3b82f6",
+    region: "Gujarat",
+    marketNote: "manufacturing, education, real estate, and D2C brands looking for sustainable market share",
+    heroLine: "data-driven digital marketing for Ahmedabad businesses",
+    industries: ["Manufacturing", "Education", "Real Estate", "D2C"],
+  },
+  {
     name: "Bangalore",
     slug: "bangalore",
     accent: "#f59e0b",

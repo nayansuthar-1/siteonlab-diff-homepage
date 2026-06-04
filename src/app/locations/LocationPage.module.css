@@ -164,7 +164,7 @@
   font-size: clamp(2rem, 4.5vw, 4rem);
   font-weight: 780;
   letter-spacing: 0;
-  line-height: 0.98;
+  line-height: 1.15;
 }
 
 .subtitle {

@@ -25,7 +25,9 @@ export default function LocationsPage() {
             <div className={styles.ctaRow}>
               <Link href="/contact" className={styles.primaryCta}>
                 Start a project
-                <span aria-hidden="true">-&gt;</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
               </Link>
             </div>
           </div>
@@ -44,7 +46,9 @@ export default function LocationsPage() {
               >
                 <div className={styles.locationCardTop}>
                   <span className={styles.locationBadge}>{location.region}</span>
-                  <span className={styles.locationArrow} aria-hidden="true">-&gt;</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={styles.locationArrow} aria-hidden="true">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
                 </div>
                 <h3>{location.name}</h3>
                 <p>{location.heroLine} for {location.marketNote}.</p>
