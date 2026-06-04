@@ -226,11 +226,15 @@ export default async function LocationDetailPage({ params }: LocationPageProps) 
               <div className={styles.ctaRow}>
                 <Link href="/contact" className={styles.primaryCta}>
                   Discuss your project
-                  <span aria-hidden="true">-&gt;</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
                 </Link>
                 <a href="#services" className={styles.secondaryCta}>
                   Explore services
-                  <span aria-hidden="true">-&gt;</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
                 </a>
               </div>
             </div>
@@ -290,7 +294,9 @@ export default async function LocationDetailPage({ params }: LocationPageProps) 
                 </ul>
                 <Link href={card.href} className={styles.textLink}>
                   Learn More
-                  <span aria-hidden="true">-&gt;</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
                 </Link>
               </article>
             ))}
