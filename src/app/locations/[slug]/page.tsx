@@ -205,20 +205,19 @@ export default async function LocationDetailPage({ params }: LocationPageProps) 
     >
       <section className={styles.hero}>
         <div className={styles.container}>
-          <div className={styles.breadcrumb}>
-            <Link href="/" className={styles.crumbLink}>Home</Link>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={styles.crumbArrow}>
-              <path d="M5 12h14M13 5l7 7-7 7" />
-            </svg>
-            <Link href="/locations" className={styles.crumbLink}>Locations</Link>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={styles.crumbArrow}>
-              <path d="M5 12h14M13 5l7 7-7 7" />
-            </svg>
-            <span className={styles.crumbCurrent}>{location.name}</span>
-          </div>
-
           <div className={styles.heroGrid}>
             <div>
+              <div className={styles.breadcrumb}>
+                <Link href="/" className={styles.crumbLink}>Home</Link>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={styles.crumbArrow}>
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+                <Link href="/locations" className={styles.crumbLink}>Locations</Link>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={styles.crumbArrow}>
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+                <span className={styles.crumbCurrent}>{location.name}</span>
+              </div>
               <span className={styles.eyebrow}>Digital marketing agency in {location.name}</span>
               <h1 className={styles.title}>Growth marketing for brands in {location.name}</h1>
               <p className={styles.subtitle}>
