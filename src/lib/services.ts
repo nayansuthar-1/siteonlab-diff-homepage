@@ -278,6 +278,84 @@ export const services: Service[] = [
     process: ["Audit", "Build", "Configure", "Support"],
     outcomes: ["Easier editing", "Better performance", "More stable publishing"],
   },
+  {
+    slug: "custom-software-development",
+    title: "Custom Software Development",
+    navTitle: "Custom Software",
+    description:
+      "Tailored software, web applications, and system integrations engineered around your exact workflows, data, and business logic.",
+    accent: "#3b82f6",
+    icon: "code",
+    promise: "Purpose-built software that fits your process instead of forcing you into a template.",
+    focusTitle: "Software shaped around how your business actually works",
+    focusIntro:
+      "We design and build custom software by mapping your workflows, data, and integrations first, then engineering clean, scalable systems that are easy to maintain and extend.",
+    focusBullets: [
+      "Requirement discovery, workflow mapping, and system architecture.",
+      "Custom web apps, internal tools, and process automation.",
+      "Secure APIs, database design, and third-party integrations.",
+    ],
+    deliverables: [
+      "Solution architecture",
+      "Custom application build",
+      "API and integrations",
+      "Testing and deployment",
+    ],
+    process: ["Discover", "Architect", "Build", "Deploy"],
+    outcomes: ["Streamlined operations", "Less manual work", "Scalable systems"],
+  },
+  {
+    slug: "saas-development",
+    title: "SaaS Software Development",
+    navTitle: "SaaS Development",
+    description:
+      "End-to-end SaaS product development with multi-tenant architecture, subscriptions, dashboards, and cloud infrastructure built to scale.",
+    accent: "#7c3aed",
+    icon: "spark",
+    promise: "A production-ready SaaS platform engineered for growth, reliability, and recurring revenue.",
+    focusTitle: "SaaS products built to launch, scale, and retain",
+    focusIntro:
+      "We build SaaS platforms from MVP to scale, combining multi-tenant architecture, subscription billing, secure cloud infrastructure, and analytics that support long-term product growth.",
+    focusBullets: [
+      "Product strategy, MVP scoping, and multi-tenant architecture.",
+      "Subscription billing, user roles, and onboarding flows.",
+      "Cloud infrastructure, DevOps, and analytics dashboards.",
+    ],
+    deliverables: [
+      "SaaS product build",
+      "Subscription and billing",
+      "Cloud and DevOps setup",
+      "Analytics dashboards",
+    ],
+    process: ["Define", "Architect", "Build", "Scale"],
+    outcomes: ["Faster time to market", "Reliable scaling", "Recurring revenue ready"],
+  },
+  {
+    slug: "mobile-app-development",
+    title: "Mobile App Development",
+    navTitle: "Mobile Apps",
+    description:
+      "Native and cross-platform mobile apps with intuitive UX, secure backends, and smooth performance across iOS and Android.",
+    accent: "#14b8a6",
+    icon: "layout",
+    promise: "Mobile apps that feel fast, look polished, and are built to grow with your users.",
+    focusTitle: "Mobile experiences your users will keep coming back to",
+    focusIntro:
+      "We design and develop mobile apps around real user journeys, building native or cross-platform solutions with reliable backends, clean UX, and store-ready performance.",
+    focusBullets: [
+      "UX flows, wireframes, and platform-specific UI design.",
+      "Native iOS, Android, and cross-platform development.",
+      "Secure APIs, backend services, and app store deployment.",
+    ],
+    deliverables: [
+      "App UX/UI design",
+      "iOS and Android build",
+      "Backend and API",
+      "App store launch",
+    ],
+    process: ["Plan", "Design", "Develop", "Launch"],
+    outcomes: ["Higher engagement", "Smooth performance", "Faster app launches"],
+  },
 ];
 
 export function getServiceBySlug(slug: string) {

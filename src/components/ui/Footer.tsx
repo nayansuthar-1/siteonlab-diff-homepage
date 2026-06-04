@@ -119,7 +119,7 @@ const Footer = ({ showSchedule = true }: FooterProps) => {
             <h3 className={styles.columnTitle}>Quick Links</h3>
             <ul className={styles.columnList}>
               <li><Link href="/">Home</Link></li>
-              <li><Link href="/about">About Us</Link></li>
+              <li><Link href="/company">Company</Link></li>
               <li><Link href="/contact">Contact us</Link></li>
               <li><Link href="/blogs">Blogs</Link></li>
               <li><Link href="/case-studies">Case Studies</Link></li>

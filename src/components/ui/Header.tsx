@@ -332,11 +332,11 @@ export default function Header() {
                   </Link>
                 </div>
 
-                <div className={`${styles.megaMenuRight} ${styles.servicesMegaGrid}`}>
+                <div className={styles.megaMenuRight} style={{ alignItems: 'flex-start', gap: '16px' }}>
                   <Link
                     href="/blogs"
                     className={styles.serviceCard}
-                    style={{ "--service-accent": "#f59e0b" } as CSSProperties}
+                    style={{ "--service-accent": "#f59e0b", flex: "0 0 240px" } as CSSProperties}
                     onClick={() => setActiveDropdown(null)}
                   >
                     <div className={styles.serviceIconWrapper}>
@@ -351,7 +351,7 @@ export default function Header() {
                   <Link
                     href="/case-studies"
                     className={styles.serviceCard}
-                    style={{ "--service-accent": "#f59e0b" } as CSSProperties}
+                    style={{ "--service-accent": "#f59e0b", flex: "0 0 240px" } as CSSProperties}
                     onClick={() => setActiveDropdown(null)}
                   >
                     <div className={styles.serviceIconWrapper}>

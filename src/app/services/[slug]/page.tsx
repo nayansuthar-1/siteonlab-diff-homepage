@@ -1332,11 +1332,397 @@ const wordpressProcess = [
   },
 ];
 
+const customSoftwareServiceCards = [
+  {
+    title: "Custom Web Application Development",
+    description: "Web apps engineered around your workflows, users, and data.",
+    icon: "code" as const,
+    items: [
+      "Tailored web applications & portals",
+      "Workflow & process automation",
+      "Role-based access & permissions",
+      "Scalable, modular architecture",
+      "Performance & security optimization",
+    ],
+  },
+  {
+    title: "Enterprise Software Solutions",
+    description: "Robust systems that streamline complex business operations.",
+    icon: "layout" as const,
+    items: [
+      "ERP & CRM development",
+      "Inventory & resource management",
+      "Reporting & business intelligence",
+      "Legacy system integration",
+    ],
+  },
+  {
+    title: "API Development & Integration",
+    description: "Connect your tools and data with secure, reliable APIs.",
+    icon: "share" as const,
+    items: [
+      "RESTful & GraphQL APIs",
+      "Third-party service integrations",
+      "Payment & CRM connectors",
+      "Secure authentication & access control",
+    ],
+  },
+  {
+    title: "Software Modernization & Migration",
+    description: "Upgrade outdated systems without disrupting operations.",
+    icon: "spark" as const,
+    items: [
+      "Legacy code refactoring",
+      "Cloud migration",
+      "Database modernization",
+      "Performance & security upgrades",
+    ],
+  },
+  {
+    title: "Database Design & Management",
+    description: "Structured, secure, and scalable data foundations.",
+    icon: "chart" as const,
+    items: [
+      "Relational & NoSQL database design",
+      "Data modeling & optimization",
+      "Backup & recovery strategies",
+      "Data security & compliance",
+    ],
+  },
+  {
+    title: "Software Maintenance & Support",
+    description: "Keep your software secure, stable, and up to date.",
+    icon: "search" as const,
+    items: [
+      "Bug fixes & enhancements",
+      "Security patches & updates",
+      "Performance monitoring",
+      "Dedicated technical support",
+    ],
+  },
+];
+
+const customSoftwareStats = [
+  {
+    label: "Tailored to Your Business",
+    detail: "Software built around your exact processes, not generic templates.",
+    metric: "7-14 Days",
+    caption: "Average project kickoff time",
+  },
+  {
+    label: "Scalable & Future-Ready",
+    detail: "Architectures designed to grow with your business needs.",
+    metric: "100+",
+    caption: "Projects successfully delivered",
+  },
+  {
+    label: "Experienced Engineering Team",
+    detail: "Skilled developers across web, backend, and cloud technologies.",
+    metric: "95%",
+    caption: "Client retention rate",
+  },
+  {
+    label: "End-to-End Development",
+    detail: "From discovery and architecture to deployment and support.",
+    metric: "50+",
+    caption: "Trusted clients",
+  },
+  {
+    label: "Transparent Communication",
+    detail: "Clear timelines, regular updates, and no hidden costs.",
+    metric: "24/7",
+    caption: "Support & assistance",
+  },
+  {
+    label: "Secure & Reliable Code",
+    detail: "Quality-tested software built with security best practices.",
+    metric: "5X ROI",
+    caption: "Average efficiency gain",
+  },
+];
+
+const customSoftwareProcess = [
+  {
+    title: "Discovery & Requirement Analysis",
+    description: "Understand your goals, workflows, and technical requirements.",
+  },
+  {
+    title: "Architecture & Planning",
+    description: "Design scalable system architecture and project roadmap.",
+  },
+  {
+    title: "Development & Integration",
+    description: "Build, integrate, and test secure, high-quality software.",
+  },
+  {
+    title: "Deployment & Support",
+    description: "Launch with documentation and ongoing maintenance.",
+  },
+];
+
+const saasServiceCards = [
+  {
+    title: "SaaS Product Development",
+    description: "Build market-ready SaaS products from MVP to full scale.",
+    icon: "spark" as const,
+    items: [
+      "MVP development & validation",
+      "Feature roadmap planning",
+      "Scalable product architecture",
+      "Iterative development cycles",
+      "Go-to-market readiness",
+    ],
+  },
+  {
+    title: "Multi-Tenant Architecture",
+    description: "Serve multiple customers securely from a single platform.",
+    icon: "layout" as const,
+    items: [
+      "Tenant isolation & data security",
+      "Role & permission management",
+      "Scalable resource allocation",
+      "Custom branding per tenant",
+    ],
+  },
+  {
+    title: "Subscription & Billing Integration",
+    description: "Automate recurring revenue with flexible billing.",
+    icon: "cart" as const,
+    items: [
+      "Subscription & plan management",
+      "Stripe & payment gateway integration",
+      "Usage-based & tiered pricing",
+      "Invoicing & dunning workflows",
+    ],
+  },
+  {
+    title: "Cloud Infrastructure & DevOps",
+    description: "Reliable, scalable infrastructure built for uptime.",
+    icon: "code" as const,
+    items: [
+      "AWS, Azure & GCP deployment",
+      "CI/CD pipelines & automation",
+      "Auto-scaling & load balancing",
+      "Monitoring & security hardening",
+    ],
+  },
+  {
+    title: "SaaS UX/UI Design",
+    description: "Intuitive interfaces that drive adoption and retention.",
+    icon: "pen" as const,
+    items: [
+      "User onboarding flows",
+      "Dashboard & app interface design",
+      "Responsive & accessible UI",
+      "Conversion-focused experiences",
+    ],
+  },
+  {
+    title: "Analytics & Reporting Dashboards",
+    description: "Give users and admins insight with real-time data.",
+    icon: "chart" as const,
+    items: [
+      "Custom admin & user dashboards",
+      "Usage & engagement analytics",
+      "Real-time reporting",
+      "Data visualization & exports",
+    ],
+  },
+];
+
+const saasStats = [
+  {
+    label: "Built to Scale",
+    detail: "Architectures engineered to handle growth from day one.",
+    metric: "7-14 Days",
+    caption: "Average project kickoff time",
+  },
+  {
+    label: "Product-Focused Engineering",
+    detail: "We build with adoption, retention, and revenue in mind.",
+    metric: "100+",
+    caption: "Projects successfully delivered",
+  },
+  {
+    label: "Cloud & DevOps Expertise",
+    detail: "Secure, reliable infrastructure across major cloud providers.",
+    metric: "95%",
+    caption: "Client retention rate",
+  },
+  {
+    label: "MVP to Enterprise",
+    detail: "From early validation to scaling a mature SaaS platform.",
+    metric: "50+",
+    caption: "Trusted clients",
+  },
+  {
+    label: "Transparent Communication",
+    detail: "Clear roadmaps, regular updates, and no hidden costs.",
+    metric: "24/7",
+    caption: "Support & assistance",
+  },
+  {
+    label: "Recurring Revenue Ready",
+    detail: "Subscriptions, billing, and analytics wired in from the start.",
+    metric: "5X ROI",
+    caption: "Average growth potential",
+  },
+];
+
+const saasProcess = [
+  {
+    title: "Discovery & Product Strategy",
+    description: "Define your SaaS vision, users, and core feature set.",
+  },
+  {
+    title: "Architecture & MVP Planning",
+    description: "Design multi-tenant architecture and prioritize the MVP.",
+  },
+  {
+    title: "Development & Integration",
+    description: "Build the platform with billing, dashboards, and DevOps.",
+  },
+  {
+    title: "Launch & Scale",
+    description: "Deploy to the cloud and scale with ongoing support.",
+  },
+];
+
+const mobileAppServiceCards = [
+  {
+    title: "Native iOS & Android Apps",
+    description: "High-performance apps built natively for each platform.",
+    icon: "code" as const,
+    items: [
+      "Swift & Kotlin development",
+      "Platform-specific UX & guidelines",
+      "Device feature integration",
+      "Optimized performance & speed",
+    ],
+  },
+  {
+    title: "Cross-Platform App Development",
+    description: "One codebase, both platforms, faster to market.",
+    icon: "layout" as const,
+    items: [
+      "React Native & Flutter development",
+      "Shared codebase for iOS & Android",
+      "Cost-effective, faster delivery",
+      "Consistent experience across devices",
+    ],
+  },
+  {
+    title: "Mobile UI/UX Design",
+    description: "Intuitive, engaging designs users love to use.",
+    icon: "pen" as const,
+    items: [
+      "User research & wireframing",
+      "Interactive prototypes",
+      "Gesture & motion design",
+      "Accessibility-focused interfaces",
+    ],
+  },
+  {
+    title: "App Backend & API Development",
+    description: "Reliable backends that power your mobile app.",
+    icon: "share" as const,
+    items: [
+      "Scalable backend services",
+      "Secure REST & GraphQL APIs",
+      "Cloud storage & databases",
+      "Push notifications & real-time data",
+    ],
+  },
+  {
+    title: "App Store Deployment & Launch",
+    description: "Smooth submission and launch on every store.",
+    icon: "megaphone" as const,
+    items: [
+      "App Store & Play Store submission",
+      "Store listing optimization (ASO)",
+      "Compliance & guideline checks",
+      "Release & version management",
+    ],
+  },
+  {
+    title: "App Maintenance & Support",
+    description: "Keep your app secure, updated, and bug-free.",
+    icon: "chart" as const,
+    items: [
+      "OS & device compatibility updates",
+      "Bug fixes & enhancements",
+      "Performance monitoring",
+      "Feature updates & support",
+    ],
+  },
+];
+
+const mobileAppStats = [
+  {
+    label: "Native & Cross-Platform",
+    detail: "We choose the right approach for your goals and budget.",
+    metric: "7-14 Days",
+    caption: "Average project kickoff time",
+  },
+  {
+    label: "User-Centric Design",
+    detail: "Apps designed around real user journeys and engagement.",
+    metric: "100+",
+    caption: "Projects successfully delivered",
+  },
+  {
+    label: "Experienced App Developers",
+    detail: "Skilled teams across iOS, Android, and cross-platform stacks.",
+    metric: "95%",
+    caption: "Client retention rate",
+  },
+  {
+    label: "End-to-End Development",
+    detail: "From design and backend to store launch and support.",
+    metric: "50+",
+    caption: "Trusted clients",
+  },
+  {
+    label: "Transparent Communication",
+    detail: "Clear timelines, regular updates, and no hidden costs.",
+    metric: "24/7",
+    caption: "Support & assistance",
+  },
+  {
+    label: "Performance-First Builds",
+    detail: "Smooth, fast, and reliable apps across all devices.",
+    metric: "5X ROI",
+    caption: "Average engagement boost",
+  },
+];
+
+const mobileAppProcess = [
+  {
+    title: "Discovery & Strategy",
+    description: "Define your app idea, users, features, and platforms.",
+  },
+  {
+    title: "Design & Prototyping",
+    description: "Create wireframes, UI design, and interactive prototypes.",
+  },
+  {
+    title: "Development & Integration",
+    description: "Build the app with secure backends and APIs.",
+  },
+  {
+    title: "Launch & Support",
+    description: "Publish to app stores and provide ongoing maintenance.",
+  },
+];
+
 const hiddenDeliverySlugs = new Set([
   "advertising-services",
   "branding-services",
   "content-writing",
+  "custom-software-development",
   "ecommerce-development",
+  "mobile-app-development",
+  "saas-development",
   "ppc-management",
   "seo-service",
   "shopify-development",
@@ -2239,6 +2625,237 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
               <div className={styles.ecommerceProcessGrid}>
                 {wordpressProcess.map((step, index) => (
+                  <article className={styles.ecommerceProcessCard} key={step.title}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : service.slug === "custom-software-development" ? (
+        <section className={styles.ecommerceSection}>
+          <div className={styles.container}>
+            <div className={styles.ecommerceHeader}>
+              <span className={styles.kicker}>Custom software development services</span>
+              <h2>Our Custom Software Development Services</h2>
+              <p>
+                We design and build custom software solutions tailored to your
+                business processes, data, and growth goals.
+              </p>
+            </div>
+
+            <div className={styles.ecommerceGrid}>
+              {customSoftwareServiceCards.map((card) => (
+                <article className={styles.ecommerceCard} key={card.title}>
+                  <div className={styles.ecommerceIcon}>
+                    <ServiceIcon name={card.icon} />
+                  </div>
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                  <ul>
+                    {card.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <Link href="/contact" className={styles.ecommerceLink}>
+                    Learn More
+                    <span aria-hidden="true">-&gt;</span>
+                  </Link>
+                </article>
+              ))}
+            </div>
+
+            <div className={styles.ecommerceStatsSection}>
+              <div className={styles.ecommerceStatsHeader}>
+                <span className={styles.kicker}>Why choose us</span>
+                <h2>Why choose our custom software development company?</h2>
+                <p>
+                  We combine engineering excellence, business insight, and clean
+                  architecture to deliver software that performs.
+                </p>
+              </div>
+
+              <div className={styles.ecommerceStatsGrid}>
+                {customSoftwareStats.map((stat) => (
+                  <article className={styles.ecommerceStatCard} key={stat.label}>
+                    <h3>{stat.label}</h3>
+                    <p>{stat.detail}</p>
+                    <strong>{stat.metric}</strong>
+                    <span>{stat.caption}</span>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.ecommerceProcessSection}>
+              <div className={styles.ecommerceStatsHeader}>
+                <span className={styles.kicker}>Our process</span>
+                <h2>Our custom software development process</h2>
+                <p>
+                  We follow a structured, transparent approach to deliver reliable,
+                  scalable software on time.
+                </p>
+              </div>
+
+              <div className={styles.ecommerceProcessGrid}>
+                {customSoftwareProcess.map((step, index) => (
+                  <article className={styles.ecommerceProcessCard} key={step.title}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : service.slug === "saas-development" ? (
+        <section className={styles.ecommerceSection}>
+          <div className={styles.container}>
+            <div className={styles.ecommerceHeader}>
+              <span className={styles.kicker}>SaaS software development services</span>
+              <h2>Our SaaS Development Services</h2>
+              <p>
+                We build scalable, secure, and market-ready SaaS products from MVP
+                to enterprise scale.
+              </p>
+            </div>
+
+            <div className={styles.ecommerceGrid}>
+              {saasServiceCards.map((card) => (
+                <article className={styles.ecommerceCard} key={card.title}>
+                  <div className={styles.ecommerceIcon}>
+                    <ServiceIcon name={card.icon} />
+                  </div>
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                  <ul>
+                    {card.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <Link href="/contact" className={styles.ecommerceLink}>
+                    Learn More
+                    <span aria-hidden="true">-&gt;</span>
+                  </Link>
+                </article>
+              ))}
+            </div>
+
+            <div className={styles.ecommerceStatsSection}>
+              <div className={styles.ecommerceStatsHeader}>
+                <span className={styles.kicker}>Why choose us</span>
+                <h2>Why choose our SaaS development company?</h2>
+                <p>
+                  We engineer SaaS platforms with scalability, security, and
+                  recurring revenue built in from day one.
+                </p>
+              </div>
+
+              <div className={styles.ecommerceStatsGrid}>
+                {saasStats.map((stat) => (
+                  <article className={styles.ecommerceStatCard} key={stat.label}>
+                    <h3>{stat.label}</h3>
+                    <p>{stat.detail}</p>
+                    <strong>{stat.metric}</strong>
+                    <span>{stat.caption}</span>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.ecommerceProcessSection}>
+              <div className={styles.ecommerceStatsHeader}>
+                <span className={styles.kicker}>Our process</span>
+                <h2>Our SaaS development process</h2>
+                <p>
+                  We follow a proven, iterative approach to take your SaaS product
+                  from idea to scale.
+                </p>
+              </div>
+
+              <div className={styles.ecommerceProcessGrid}>
+                {saasProcess.map((step, index) => (
+                  <article className={styles.ecommerceProcessCard} key={step.title}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : service.slug === "mobile-app-development" ? (
+        <section className={styles.ecommerceSection}>
+          <div className={styles.container}>
+            <div className={styles.ecommerceHeader}>
+              <span className={styles.kicker}>Mobile app development services</span>
+              <h2>Our Mobile App Development Services</h2>
+              <p>
+                We design and develop high-performance mobile apps for iOS and
+                Android that users love to use.
+              </p>
+            </div>
+
+            <div className={styles.ecommerceGrid}>
+              {mobileAppServiceCards.map((card) => (
+                <article className={styles.ecommerceCard} key={card.title}>
+                  <div className={styles.ecommerceIcon}>
+                    <ServiceIcon name={card.icon} />
+                  </div>
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                  <ul>
+                    {card.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <Link href="/contact" className={styles.ecommerceLink}>
+                    Learn More
+                    <span aria-hidden="true">-&gt;</span>
+                  </Link>
+                </article>
+              ))}
+            </div>
+
+            <div className={styles.ecommerceStatsSection}>
+              <div className={styles.ecommerceStatsHeader}>
+                <span className={styles.kicker}>Why choose us</span>
+                <h2>Why choose our mobile app development company?</h2>
+                <p>
+                  We combine intuitive design, solid engineering, and reliable
+                  backends to deliver apps that perform.
+                </p>
+              </div>
+
+              <div className={styles.ecommerceStatsGrid}>
+                {mobileAppStats.map((stat) => (
+                  <article className={styles.ecommerceStatCard} key={stat.label}>
+                    <h3>{stat.label}</h3>
+                    <p>{stat.detail}</p>
+                    <strong>{stat.metric}</strong>
+                    <span>{stat.caption}</span>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.ecommerceProcessSection}>
+              <div className={styles.ecommerceStatsHeader}>
+                <span className={styles.kicker}>Our process</span>
+                <h2>Our mobile app development process</h2>
+                <p>
+                  We follow a structured approach to design, build, and launch
+                  apps that engage and retain users.
+                </p>
+              </div>
+
+              <div className={styles.ecommerceProcessGrid}>
+                {mobileAppProcess.map((step, index) => (
                   <article className={styles.ecommerceProcessCard} key={step.title}>
                     <span>{String(index + 1).padStart(2, "0")}</span>
                     <h3>{step.title}</h3>

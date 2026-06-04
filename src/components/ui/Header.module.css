@@ -5,8 +5,8 @@
 .header {
   position: fixed;
   top: 10px;
-  left: 40px;
-  right: 40px;
+  left: 60px;
+  right: 60px;
   z-index: 300;
   font-family: var(--font-plus-jakarta), sans-serif;
   transition: background 0.35s ease, backdrop-filter 0.35s ease, -webkit-backdrop-filter 0.35s ease,
