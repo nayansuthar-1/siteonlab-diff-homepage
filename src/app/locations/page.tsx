@@ -5,6 +5,7 @@ import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/ui/Footer";
 import { locations } from "@/lib/locations";
 import styles from "./LocationPage.module.css";
+import HeroSmoke from "./HeroSmoke";
 
 export const metadata: Metadata = {
   title: "Digital Marketing Locations | SiteOnLab",
@@ -14,7 +15,8 @@ export const metadata: Metadata = {
 export default function LocationsPage() {
   return (
     <main className={`${styles.main} ${styles.overviewHero}`}>
-      <section className={styles.hero}>
+      <section className={styles.hero} id="locations-hero">
+        <HeroSmoke />
         <div className={styles.container}>
           <div className={styles.overviewIntro}>
             <span className={styles.eyebrow}>SiteOnLab locations</span>
