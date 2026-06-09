@@ -5,12 +5,12 @@ import Image from "next/image";
 import styles from "./ClientsMarquee.module.css";
 
 const clientBrands = [
-  { src: '/brands/galerie.svg', alt: 'Galerie', padding: '32px', scale: 1 },
-  { src: '/brands/stephanie.svg', alt: 'Stephanie', padding: '32px', scale: 1 },
-  { src: '/brands/wing-orbit.png', alt: 'Wing Orbit', padding: '12px', scale: 1 },
-  { src: '/brands/Bhawna_foundation_logo.png', alt: 'Bhawna Foundation', padding: '0px', scale: 1.5 },
-  { src: '/brands/jemie.png', alt: 'Jemie', padding: '0px', scale: 1.5 },
-  { src: '/brands/sr-indus.jpeg', alt: 'SR Indus', padding: '32px', scale: 1 }
+  { src: '/new/Group 11.png', alt: 'Client 1', scale: 1 },
+  { src: '/new/Group 12.png', alt: 'Client 2', scale: 0.65 },
+  { src: '/new/Group 13.png', alt: 'Client 3', scale: 1 },
+  { src: '/new/Mask group.png', alt: 'Client 4', scale: 1 },
+  { src: '/new/Mask group-1.png', alt: 'Client 5', scale: 1 },
+  { src: '/new/Mask group-2.png', alt: 'Client 6', scale: 1.5 },
 ];
 
 export default function ClientsMarquee() {
@@ -30,7 +30,7 @@ export default function ClientsMarquee() {
                       src={brand.src}
                       alt={brand.alt}
                       fill
-                      style={{ objectFit: 'contain', padding: brand.padding, transform: `scale(${brand.scale || 1})` }}
+                      style={{ objectFit: 'contain', padding: '12px', transform: `scale(${brand.scale})` }}
                       sizes="(max-width: 720px) 50vw, 25vw"
                     />
                   </div>
