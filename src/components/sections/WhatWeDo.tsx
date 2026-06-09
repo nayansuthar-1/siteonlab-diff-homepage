@@ -156,6 +156,10 @@ export default function WhatWeDo() {
       {/* Global Background Glow Dynamic */}
       <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[140px] pointer-events-none opacity-[0.15] transition-colors duration-1000 ${categoryData[activeIdx].theme.sectionBg}`} />
 
+      {/* Edge fades — smooth the glow into the surrounding black */}
+      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black to-transparent pointer-events-none z-[5]" />
+      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent pointer-events-none z-[5]" />
+
       <div className="relative z-10 w-full max-w-[1450px] mx-auto px-6 md:px-12 lg:px-20">
         
         {/* Header */}
@@ -285,17 +289,11 @@ export default function WhatWeDo() {
                     </h3>
                   </div>
                   
-                  {/* Description & Link row */}
-                  <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-4 mt-3 md:mt-2">
+                  {/* Description */}
+                  <div className="relative z-10 mt-3 md:mt-2">
                     <p className="hidden md:block text-[#8e95a3] text-[0.85rem] leading-[1.6] max-w-[340px]">
                       {card.desc}
                     </p>
-                    <a href="#" className="flex items-center gap-1.5 text-white hover:text-[#f59e0b] transition-colors group-hover:text-[#f59e0b] font-semibold text-[0.9rem] whitespace-nowrap pb-1">
-                      Learn more 
-                      <svg className="w-4 h-4 text-[#f59e0b]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </a>
                   </div>
                 </div>
                 );
