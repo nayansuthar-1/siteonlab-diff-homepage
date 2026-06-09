@@ -4,165 +4,206 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import styles from "./WebsiteAudit.module.css";
 
-type CheckStatus = "pass" | "warn" | "fail" | "info";
+type Rating = "good" | "needs-improvement" | "poor" | "info";
 
-interface Check {
-  label: string;
-  status: CheckStatus;
-  value?: string;
+interface Audit {
+  id: string;
+  title: string;
   description: string;
+  displayValue: string | null;
+  rating: Rating;
+  weight: number;
 }
 
 interface Category {
   id: string;
   title: string;
-  icon: string;
   score: number | null;
-  summary: string;
-  checks: Check[];
+  audits: Audit[];
 }
 
-interface CoreWebVital {
+interface Metric {
   id: string;
   label: string;
   value: string;
-  rating: "good" | "needs-improvement" | "poor" | "unknown";
-  description: string;
+  rating: Rating;
 }
 
 interface AuditResult {
   url: string;
   finalUrl: string;
   fetchedAt: string;
-  statusCode: number;
+  strategy: "mobile" | "desktop";
   scores: {
-    overall: number;
-    seo: number;
-    performance: number;
-    security: number;
-    bestPractices: number;
+    performance: number | null;
     accessibility: number | null;
+    bestPractices: number | null;
+    seo: number | null;
   };
-  coreWebVitals: CoreWebVital[];
+  cwv: { assessment: "pass" | "fail" | null; metrics: Metric[] };
+  labMetrics: Metric[];
   categories: Category[];
-  notes: { pageSpeed: string | null };
 }
 
+type Strategy = "mobile" | "desktop";
+
 const WORKFLOW_STEPS = [
-  { label: "Fetching your page", detail: "Loading HTML & response headers" },
-  { label: "Running PageSpeed Insights", detail: "Google Lighthouse analysis (this can take a moment)" },
-  { label: "Auditing security & privacy", detail: "Inspecting TLS and security headers" },
+  { label: "Loading your page", detail: "Capturing the page and its resources" },
+  { label: "Measuring performance", detail: "Running a full lab analysis (this takes a moment)" },
+  { label: "Checking accessibility & SEO", detail: "Auditing structure, markup and metadata" },
   { label: "Compiling your report", detail: "Scoring every category" },
 ];
 
+const RATING_COLOR: Record<Rating, string> = {
+  good: "#22c55e",
+  "needs-improvement": "#f59e0b",
+  poor: "#ef4444",
+  info: "#64748b",
+};
+
+// PageSpeed-style thresholds: 0-49 poor, 50-89 needs work, 90-100 good.
+function scoreRating(score: number | null): Rating {
+  if (score === null) return "info";
+  if (score >= 90) return "good";
+  if (score >= 50) return "needs-improvement";
+  return "poor";
+}
 function scoreColor(score: number | null): string {
-  if (score === null) return "#64748b";
-  if (score >= 90) return "#22c55e";
-  if (score >= 75) return "#84cc16";
-  if (score >= 50) return "#f59e0b";
-  return "#ef4444";
+  return RATING_COLOR[scoreRating(score)];
 }
 
-function CategoryIcon({ name }: { name: string }) {
-  const common = {
-    width: 22,
-    height: 22,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 2,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-  };
-  switch (name) {
-    case "search":
-      return (
-        <svg {...common}>
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.3-4.3" />
-        </svg>
-      );
-    case "zap":
-      return (
-        <svg {...common}>
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-        </svg>
-      );
-    case "shield":
-      return (
-        <svg {...common}>
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        </svg>
-      );
-    case "check":
-      return (
-        <svg {...common}>
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-          <polyline points="22 4 12 14.01 9 11.01" />
-        </svg>
-      );
-    default:
-      return null;
-  }
-}
-
-function ScoreRing({ score, size = 132 }: { score: number | null; size?: number }) {
-  const stroke = 9;
+function ScoreGauge({ score, label }: { score: number | null; label: string }) {
+  const size = 118;
+  const stroke = 8;
   const radius = (size - stroke) / 2;
   const circumference = 2 * Math.PI * radius;
-  const pct = score === null ? 0 : score;
+  const pct = score ?? 0;
   const offset = circumference - (pct / 100) * circumference;
   const color = scoreColor(score);
   return (
-    <div className={styles.ring} style={{ width: size, height: size }}>
-      <svg width={size} height={size}>
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          stroke="rgba(255,255,255,0.08)"
-          strokeWidth={stroke}
-          fill="none"
-        />
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          stroke={color}
-          strokeWidth={stroke}
-          fill="none"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          transform={`rotate(-90 ${size / 2} ${size / 2})`}
-          style={{ transition: "stroke-dashoffset 1s ease" }}
-        />
-      </svg>
-      <div className={styles.ringLabel}>
-        <span className={styles.ringScore} style={{ color }}>
-          {score === null ? "—" : score}
+    <div className={styles.gauge}>
+      <div className={styles.gaugeRing} style={{ width: size, height: size }}>
+        <svg width={size} height={size}>
+          <circle cx={size / 2} cy={size / 2} r={radius} stroke="rgba(255,255,255,0.08)" strokeWidth={stroke} fill="none" />
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke={color}
+            strokeWidth={stroke}
+            fill="none"
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            transform={`rotate(-90 ${size / 2} ${size / 2})`}
+            style={{ transition: "stroke-dashoffset 1s ease" }}
+          />
+        </svg>
+        <span className={styles.gaugeScore} style={{ color }}>
+          {score ?? "—"}
         </span>
-        <span className={styles.ringMax}>/ 100</span>
+      </div>
+      <span className={styles.gaugeLabel}>{label}</span>
+    </div>
+  );
+}
+
+function MetricPill({ metric }: { metric: Metric }) {
+  const color = RATING_COLOR[metric.rating];
+  return (
+    <div className={styles.metric}>
+      <span className={styles.metricSquare} style={{ background: color }} />
+      <div className={styles.metricBody}>
+        <span className={styles.metricLabel}>{metric.label}</span>
+        <span className={styles.metricValue} style={{ color }}>
+          {metric.value}
+        </span>
       </div>
     </div>
   );
 }
 
-const STATUS_META: Record<CheckStatus, { color: string; symbol: string; label: string }> = {
-  pass: { color: "#22c55e", symbol: "✓", label: "Pass" },
-  warn: { color: "#f59e0b", symbol: "!", label: "Warning" },
-  fail: { color: "#ef4444", symbol: "✕", label: "Fail" },
-  info: { color: "#64748b", symbol: "i", label: "Info" },
-};
+function CategorySection({ category }: { category: Category }) {
+  const [showPassed, setShowPassed] = useState(false);
+  const problems = category.audits.filter(
+    (a) => a.rating === "poor" || a.rating === "needs-improvement",
+  );
+  const rest = category.audits.filter((a) => a.rating === "good" || a.rating === "info");
+
+  const renderAudit = (a: Audit) => (
+    <li key={a.id} className={styles.audit}>
+      <span className={styles.auditDot} style={{ background: RATING_COLOR[a.rating] }} />
+      <div className={styles.auditBody}>
+        <div className={styles.auditTop}>
+          <span className={styles.auditTitle}>{a.title}</span>
+          {a.displayValue && (
+            <span className={styles.auditValue} style={{ color: RATING_COLOR[a.rating] }}>
+              {a.displayValue}
+            </span>
+          )}
+        </div>
+        {a.description && <span className={styles.auditDesc}>{a.description}</span>}
+      </div>
+    </li>
+  );
+
+  return (
+    <div className={styles.catCard}>
+      <div className={styles.catHeader}>
+        <h3 className={styles.catTitle}>{category.title}</h3>
+        <span className={styles.catScore} style={{ color: scoreColor(category.score) }}>
+          {category.score ?? "—"}
+          <span>/100</span>
+        </span>
+      </div>
+      <div className={styles.catBar}>
+        <div
+          className={styles.catBarFill}
+          style={{ width: `${category.score ?? 0}%`, background: scoreColor(category.score) }}
+        />
+      </div>
+
+      {problems.length > 0 ? (
+        <ul className={styles.audits}>{problems.map(renderAudit)}</ul>
+      ) : (
+        <p className={styles.catClean}>No issues found in this category. Nice work!</p>
+      )}
+
+      {rest.length > 0 && (
+        <>
+          <button className={styles.toggle} onClick={() => setShowPassed((v) => !v)}>
+            {showPassed ? "Hide" : "Show"} {rest.length} passed &amp; informational checks
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ transform: showPassed ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          {showPassed && <ul className={styles.audits}>{rest.map(renderAudit)}</ul>}
+        </>
+      )}
+    </div>
+  );
+}
 
 export default function WebsiteAudit() {
   const [url, setUrl] = useState("");
+  const [strategy, setStrategy] = useState<Strategy>("mobile");
   const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const [result, setResult] = useState<AuditResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const stepTimer = useRef<ReturnType<typeof setInterval> | null>(null);
   const resultsRef = useRef<HTMLDivElement | null>(null);
+  const lastAudited = useRef<string>("");
 
   useEffect(() => {
     return () => {
@@ -176,23 +217,23 @@ export default function WebsiteAudit() {
     }
   }, [result]);
 
-  async function runAudit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!url.trim() || loading) return;
-
+  async function audit(targetUrl: string, strat: Strategy) {
+    if (!targetUrl.trim() || loading) return;
+    lastAudited.current = targetUrl.trim();
     setLoading(true);
     setError(null);
     setResult(null);
     setActiveStep(0);
 
-    // Advance the workflow steps for feedback while the request runs.
     if (stepTimer.current) clearInterval(stepTimer.current);
     stepTimer.current = setInterval(() => {
       setActiveStep((s) => (s < WORKFLOW_STEPS.length - 1 ? s + 1 : s));
-    }, 4000);
+    }, 5000);
 
     try {
-      const res = await fetch(`/api/website-audit?url=${encodeURIComponent(url.trim())}`);
+      const res = await fetch(
+        `/api/website-audit?url=${encodeURIComponent(targetUrl.trim())}&strategy=${strat}`,
+      );
       const data = await res.json();
       if (!res.ok) {
         setError(data.error || "Something went wrong while auditing this site.");
@@ -208,8 +249,20 @@ export default function WebsiteAudit() {
     }
   }
 
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    audit(url, strategy);
+  }
+
+  function switchStrategy(strat: Strategy) {
+    if (strat === strategy || loading) return;
+    setStrategy(strat);
+    if (lastAudited.current) audit(lastAudited.current, strat);
+  }
+
   return (
     <>
+      {/* ---------- HERO (unchanged design) ---------- */}
       <section className={styles.hero}>
         <div className={styles.glow} />
         <div className={styles.container}>
@@ -224,12 +277,11 @@ export default function WebsiteAudit() {
             Is your website <span className={styles.highlight}>healthy?</span>
           </h1>
           <p className={styles.subtitle}>
-            Enter a URL for an instant report on technical SEO, performance, Core Web Vitals,
-            security, and best practices. Powered by Google PageSpeed Insights and live header
-            analysis.
+            Enter a URL for an instant report on performance, accessibility, SEO, and best
+            practices — with Core Web Vitals and a prioritized list of what to fix.
           </p>
 
-          <form className={styles.form} onSubmit={runAudit}>
+          <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.inputWrap}>
               <svg className={styles.inputIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
@@ -260,20 +312,19 @@ export default function WebsiteAudit() {
 
       <div ref={resultsRef} />
 
+      {/* ---------- LOADING ---------- */}
       {loading && (
         <section className={styles.workflow}>
           <div className={styles.container}>
             <div className={styles.workflowCard}>
               <div className={styles.spinner} />
-              <h2 className={styles.workflowTitle}>Auditing {url}</h2>
+              <h2 className={styles.workflowTitle}>Auditing {lastAudited.current}</h2>
               <ol className={styles.steps}>
                 {WORKFLOW_STEPS.map((step, i) => {
                   const state = i < activeStep ? "done" : i === activeStep ? "active" : "pending";
                   return (
                     <li key={step.label} className={`${styles.step} ${styles[state]}`}>
-                      <span className={styles.stepDot}>
-                        {state === "done" ? "✓" : i + 1}
-                      </span>
+                      <span className={styles.stepDot}>{state === "done" ? "✓" : i + 1}</span>
                       <div className={styles.stepText}>
                         <span className={styles.stepLabel}>{step.label}</span>
                         <span className={styles.stepDetail}>{step.detail}</span>
@@ -287,6 +338,7 @@ export default function WebsiteAudit() {
         </section>
       )}
 
+      {/* ---------- ERROR ---------- */}
       {error && !loading && (
         <section className={styles.errorSection}>
           <div className={styles.container}>
@@ -297,150 +349,111 @@ export default function WebsiteAudit() {
                 <line x1="12" y1="16" x2="12.01" y2="16" />
               </svg>
               <p>{error}</p>
+              {lastAudited.current && (
+                <button className={styles.rerun} onClick={() => audit(lastAudited.current, strategy)}>
+                  Try again
+                </button>
+              )}
             </div>
           </div>
         </section>
       )}
 
+      {/* ---------- RESULTS ---------- */}
       {result && !loading && (
         <section className={styles.results}>
           <div className={styles.container}>
-            {/* Overview */}
-            <div className={styles.overview}>
-              <div className={styles.overviewMain}>
-                <ScoreRing score={result.scores.overall} />
-                <div>
-                  <span className={styles.overviewLabel}>Overall health score</span>
-                  <h2 className={styles.overviewUrl}>{result.finalUrl}</h2>
-                  <p className={styles.overviewMeta}>
-                    Audited {new Date(result.fetchedAt).toLocaleString()} · HTTP {result.statusCode}
-                  </p>
-                  <button
-                    className={styles.rerun}
-                    onClick={() => {
-                      setResult(null);
-                      window.scrollTo({ top: 0, behavior: "smooth" });
+            {/* report bar */}
+            <div className={styles.reportBar}>
+              <div>
+                <span className={styles.reportLabel}>Report for</span>
+                <h2 className={styles.reportUrl}>{result.finalUrl}</h2>
+                <span className={styles.reportMeta}>
+                  Analyzed {new Date(result.fetchedAt).toLocaleString()}
+                </span>
+              </div>
+              <div className={styles.strategyTabs}>
+                <button
+                  className={`${styles.strategyTab} ${strategy === "mobile" ? styles.strategyActive : ""}`}
+                  onClick={() => switchStrategy("mobile")}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="5" y="2" width="14" height="20" rx="2" /><line x1="12" y1="18" x2="12.01" y2="18" />
+                  </svg>
+                  Mobile
+                </button>
+                <button
+                  className={`${styles.strategyTab} ${strategy === "desktop" ? styles.strategyActive : ""}`}
+                  onClick={() => switchStrategy("desktop")}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
+                  </svg>
+                  Desktop
+                </button>
+              </div>
+            </div>
+
+            {/* Core Web Vitals assessment */}
+            <div className={styles.cwvSection}>
+              <div className={styles.cwvHeader}>
+                <h3 className={styles.sectionHeading}>Core Web Vitals Assessment</h3>
+                {result.cwv.assessment && (
+                  <span
+                    className={styles.cwvVerdict}
+                    style={{
+                      color: result.cwv.assessment === "pass" ? "#22c55e" : "#ef4444",
+                      borderColor: result.cwv.assessment === "pass" ? "#22c55e" : "#ef4444",
                     }}
                   >
-                    Run another audit
-                  </button>
+                    {result.cwv.assessment === "pass" ? "Passed" : "Failed"}
+                  </span>
+                )}
+              </div>
+              {result.cwv.metrics.length > 0 ? (
+                <div className={styles.metricsGrid}>
+                  {result.cwv.metrics.map((m) => (
+                    <MetricPill key={m.id} metric={m} />
+                  ))}
                 </div>
-              </div>
-
-              <div className={styles.scorePills}>
-                {[
-                  { label: "SEO", v: result.scores.seo },
-                  { label: "Performance", v: result.scores.performance },
-                  { label: "Security", v: result.scores.security },
-                  { label: "Best Practices", v: result.scores.bestPractices },
-                  ...(result.scores.accessibility !== null
-                    ? [{ label: "Accessibility", v: result.scores.accessibility }]
-                    : []),
-                ].map((p) => (
-                  <div key={p.label} className={styles.pill}>
-                    <span className={styles.pillScore} style={{ color: scoreColor(p.v) }}>
-                      {p.v}
-                    </span>
-                    <span className={styles.pillLabel}>{p.label}</span>
-                  </div>
-                ))}
-              </div>
+              ) : (
+                <p className={styles.noField}>
+                  Not enough real-world usage data is available for this site yet. The lab results
+                  below still provide a full picture of its health.
+                </p>
+              )}
             </div>
 
-            {result.notes.pageSpeed && (
-              <p className={styles.notice}>
-                Note: {result.notes.pageSpeed} Some performance metrics may be estimated from a
-                direct fetch.
-              </p>
+            {/* Category gauges */}
+            <div className={styles.gauges}>
+              <ScoreGauge score={result.scores.performance} label="Performance" />
+              <ScoreGauge score={result.scores.accessibility} label="Accessibility" />
+              <ScoreGauge score={result.scores.bestPractices} label="Best Practices" />
+              <ScoreGauge score={result.scores.seo} label="SEO" />
+            </div>
+
+            <div className={styles.legend}>
+              <span><i style={{ background: "#ef4444" }} /> 0–49</span>
+              <span><i style={{ background: "#f59e0b" }} /> 50–89</span>
+              <span><i style={{ background: "#22c55e" }} /> 90–100</span>
+            </div>
+
+            {/* Lab metrics */}
+            {result.labMetrics.length > 0 && (
+              <div className={styles.cwvSection}>
+                <h3 className={styles.sectionHeading}>Metrics</h3>
+                <div className={styles.metricsGrid}>
+                  {result.labMetrics.map((m) => (
+                    <MetricPill key={m.id} metric={m} />
+                  ))}
+                </div>
+              </div>
             )}
 
-            {/* Core Web Vitals */}
-            <div className={styles.cwvSection}>
-              <h3 className={styles.sectionHeading}>Core Web Vitals</h3>
-              <div className={styles.cwvGrid}>
-                {result.coreWebVitals.map((v) => {
-                  const ratingColor =
-                    v.rating === "good"
-                      ? "#22c55e"
-                      : v.rating === "needs-improvement"
-                        ? "#f59e0b"
-                        : v.rating === "poor"
-                          ? "#ef4444"
-                          : "#64748b";
-                  return (
-                    <div key={v.id} className={styles.cwvCard}>
-                      <div className={styles.cwvTop}>
-                        <span className={styles.cwvName}>{v.label}</span>
-                        <span className={styles.cwvBadge} style={{ color: ratingColor, borderColor: ratingColor }}>
-                          {v.rating === "needs-improvement" ? "needs work" : v.rating}
-                        </span>
-                      </div>
-                      <span className={styles.cwvValue} style={{ color: ratingColor }}>
-                        {v.value}
-                      </span>
-                      <span className={styles.cwvDesc}>{v.description}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Category breakdowns */}
+            {/* Per-category diagnostics */}
             <div className={styles.categories}>
               {result.categories.map((cat) => (
-                <div key={cat.id} className={styles.catCard}>
-                  <div className={styles.catHeader}>
-                    <div className={styles.catHeaderLeft}>
-                      <span className={styles.catIcon} style={{ color: scoreColor(cat.score) }}>
-                        <CategoryIcon name={cat.icon} />
-                      </span>
-                      <div>
-                        <h3 className={styles.catTitle}>{cat.title}</h3>
-                        <span className={styles.catSummary}>{cat.summary}</span>
-                      </div>
-                    </div>
-                    <div className={styles.catScore} style={{ color: scoreColor(cat.score) }}>
-                      {cat.score ?? "—"}
-                      <span>/100</span>
-                    </div>
-                  </div>
-                  <div className={styles.catBar}>
-                    <div
-                      className={styles.catBarFill}
-                      style={{
-                        width: `${cat.score ?? 0}%`,
-                        background: scoreColor(cat.score),
-                      }}
-                    />
-                  </div>
-                  <ul className={styles.checks}>
-                    {cat.checks.map((check, i) => {
-                      const meta = STATUS_META[check.status];
-                      return (
-                        <li key={i} className={styles.check}>
-                          <span
-                            className={styles.checkBadge}
-                            style={{ color: meta.color, borderColor: meta.color }}
-                            title={meta.label}
-                          >
-                            {meta.symbol}
-                          </span>
-                          <div className={styles.checkBody}>
-                            <div className={styles.checkTop}>
-                              <span className={styles.checkLabel}>{check.label}</span>
-                              {check.value && (
-                                <span className={styles.checkValue} style={{ color: meta.color }}>
-                                  {check.value}
-                                </span>
-                              )}
-                            </div>
-                            <span className={styles.checkDesc}>{check.description}</span>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
+                <CategorySection key={cat.id} category={cat} />
               ))}
             </div>
 
@@ -449,7 +462,7 @@ export default function WebsiteAudit() {
               <h3>Want us to fix these issues for you?</h3>
               <p>
                 Our team turns audit findings into real growth — faster pages, higher rankings, and
-                a more secure site.
+                a more accessible, secure site.
               </p>
               <Link href="/contact" className={styles.ctaBtn}>
                 Talk to an expert
