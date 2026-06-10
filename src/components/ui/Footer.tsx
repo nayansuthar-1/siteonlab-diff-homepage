@@ -11,19 +11,47 @@ const Footer = ({ showSchedule = true }: FooterProps) => {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        {/* Top Section: Schedule a Call */}
+        {/* Top Section: Bring your brand to life CTA */}
         {showSchedule && (
-          <div className={styles.scheduleSection}>
-            <span className={styles.scheduleLabel}>Schedule a call</span>
-            <h2 className={styles.scheduleHeading}>
-              Tell us about your project idea and let us guide you
-            </h2>
-            <Link href="/contact" className={styles.bookButton}>
-              <span>Book a meeting</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className={styles.arrowIcon}>
-                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
+          <div className={styles.ctaSection}>
+            <div className={styles.ctaVisual}>
+              <Image
+                src="/contact.svg"
+                alt=""
+                width={420}
+                height={460}
+                className={styles.ctaImage}
+                aria-hidden="true"
+              />
+            </div>
+
+            <div className={styles.ctaContent}>
+              <h2 className={styles.ctaHeading}>
+                Bring the magic of
+                <br />
+                your brand to life.
+              </h2>
+
+              <div className={styles.ctaMeta}>
+                <span className={styles.ctaAvatar}>
+                  <Image
+                    src="/Siteon_logo-removebg-preview.png"
+                    alt="SiteOnLab"
+                    width={52}
+                    height={52}
+                  />
+                </span>
+                <p className={styles.ctaText}>
+                  Work with a full-service digital agency trusted by founders and
+                  growing brands. Schedule a one-on-one with our team and let&rsquo;s
+                  map out your next move.
+                </p>
+              </div>
+
+              <Link href="/contact" className={styles.ctaButton}>
+                Start a project
+              </Link>
+            </div>
           </div>
         )}
 

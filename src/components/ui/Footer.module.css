@@ -16,62 +16,94 @@
   align-items: center;
 }
 
-/* ─── Schedule Section ─── */
-.scheduleSection {
+/* ─── CTA Section (Bring your brand to life) ─── */
+.ctaSection {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  gap: 64px;
+  width: 100%;
+  margin-bottom: 90px;
+}
+
+.ctaVisual {
+  display: flex;
+  justify-content: center;
+}
+
+.ctaImage {
+  width: 100%;
+  max-width: 290px;
+  height: auto;
+}
+
+.ctaContent {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 80px;
+  align-items: flex-start;
 }
 
-.scheduleLabel {
-  display: block;
-  font-size: 14px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
-  letter-spacing: 0.1em;
-  margin-bottom: 16px;
+.ctaHeading {
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
   font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: #ece7dd;
+  margin: 0 0 36px;
 }
 
-.scheduleHeading {
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 32px;
-  max-width: 700px;
-  letter-spacing: -0.02em;
-}
-
-.bookButton {
+.ctaMeta {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 18px;
+  max-width: 560px;
+  margin-bottom: 36px;
+}
+
+.ctaAvatar {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   background: #1a1a1e;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ctaAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+}
+
+.ctaText {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 15px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 100px;
   color: #fff;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }
 
-.bookButton:hover {
-  background: #25252a;
-  border-color: rgba(255, 255, 255, 0.2);
+.ctaButton:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-}
-
-.arrowIcon {
-  transition: transform 0.3s ease;
-}
-
-.bookButton:hover .arrowIcon {
-  transform: translateX(4px);
 }
 
 /* ─── Divider ─── */
@@ -246,13 +278,28 @@
     gap: 24px;
     text-align: center;
   }
-  
+
   .left, .right {
     justify-content: center;
   }
 
-  .scheduleHeading {
-    font-size: 32px;
+  .ctaSection {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .ctaContent {
+    align-items: center;
+  }
+
+  .ctaImage {
+    max-width: 240px;
+  }
+
+  .ctaMeta {
+    text-align: left;
   }
 
   .address {
@@ -283,9 +330,10 @@
     padding: 0 24px;
   }
 
-  .scheduleHeading {
-    font-size: 26px;
-    margin-bottom: 24px;
+  .ctaMeta {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
   }
 
   .bottomBar {

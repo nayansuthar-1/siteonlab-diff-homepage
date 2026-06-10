@@ -79,7 +79,6 @@ export default function DomainExpertise({
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>
-          <span className={styles.label}>Domain expertise</span>
           <h2 className={styles.heading}>{title}</h2>
           <p className={styles.subheading}>{subtitle}</p>
         </div>

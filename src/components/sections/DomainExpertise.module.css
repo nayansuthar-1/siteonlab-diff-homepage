@@ -14,21 +14,9 @@
 
 /* ─── Header ─── */
 .header {
-  margin-bottom: 64px;
+  margin: 0 auto 64px;
   max-width: 760px;
-}
-
-.label {
-  display: inline-block;
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 6px 14px;
-  border-radius: 999px;
-  margin-bottom: 20px;
+  text-align: center;
 }
 
 .heading {
