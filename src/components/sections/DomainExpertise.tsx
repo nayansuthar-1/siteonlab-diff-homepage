@@ -4,65 +4,62 @@ import styles from "./DomainExpertise.module.css";
 const domainData = [
   {
     number: "01",
-    title: "Finance",
-    desc: "Build a secure and reliable fintech app to transform financial operations and enhance customer engagement.",
+    title: "Web Development",
+    desc: "Build fast, scalable, and secure websites and web apps — engineered for performance, conversions, and effortless growth.",
     theme: "purple",
-    tags: ["Payments", "Banking", "Trading", "Wallets", "Compliance"],
+    tags: ["Next.js", "React", "Web Apps", "E-commerce", "Performance"],
     icon: (
-      <svg width="100%" height="100%" viewBox="0 0 32 32" fill="none">
-        <defs>
-          <linearGradient id="finTop" x1="16" y1="4" x2="16" y2="15" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#A855F7" />
-            <stop offset="100%" stopColor="#6366F1" />
-          </linearGradient>
-          <linearGradient id="finBot" x1="16" y1="17" x2="16" y2="28" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#60A5FA" />
-            <stop offset="100%" stopColor="#1E40AF" />
-          </linearGradient>
-        </defs>
-        <path d="M6 15C6 15 6 4 16 4C26 4 26 15 26 15H6Z" fill="url(#finTop)" />
-        <path d="M6 17C6 17 6 28 16 28C26 28 26 17 26 17H6Z" fill="url(#finBot)" />
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 32 32"
+        fill="none"
+        stroke="#fff"
+        strokeWidth={2.2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M11 10 4 16l7 6" />
+        <path d="M21 10l7 6-7 6" />
+        <path d="M18 6 14 26" />
       </svg>
     ),
   },
   {
     number: "02",
-    title: "Education",
-    desc: "Develop self-learning apps and platforms for corporate training and improve the learning experience for both teachers and students.",
+    title: "SEO Service",
+    desc: "Boost your search rankings and organic traffic with data-driven, technical, and on-page SEO built to keep you visible.",
     theme: "red",
-    tags: ["E-Learning", "LMS", "Corporate Training", "Assessments", "EdTech"],
+    tags: ["Technical SEO", "On-Page", "Keyword Research", "Local SEO", "Analytics"],
     icon: (
-      <svg width="100%" height="100%" viewBox="0 0 32 32" fill="none">
-        <defs>
-          <linearGradient id="eduGradient" x1="16" y1="6" x2="16" y2="26" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#EF4444" />
-            <stop offset="100%" stopColor="#7F1D1D" />
-          </linearGradient>
-        </defs>
-        <path d="M10 6C10 6 8 6 8 8V24C8 26 10 26 10 26H24V6H10Z" fill="url(#eduGradient)" />
-        <path d="M22 6H24V26H22V6Z" fill="#DC2626" />
-        <path d="M12 6H14V26H12V6Z" fill="rgba(255,255,255,0.1)" />
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 32 32"
+        fill="none"
+        stroke="#fff"
+        strokeWidth={2.2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="13" cy="13" r="8.5" />
+        <path d="M19.5 19.5 27 27" />
+        <path d="M9 15.5l2.5-3.5 2.2 2.4 3.3-4.4" />
       </svg>
     ),
   },
   {
     number: "03",
-    title: "Healthcare",
-    desc: "Create healthcare solutions to enhance diagnostic accuracy, improve patient care, and optimize operational costs.",
+    title: "UI/UX Design",
+    desc: "Craft intuitive, engaging interfaces backed by research — turning every interaction into a seamless, delightful experience.",
     theme: "teal",
-    tags: ["Telemedicine", "Diagnostics", "Patient Care", "EHR", "MedTech"],
+    tags: ["UI Design", "UX Research", "Prototyping", "Wireframing", "Design Systems"],
     icon: (
       <svg width="100%" height="100%" viewBox="0 0 32 32" fill="none">
-        <defs>
-          <radialGradient id="healthGlow" cx="16" cy="16" r="16" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#60A5FA" />
-            <stop offset="70%" stopColor="#2563EB" />
-            <stop offset="100%" stopColor="#1E3A8A" />
-          </radialGradient>
-        </defs>
-        <path d="M16 4V28M10 6.5L22 25.5M4 12L28 20M4 20L28 12M10 25.5L22 6.5"
-          stroke="url(#healthGlow)" strokeWidth="4.5" strokeLinecap="round" />
-        <circle cx="16" cy="16" r="4" fill="#93C5FD" opacity="0.8" />
+        <path
+          d="M16 3 L19 13 L29 16 L19 19 L16 29 L13 19 L3 16 L13 13 Z"
+          fill="#fff"
+        />
       </svg>
     ),
   },
