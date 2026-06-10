@@ -1,6 +1,4 @@
-"use client";
-import React, { useEffect, useRef } from "react";
-import Image from "next/image";
+import React from "react";
 import styles from "./DomainExpertise.module.css";
 
 const domainData = [
@@ -8,8 +6,8 @@ const domainData = [
     number: "01",
     title: "Finance",
     desc: "Build a secure and reliable fintech app to transform financial operations and enhance customer engagement.",
-    image: "/finance.png",
     theme: "purple",
+    tags: ["Payments", "Banking", "Trading", "Wallets", "Compliance"],
     icon: (
       <svg width="100%" height="100%" viewBox="0 0 32 32" fill="none">
         <defs>
@@ -31,8 +29,8 @@ const domainData = [
     number: "02",
     title: "Education",
     desc: "Develop self-learning apps and platforms for corporate training and improve the learning experience for both teachers and students.",
-    image: "/education.png",
     theme: "red",
+    tags: ["E-Learning", "LMS", "Corporate Training", "Assessments", "EdTech"],
     icon: (
       <svg width="100%" height="100%" viewBox="0 0 32 32" fill="none">
         <defs>
@@ -51,8 +49,8 @@ const domainData = [
     number: "03",
     title: "Healthcare",
     desc: "Create healthcare solutions to enhance diagnostic accuracy, improve patient care, and optimize operational costs.",
-    image: "/healthcare.png",
     theme: "teal",
+    tags: ["Telemedicine", "Diagnostics", "Patient Care", "EHR", "MedTech"],
     icon: (
       <svg width="100%" height="100%" viewBox="0 0 32 32" fill="none">
         <defs>
@@ -62,7 +60,7 @@ const domainData = [
             <stop offset="100%" stopColor="#1E3A8A" />
           </radialGradient>
         </defs>
-        <path d="M16 4V28M10 6.5L22 25.5M4 12L28 20M4 20L28 12M10 25.5L22 6.5" 
+        <path d="M16 4V28M10 6.5L22 25.5M4 12L28 20M4 20L28 12M10 25.5L22 6.5"
           stroke="url(#healthGlow)" strokeWidth="4.5" strokeLinecap="round" />
         <circle cx="16" cy="16" r="4" fill="#93C5FD" opacity="0.8" />
       </svg>
@@ -79,114 +77,51 @@ export default function DomainExpertise({
   title = "Domain expertise",
   subtitle = "Siteon Lab blends cutting-edge technologies, expert engineering skills, and domain-specific knowledge to build top-notch solutions in fintech, edtech, and medtech.",
 }: DomainExpertiseProps) {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const activeCardRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    let frameId = 0;
-    const mobileQuery = window.matchMedia("(max-width: 1024px)");
-
-    const updateActiveCard = () => {
-      frameId = 0;
-
-      const cards = sectionRef.current?.querySelectorAll<HTMLElement>(`.${styles.card}`);
-      if (!cards?.length) return;
-
-      if (!mobileQuery.matches) {
-        activeCardRef.current?.classList.remove(styles.active);
-        activeCardRef.current = null;
-        return;
-      }
-
-      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
-      const viewportTop = window.visualViewport?.offsetTop ?? 0;
-      const viewportBottom = viewportTop + viewportHeight;
-      const viewportCenter = viewportTop + viewportHeight / 2;
-
-      const closestCard = Array.from(cards).reduce<{
-        card: HTMLElement | null;
-        distance: number;
-      }>((closest, card) => {
-        const rect = card.getBoundingClientRect();
-        const cardCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(viewportCenter - cardCenter);
-        const isVisible = rect.bottom > viewportTop && rect.top < viewportBottom;
-
-        if (isVisible && distance < closest.distance) {
-          return { card, distance };
-        }
-
-        return closest;
-      }, { card: null, distance: Infinity }).card;
-
-      if (closestCard === activeCardRef.current) return;
-
-      activeCardRef.current?.classList.remove(styles.active);
-      closestCard?.classList.add(styles.active);
-      activeCardRef.current = closestCard;
-    };
-
-    const scheduleUpdate = () => {
-      if (frameId) return;
-      frameId = window.requestAnimationFrame(updateActiveCard);
-    };
-
-    scheduleUpdate();
-
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
-    window.addEventListener("orientationchange", scheduleUpdate);
-    window.visualViewport?.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.visualViewport?.addEventListener("resize", scheduleUpdate);
-    mobileQuery.addEventListener("change", scheduleUpdate);
-
-    return () => {
-      if (frameId) window.cancelAnimationFrame(frameId);
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-      window.removeEventListener("orientationchange", scheduleUpdate);
-      window.visualViewport?.removeEventListener("scroll", scheduleUpdate);
-      window.visualViewport?.removeEventListener("resize", scheduleUpdate);
-      mobileQuery.removeEventListener("change", scheduleUpdate);
-    };
-  }, []);
-
   return (
-    <section ref={sectionRef} className={styles.section}>
+    <section className={styles.section}>
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>
+          <span className={styles.label}>Domain expertise</span>
           <h2 className={styles.heading}>{title}</h2>
-          <p className={styles.subheading}>
-            {subtitle}
-          </p>
+          <p className={styles.subheading}>{subtitle}</p>
         </div>
 
-        {/* Cards */}
-        <div className={styles.grid}>
+        {/* Stacking cards */}
+        <ul
+          className={styles.cards}
+          style={{ ["--cards-count" as string]: domainData.length }}
+        >
           {domainData.map((item, idx) => (
-            <div
-              key={idx}
-              className={`${styles.card} ${styles[item.theme]}`}
+            <li
+              key={item.title}
+              className={styles.cardOuter}
+              style={{ ["--index" as string]: idx + 1 }}
             >
-              {/* Inner shell with border-radius & overflow hidden */}
-              <div className={styles.cardInner}>
-                {/* Colored glow overlay */}
-                <div className={styles.glowOverlay} />
+              <article className={`${styles.card} ${styles[item.theme]}`}>
+                <div className={styles.glow} />
 
-                <div className={styles.cardContent}>
+                {/* Gradient orb top-right */}
+                <div className={styles.orb}>
+                  <span className={styles.orbIcon}>{item.icon}</span>
+                </div>
+
+                {/* Content bottom-left */}
+                <div className={styles.content}>
                   <span className={styles.number}>{item.number}</span>
+                  <h3 className={styles.title}>{item.title}</h3>
 
-                  <div className={styles.titleRow}>
-                    <span className={styles.icon}>{item.icon}</span>
-                    <h3 className={styles.title}>{item.title}</h3>
+                  <div className={styles.tags}>
+                    {item.tags.map((tag) => (
+                      <span key={tag} className={styles.tag}>
+                        {tag}
+                      </span>
+                    ))}
                   </div>
 
                   <p className={styles.desc}>{item.desc}</p>
 
-                  <a href="#" className={styles.learnMore}>
+                  <a href="#" className={styles.cta}>
                     Learn more
                     <svg
                       width="18"
@@ -203,21 +138,10 @@ export default function DomainExpertise({
                     </svg>
                   </a>
                 </div>
-              </div>
-
-              {/* Image outside cardInner so it can overflow 8px */}
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  width={400}
-                  height={300}
-                  className={styles.cardImage}
-                />
-              </div>
-            </div>
+              </article>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
