@@ -106,16 +106,49 @@
   transform: translateY(-2px);
 }
 
-/* ─── Divider ─── */
-.divider {
+/* ─── Footer Card ─── */
+.card {
+  position: relative;
   width: 100%;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  margin-bottom: 40px;
+  background: #161618;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 32px;
+  padding: 72px 64px 48px;
+  overflow: hidden;
+}
+
+.bigLine {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(2.25rem, 6vw, 5rem);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: #ece7dd;
+  margin: 0 0 90px;
+  max-width: 16ch;
+}
+
+/* Decorative brand mark, bottom-left, clipped by the card */
+.cardMark {
+  position: absolute;
+  left: -50px;
+  bottom: -70px;
+  width: 360px;
+  height: 360px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cardMark svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* ─── Footer Grid ─── */
 .footerGrid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
   gap: 40px;
@@ -178,6 +211,8 @@
 
 /* ─── Bottom Bar ─── */
 .bottomBar {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -258,6 +293,15 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 1024px) {
+  .card {
+    padding: 56px 40px 40px;
+    border-radius: 28px;
+  }
+
+  .bigLine {
+    margin-bottom: 64px;
+  }
+
   .footerGrid {
     grid-template-columns: 1fr 1fr;
     gap: 60px 40px;
@@ -325,9 +369,26 @@
   .footer {
     padding: 60px 0 30px;
   }
-  
+
   .container {
     padding: 0 24px;
+  }
+
+  .card {
+    padding: 40px 24px 32px;
+    border-radius: 24px;
+  }
+
+  .bigLine {
+    margin-bottom: 48px;
+    max-width: 100%;
+  }
+
+  .cardMark {
+    width: 240px;
+    height: 240px;
+    left: -40px;
+    bottom: -50px;
   }
 
   .ctaMeta {

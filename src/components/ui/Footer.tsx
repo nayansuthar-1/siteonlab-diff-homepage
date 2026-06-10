@@ -55,11 +55,25 @@ const Footer = ({ showSchedule = true }: FooterProps) => {
           </div>
         )}
 
-        {/* Divider */}
-        <div className={styles.divider} />
+        {/* Footer Card */}
+        <div className={styles.card}>
+          {/* Decorative brand mark */}
+          <span className={styles.cardMark} aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="49" fill="#0c0c0e" />
+              <path d="M40 33 24 50l16 17" stroke="#1c1c1f" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M60 33 76 50 60 67" stroke="#1c1c1f" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M55 28 45 72" stroke="#1c1c1f" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
 
-        {/* Footer Grid */}
-        <div className={styles.footerGrid}>
+          {/* Big headline */}
+          <h2 className={styles.bigLine}>
+            Be online happy with SiteOnLab.
+          </h2>
+
+          {/* Footer Grid */}
+          <div className={styles.footerGrid}>
           {/* Column 1: Logo & Info */}
           <div className={styles.footerColumn}>
             <Link href="/" className={styles.logo}>
@@ -167,6 +181,7 @@ const Footer = ({ showSchedule = true }: FooterProps) => {
               F1, Bhagawati Complex, Vejalpur, Ahmedabad, Gujarat 380051
             </p>
           </div>
+        </div>
         </div>
       </div>
     </footer>
