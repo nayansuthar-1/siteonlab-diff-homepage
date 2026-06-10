@@ -126,7 +126,7 @@
   letter-spacing: -0.03em;
   color: #ece7dd;
   margin: 0 0 90px;
-  max-width: 16ch;
+  white-space: nowrap;
 }
 
 /* Decorative brand mark, bottom-left, clipped by the card */
@@ -382,6 +382,7 @@
   .bigLine {
     margin-bottom: 48px;
     max-width: 100%;
+    white-space: normal;
   }
 
   .cardMark {
