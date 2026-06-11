@@ -102,6 +102,7 @@ export default function Header() {
       return [
         { title: "Blogs", href: "/blogs", accent: "#f59e0b" },
         { title: "Case Studies", href: "/case-studies", accent: "#f59e0b" },
+        { title: "Portfolio", href: "/portfolio", accent: "#f59e0b" },
       ];
     }
 
@@ -371,6 +372,21 @@ export default function Header() {
                       </svg>
                     </div>
                     <span className={styles.serviceTitle}>Case Studies</span>
+                    <div className={styles.cardGlow}></div>
+                  </Link>
+                  <Link
+                    href="/portfolio"
+                    className={styles.serviceCard}
+                    style={{ "--service-accent": "#f59e0b", flex: "0 0 240px" } as CSSProperties}
+                    onClick={() => setActiveDropdown(null)}
+                  >
+                    <div className={styles.serviceIconWrapper}>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                      </svg>
+                    </div>
+                    <span className={styles.serviceTitle}>Portfolio</span>
                     <div className={styles.cardGlow}></div>
                   </Link>
                 </div>
