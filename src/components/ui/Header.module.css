@@ -45,7 +45,7 @@
 }
 
 .logoImage {
-  width: 190px;
+  width: 270px;
   height: auto;
   display: block;
   object-fit: contain;
@@ -441,7 +441,7 @@
   }
 
   .logoImage {
-    width: 156px;
+    width: 190px;
     height: auto;
   }
 
