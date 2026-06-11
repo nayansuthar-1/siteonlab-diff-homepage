@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import Image from "next/image";
 import styles from "./portfolio.module.css";
 
 /* ─── Particle config (deterministic) ─── */
@@ -20,11 +21,15 @@ const PARTICLES = [
 /* ─── Hero text split into words ─── */
 const HERO_WORDS = ["Our", "solutions", "have", "helped", "global", "customers."];
 
-/* ─── Placeholder brand slots ─── */
-const BRAND_SLOTS = Array.from({ length: 8 }, (_, i) => ({
-  id: i,
-  label: `Brand ${i + 1}`,
-}));
+/* ─── Client brand logos (same as homepage) ─── */
+const clientBrands = [
+  { src: '/new/Group 11.png', alt: 'Client 1', scale: 1 },
+  { src: '/new/Group 12.png', alt: 'Client 2', scale: 0.65 },
+  { src: '/new/Group 13.png', alt: 'Client 3', scale: 1 },
+  { src: '/new/Mask group.png', alt: 'Client 4', scale: 1 },
+  { src: '/new/Mask group-1.png', alt: 'Client 5', scale: 1 },
+  { src: '/new/Mask group-2.png', alt: 'Client 6', scale: 1.5 },
+];
 
 export default function PortfolioPage() {
   const heroRef = useRef<HTMLElement>(null);
@@ -138,12 +143,18 @@ export default function PortfolioPage() {
                   className={styles.marqueeGroup}
                   aria-hidden={groupIdx === 1}
                 >
-                  {BRAND_SLOTS.map((slot) => (
+                  {clientBrands.map((brand, i) => (
                     <div
-                      key={`slot-${groupIdx}-${slot.id}`}
+                      key={`logo-${groupIdx}-${i}`}
                       className={styles.brandSlot}
                     >
-                      {slot.label}
+                      <Image
+                        src={brand.src}
+                        alt={brand.alt}
+                        fill
+                        style={{ objectFit: 'contain', padding: '12px', transform: `scale(${brand.scale})` }}
+                        sizes="(max-width: 720px) 40vw, 180px"
+                      />
                     </div>
                   ))}
                 </div>

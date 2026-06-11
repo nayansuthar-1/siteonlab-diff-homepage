@@ -13,6 +13,18 @@
   background: #000;
 }
 
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent, #000);
+  z-index: 4;
+  pointer-events: none;
+}
+
 /* Custom cursor */
 .customCursor {
   position: fixed;
@@ -513,31 +525,23 @@
 
 .marqueeGroup {
   display: flex;
-  gap: 48px;
-  padding-right: 48px;
+  gap: 2vw;
+  padding-right: 2vw;
   align-items: center;
 }
 
 .brandSlot {
   flex-shrink: 0;
-  width: 140px;
-  height: 56px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.02);
+  width: 18vw;
+  height: 100px;
+  border-radius: 12px;
+  background: transparent;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.15);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  transition: border-color 0.3s ease, background 0.3s ease;
-}
-
-.brandSlot:hover {
-  border-color: rgba(245, 158, 11, 0.15);
-  background: rgba(255, 255, 255, 0.04);
+  position: relative;
+  overflow: hidden;
 }
 
 /* ─── Responsive ─── */
@@ -575,13 +579,13 @@
   }
 
   .marqueeGroup {
-    gap: 32px;
-    padding-right: 32px;
+    gap: 3vw;
+    padding-right: 3vw;
   }
 
   .brandSlot {
-    width: 120px;
-    height: 48px;
+    width: 36vw;
+    height: 80px;
   }
 
   .scrollIndicator {
