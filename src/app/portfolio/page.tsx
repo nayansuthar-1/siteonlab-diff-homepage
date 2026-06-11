@@ -58,9 +58,12 @@ export default function PortfolioPage() {
         className={styles.hero}
         onMouseMove={handleMouseMove}
       >
-        {/* Animated gradient mesh */}
-        <div className={styles.heroBg} />
-        <div className={styles.ambientOrb} />
+        {/* Smoke + glow background */}
+        <div className={styles.glowContainer}>
+          <div className={styles.glow} />
+          <div className={styles.glowSecond} />
+          <div className={styles.glowThird} />
+        </div>
 
         {/* Subtle grid */}
         <div className={styles.gridOverlay} />
