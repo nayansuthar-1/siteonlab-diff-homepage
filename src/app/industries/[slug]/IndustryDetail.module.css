@@ -216,8 +216,9 @@
   z-index: -1;
 }
 
-.primaryCta span {
+.primaryCta svg {
   color: var(--industry-accent);
+  transition: transform 0.25s ease;
 }
 
 .primaryCta:hover {
@@ -226,13 +227,16 @@
   transform: translateY(-2px);
 }
 
+.primaryCta:hover svg {
+  transform: translateX(4px);
+}
+
 .primaryCta:hover::before {
   transform: translateX(110%);
 }
 
 .signalPanel,
 .listPanel,
-.workflowCard,
 .outcomeCard,
 .relatedCard {
   border: 1px solid transparent;
@@ -349,6 +353,71 @@
   font-weight: 740;
 }
 
+.workflowHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.workflowHeader h2 {
+  max-width: 720px;
+}
+
+.workflowHeader p {
+  max-width: 620px;
+  margin: 18px auto 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.processStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 8px;
+}
+
+.processNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 26px;
+  border-radius: 999px;
+  background: var(--industry-accent);
+  color: #050505;
+  font-size: 1.4rem;
+  font-weight: 850;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--industry-accent) 12%, transparent),
+    0 14px 38px color-mix(in srgb, var(--industry-accent) 22%, transparent);
+}
+
+.processStep h3 {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 720;
+}
+
+.processStep p {
+  margin: 0;
+  max-width: 240px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
 .capabilityGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -377,63 +446,6 @@
 
 .listPanel li::marker {
   color: var(--industry-accent);
-}
-
-.workflowGrid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.workflowCard {
-  position: relative;
-  min-height: 180px;
-  padding: 28px;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.34s cubic-bezier(0.2, 0.9, 0.2, 1), background 0.34s ease, box-shadow 0.34s ease;
-}
-
-.workflowCard::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(120deg, transparent 0%, transparent 42%, rgba(255, 255, 255, 0.1) 50%, transparent 58%, transparent 100%),
-    radial-gradient(circle at 14% 16%, color-mix(in srgb, var(--industry-accent) 18%, transparent), transparent 36%);
-  opacity: 0;
-  transform: translateX(-32%);
-  transition: opacity 0.34s ease, transform 0.65s ease;
-}
-
-.workflowCard:hover {
-  transform: translateY(-8px);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.028)) padding-box,
-    linear-gradient(135deg, color-mix(in srgb, var(--industry-accent) 58%, rgba(255, 255, 255, 0.18)), rgba(255, 255, 255, 0.06), color-mix(in srgb, var(--industry-accent) 26%, transparent)) border-box;
-  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.34), 0 0 34px color-mix(in srgb, var(--industry-accent) 12%, transparent);
-}
-
-.workflowCard:hover::before {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.workflowCard span,
-.workflowCard h3 {
-  position: relative;
-}
-
-.workflowCard span {
-  color: var(--industry-accent);
-  font-size: 0.9rem;
-  font-weight: 850;
-}
-
-.workflowCard h3 {
-  margin: 72px 0 0;
-  color: #fff;
-  font-size: 1.25rem;
 }
 
 .outcomeGrid {
@@ -477,16 +489,23 @@
   display: block;
   width: 36px;
   height: 3px;
-  margin-bottom: 34px;
+  margin-bottom: 28px;
   border-radius: 999px;
   background: var(--industry-accent);
 }
 
 .outcomeCard h3 {
-  margin: 0;
+  margin: 0 0 12px;
   color: #fff;
   font-size: 1.28rem;
   line-height: 1.35;
+}
+
+.outcomeCard p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
 
 .relatedHeader {
@@ -572,10 +591,21 @@
     gap: 40px;
   }
 
-  .workflowGrid,
+  .processGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 24px;
+  }
+
   .outcomeGrid,
   .relatedGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .processGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 }
 
@@ -612,8 +642,6 @@
   }
 
   .primaryCta,
-  .workflowCard,
-  .workflowCard::before,
   .outcomeCard,
   .outcomeCard::after,
   .relatedCard,

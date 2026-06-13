@@ -70,7 +70,7 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
               <p>{industry.heroLine}</p>
               <Link href="/contact" className={styles.primaryCta}>
                 Plan an industry build
-                <span aria-hidden="true">-&gt;</span>
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </Link>
             </div>
 
@@ -121,14 +121,16 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
         <div className={styles.container}>
           <div className={styles.workflowHeader}>
             <span className={styles.kicker}>Workflow model</span>
-            <h2>We design around the real movement of the business.</h2>
+            <h2>{industry.workflowTitle}</h2>
+            <p>{industry.workflowIntro}</p>
           </div>
 
-          <div className={styles.workflowGrid}>
+          <div className={styles.processGrid}>
             {industry.workflows.map((step, index) => (
-              <div className={styles.workflowCard} key={step}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{step}</h3>
+              <div className={styles.processStep} key={step.title}>
+                <div className={styles.processNumber}>{index + 1}</div>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
               </div>
             ))}
           </div>
@@ -137,11 +139,17 @@ export default async function IndustryDetailPage({ params }: IndustryPageProps) 
 
       <section className={styles.outcomeSection}>
         <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.kicker}>Business outcomes</span>
+            <h2>What this delivers for your {industry.title.toLowerCase()} business.</h2>
+          </div>
+
           <div className={styles.outcomeGrid}>
             {industry.outcomes.map((outcome) => (
-              <div className={styles.outcomeCard} key={outcome}>
+              <div className={styles.outcomeCard} key={outcome.title}>
                 <span />
-                <h3>{outcome}</h3>
+                <h3>{outcome.title}</h3>
+                <p>{outcome.description}</p>
               </div>
             ))}
           </div>

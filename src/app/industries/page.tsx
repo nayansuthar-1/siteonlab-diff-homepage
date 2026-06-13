@@ -29,7 +29,7 @@ export default function IndustriesPage() {
             </p>
             <Link href="/contact" className={styles.primaryCta}>
               Book consultation
-              <span aria-hidden="true">-&gt;</span>
+              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </Link>
           </div>
 

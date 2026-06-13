@@ -1,5 +1,15 @@
 import type { IndustryIconName } from "@/components/ui/IndustryIcon";
 
+export type ProcessStep = {
+  title: string;
+  description: string;
+};
+
+export type Outcome = {
+  title: string;
+  description: string;
+};
+
 export type Industry = {
   slug: string;
   title: string;
@@ -13,8 +23,10 @@ export type Industry = {
   focusIntro: string;
   expertise: string[];
   capabilities: string[];
-  workflows: string[];
-  outcomes: string[];
+  workflowTitle: string;
+  workflowIntro: string;
+  workflows: ProcessStep[];
+  outcomes: Outcome[];
   metrics: string[];
 };
 
@@ -48,8 +60,48 @@ export const industries: Industry[] = [
       "Automated payment processing",
       "Customer journey automation",
     ],
-    workflows: ["Discover", "Book", "Arrive", "Delight"],
-    outcomes: ["Higher direct bookings", "Smoother guest operations", "More repeat stays"],
+    workflowTitle: "Our travel & hospitality process",
+    workflowIntro:
+      "A clear, step-by-step approach designed to attract more travelers, increase direct bookings, and build lasting guest loyalty.",
+    workflows: [
+      {
+        title: "Discover",
+        description:
+          "Capture traveler intent early through search, content, and campaigns tuned to your destinations and packages.",
+      },
+      {
+        title: "Book",
+        description:
+          "Real-time availability and frictionless booking flows turn interest into confirmed, direct reservations.",
+      },
+      {
+        title: "Arrive",
+        description:
+          "Smooth check-in, guest apps, and operations tooling make every arrival effortless for staff and guests.",
+      },
+      {
+        title: "Delight",
+        description:
+          "Loyalty, follow-ups, and post-stay touchpoints turn a single trip into repeat stays and referrals.",
+      },
+    ],
+    outcomes: [
+      {
+        title: "Higher direct bookings",
+        description:
+          "Reduce dependence on third-party channels and keep more revenue on every reservation.",
+      },
+      {
+        title: "Smoother guest operations",
+        description:
+          "Automate routine tasks so your team spends time on guests instead of admin work.",
+      },
+      {
+        title: "More repeat stays",
+        description:
+          "Personalized follow-ups and loyalty programs keep past guests coming back.",
+      },
+    ],
     metrics: ["Booking conversion", "Guest response time", "Occupancy visibility"],
   },
   {
@@ -81,8 +133,48 @@ export const industries: Industry[] = [
       "AI recommendation engines",
       "Order and fulfillment automation",
     ],
-    workflows: ["Browse", "Compare", "Checkout", "Retain"],
-    outcomes: ["Faster checkout", "Cleaner inventory control", "Stronger repeat purchases"],
+    workflowTitle: "Our ecommerce & retail process",
+    workflowIntro:
+      "A conversion-focused path that guides shoppers from first click to loyal, repeat customer.",
+    workflows: [
+      {
+        title: "Browse",
+        description:
+          "Fast, intuitive storefronts and smart search help shoppers find the right product instantly.",
+      },
+      {
+        title: "Compare",
+        description:
+          "Rich product pages, reviews, and recommendations build confidence before checkout.",
+      },
+      {
+        title: "Checkout",
+        description:
+          "Streamlined, secure payment flows remove friction and recover abandoned carts.",
+      },
+      {
+        title: "Retain",
+        description:
+          "Automated post-purchase journeys and loyalty programs drive repeat orders.",
+      },
+    ],
+    outcomes: [
+      {
+        title: "Faster checkout",
+        description:
+          "Fewer steps and trusted payments lift completion rates across every device.",
+      },
+      {
+        title: "Cleaner inventory control",
+        description:
+          "Real-time stock and order data keep operations accurate and predictable.",
+      },
+      {
+        title: "Stronger repeat purchases",
+        description:
+          "Personalized retention flows increase average customer lifetime value.",
+      },
+    ],
     metrics: ["Cart conversion", "Average order value", "Stock accuracy"],
   },
   {
@@ -115,8 +207,48 @@ export const industries: Industry[] = [
       "AI-powered diagnostics support",
       "HIPAA/GDPR compliance",
     ],
-    workflows: ["Intake", "Diagnose", "Coordinate", "Follow up"],
-    outcomes: ["Safer patient data", "Faster appointments", "Better care coordination"],
+    workflowTitle: "Our healthcare delivery process",
+    workflowIntro:
+      "A secure, patient-first journey that connects every stage of care without compromising compliance.",
+    workflows: [
+      {
+        title: "Intake",
+        description:
+          "Digital registration and scheduling get patients into care quickly and accurately.",
+      },
+      {
+        title: "Diagnose",
+        description:
+          "Connected records and decision support give clinicians the full picture, fast.",
+      },
+      {
+        title: "Coordinate",
+        description:
+          "Shared workflows align providers, pharmacies, and labs around each patient.",
+      },
+      {
+        title: "Follow up",
+        description:
+          "Automated reminders and patient portals keep people engaged after every visit.",
+      },
+    ],
+    outcomes: [
+      {
+        title: "Safer patient data",
+        description:
+          "Encryption and HIPAA/GDPR compliance protect sensitive records by default.",
+      },
+      {
+        title: "Faster appointments",
+        description:
+          "Real-time scheduling reduces wait times and lowers no-show rates.",
+      },
+      {
+        title: "Better care coordination",
+        description:
+          "Interoperable systems keep every provider working from the same record.",
+      },
+    ],
     metrics: ["Appointment utilization", "Claim cycle time", "Patient portal usage"],
   },
   {
@@ -148,8 +280,48 @@ export const industries: Industry[] = [
       "Billing and retainer visibility",
       "CRM and calendar integrations",
     ],
-    workflows: ["Intake", "Review", "Manage", "Resolve"],
-    outcomes: ["Better client trust", "Reduced admin work", "Clearer case visibility"],
+    workflowTitle: "Our legal operations process",
+    workflowIntro:
+      "An organized, secure workflow that builds client trust while reducing administrative load.",
+    workflows: [
+      {
+        title: "Intake",
+        description:
+          "Structured digital intake captures qualified leads and routes them instantly.",
+      },
+      {
+        title: "Review",
+        description:
+          "Document automation and matter tracking keep every case organized from day one.",
+      },
+      {
+        title: "Manage",
+        description:
+          "Role-based portals give clients and staff secure, controlled access to case progress.",
+      },
+      {
+        title: "Resolve",
+        description:
+          "Billing visibility and clear communication close matters with confidence.",
+      },
+    ],
+    outcomes: [
+      {
+        title: "Better client trust",
+        description:
+          "Professional, secure systems signal credibility from the first interaction.",
+      },
+      {
+        title: "Reduced admin work",
+        description:
+          "Automation handles routine tasks so your team focuses on casework.",
+      },
+      {
+        title: "Clearer case visibility",
+        description:
+          "Live dashboards keep clients informed and reduce status inquiries.",
+      },
+    ],
     metrics: ["Lead-to-consult rate", "Document turnaround", "Client response time"],
   },
   {
@@ -181,8 +353,48 @@ export const industries: Industry[] = [
       "Gold, diamond, and variant data structures",
       "CRM and showroom follow-up automation",
     ],
-    workflows: ["Discover", "Inspect", "Inquire", "Purchase"],
-    outcomes: ["Premium brand trust", "Higher qualified inquiries", "Cleaner product operations"],
+    workflowTitle: "Our jewellery commerce process",
+    workflowIntro:
+      "A premium buying journey crafted to turn careful browsers into confident, high-value buyers.",
+    workflows: [
+      {
+        title: "Discover",
+        description:
+          "Editorial collections and rich storytelling draw buyers into your brand world.",
+      },
+      {
+        title: "Inspect",
+        description:
+          "High-detail product pages, certificates, and variant data build buying confidence.",
+      },
+      {
+        title: "Inquire",
+        description:
+          "Wishlist, inquiry, and appointment flows connect serious buyers to your team.",
+      },
+      {
+        title: "Purchase",
+        description:
+          "Secure checkout and showroom follow-ups close sales online and in person.",
+      },
+    ],
+    outcomes: [
+      {
+        title: "Premium brand trust",
+        description:
+          "Refined design and authenticity signals reassure high-value buyers.",
+      },
+      {
+        title: "Higher qualified inquiries",
+        description:
+          "Clear inquiry paths surface buyers who are ready to purchase.",
+      },
+      {
+        title: "Cleaner product operations",
+        description:
+          "Structured SKU and inventory data keep catalogs accurate and complete.",
+      },
+    ],
     metrics: ["Product inquiry rate", "Appointment bookings", "Catalog completion"],
   },
 ];
