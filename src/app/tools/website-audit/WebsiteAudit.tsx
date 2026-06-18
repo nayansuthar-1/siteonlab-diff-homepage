@@ -47,6 +47,12 @@ interface AuditResult {
 
 type Strategy = "mobile" | "desktop";
 
+interface LeadData {
+  fullName: string;
+  email: string;
+  companyName: string;
+}
+
 const WORKFLOW_STEPS = [
   { label: "Loading your page", detail: "Capturing the page and its resources" },
   { label: "Measuring performance", detail: "Running a full lab analysis (this takes a moment)" },
@@ -205,6 +211,12 @@ export default function WebsiteAudit() {
   const resultsRef = useRef<HTMLDivElement | null>(null);
   const lastAudited = useRef<string>("");
 
+  // Lead form state
+  const [showLeadForm, setShowLeadForm] = useState(false);
+  const [leadData, setLeadData] = useState<LeadData>({ fullName: "", email: "", companyName: "" });
+  const [leadError, setLeadError] = useState<string | null>(null);
+  const [pendingUrl, setPendingUrl] = useState("");
+
   useEffect(() => {
     return () => {
       if (stepTimer.current) clearInterval(stepTimer.current);
@@ -217,7 +229,7 @@ export default function WebsiteAudit() {
     }
   }, [result]);
 
-  async function audit(targetUrl: string, strat: Strategy) {
+  async function audit(targetUrl: string, strat: Strategy, lead: LeadData) {
     if (!targetUrl.trim() || loading) return;
     lastAudited.current = targetUrl.trim();
     setLoading(true);
@@ -239,7 +251,24 @@ export default function WebsiteAudit() {
         setError(data.error || "Something went wrong while auditing this site.");
       } else {
         setActiveStep(WORKFLOW_STEPS.length - 1);
-        setResult(data as AuditResult);
+        const auditResult = data as AuditResult;
+        setResult(auditResult);
+
+        // Save lead + audit scores to DB (fire-and-forget)
+        fetch("/api/admin/audit-leads", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fullName: lead.fullName,
+            email: lead.email,
+            companyName: lead.companyName,
+            websiteUrl: targetUrl.trim(),
+            strategy: strat,
+            scores: auditResult.scores,
+          }),
+        }).catch(() => {
+          // Silently ignore — the audit still succeeded
+        });
       }
     } catch {
       setError("We couldn't complete the audit. Please check the URL and try again.");
@@ -251,13 +280,39 @@ export default function WebsiteAudit() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    audit(url, strategy);
+    if (!url.trim()) return;
+    setPendingUrl(url.trim());
+    setLeadError(null);
+    setShowLeadForm(true);
+  }
+
+  function handleLeadSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const { fullName, email, companyName } = leadData;
+
+    if (!fullName.trim() || !email.trim() || !companyName.trim()) {
+      setLeadError("Please fill in all fields.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setLeadError("Please enter a valid email address.");
+      return;
+    }
+
+    setShowLeadForm(false);
+    setLeadError(null);
+    audit(pendingUrl, strategy, leadData);
+  }
+
+  function handleLeadClose() {
+    setShowLeadForm(false);
+    setLeadError(null);
   }
 
   function switchStrategy(strat: Strategy) {
     if (strat === strategy || loading) return;
     setStrategy(strat);
-    if (lastAudited.current) audit(lastAudited.current, strat);
+    if (lastAudited.current) audit(lastAudited.current, strat, leadData);
   }
 
   return (
@@ -306,9 +361,99 @@ export default function WebsiteAudit() {
               )}
             </button>
           </form>
-          <p className={styles.hint}>Free · No sign-up · Results in seconds</p>
+
         </div>
       </section>
+
+      {/* ---------- LEAD CAPTURE MODAL ---------- */}
+      {showLeadForm && (
+        <div className={styles.modalBackdrop} onClick={handleLeadClose}>
+          <div className={styles.modalCard} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.modalClose} onClick={handleLeadClose} aria-label="Close">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+
+            <div className={styles.modalHeader}>
+              <div className={styles.modalIconWrap}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10 9 9 9 8 9" />
+                </svg>
+              </div>
+              <h2 className={styles.modalTitle}>Get Your Audit Report</h2>
+              <p className={styles.modalSub}>
+                Enter your details below to receive your free website audit report.
+              </p>
+            </div>
+
+            <form className={styles.modalForm} onSubmit={handleLeadSubmit}>
+              {leadError && <div className={styles.modalError}>{leadError}</div>}
+
+              <div className={styles.modalField}>
+                <label className={styles.modalLabel} htmlFor="lead-name">Full Name</label>
+                <input
+                  id="lead-name"
+                  type="text"
+                  className={styles.modalInput}
+                  placeholder="John Doe"
+                  value={leadData.fullName}
+                  onChange={(e) => setLeadData((d) => ({ ...d, fullName: e.target.value }))}
+                  autoFocus
+                />
+              </div>
+
+              <div className={styles.modalField}>
+                <label className={styles.modalLabel} htmlFor="lead-email">Email Address</label>
+                <input
+                  id="lead-email"
+                  type="email"
+                  className={styles.modalInput}
+                  placeholder="john@company.com"
+                  value={leadData.email}
+                  onChange={(e) => setLeadData((d) => ({ ...d, email: e.target.value }))}
+                />
+              </div>
+
+              <div className={styles.modalField}>
+                <label className={styles.modalLabel} htmlFor="lead-company">Company Name</label>
+                <input
+                  id="lead-company"
+                  type="text"
+                  className={styles.modalInput}
+                  placeholder="Acme Inc."
+                  value={leadData.companyName}
+                  onChange={(e) => setLeadData((d) => ({ ...d, companyName: e.target.value }))}
+                />
+              </div>
+
+              <div className={styles.modalField}>
+                <label className={styles.modalLabel} htmlFor="lead-url">Website URL</label>
+                <input
+                  id="lead-url"
+                  type="text"
+                  className={styles.modalInput}
+                  value={pendingUrl}
+                  readOnly
+                  style={{ opacity: 0.6, cursor: "default" }}
+                />
+              </div>
+
+              <button type="submit" className={styles.modalSubmit}>
+                Start Audit
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       <div ref={resultsRef} />
 
@@ -350,7 +495,7 @@ export default function WebsiteAudit() {
               </svg>
               <p>{error}</p>
               {lastAudited.current && (
-                <button className={styles.rerun} onClick={() => audit(lastAudited.current, strategy)}>
+                <button className={styles.rerun} onClick={() => audit(lastAudited.current, strategy, leadData)}>
                   Try again
                 </button>
               )}
