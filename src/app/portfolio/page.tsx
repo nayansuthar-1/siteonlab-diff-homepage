@@ -21,6 +21,17 @@ const PARTICLES = [
 /* ─── Hero text split into words ─── */
 const HERO_WORDS = ["Our", "solutions", "have", "helped", "global", "customers."];
 
+/* ─── Portfolio projects ─── */
+const PROJECTS = [
+  { image: "/portfolio/1.png", url: "https://expogalerie-s.com/",         name: "Expo Galerie-S" },
+  { image: "/portfolio/2.png", url: "https://hotelwingorbit.in/",         name: "Hotel Wing Orbit" },
+  { image: "/portfolio/3.png", url: "https://www.stephaniecoudray.com/",  name: "Stephanie Coudray" },
+  { image: "/portfolio/4.png", url: "https://bhawnafoundation.com/",      name: "Bhawna Foundation" },
+  { image: "/portfolio/5.png", url: "https://skinfoodorganicsusa.com/",   name: "Skinfood Organics" },
+  { image: "/portfolio/6.png", url: "https://slaxorajewels.com/",         name: "Slaxora Jewels" },
+  { image: "/portfolio/7.png", url: "https://flamingo-piccolo-4nsz.squarespace.com/", name: "Flamingo Piccolo" },
+];
+
 /* ─── Client brand logos (same as homepage) ─── */
 const clientBrands = [
   { src: '/new/Group 11.png', alt: 'Client 1', scale: 1 },
@@ -34,11 +45,36 @@ const clientBrands = [
 export default function PortfolioPage() {
   const heroRef = useRef<HTMLElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  /* Intersection observer for staggered card reveal */
+  useEffect(() => {
+    if (!mounted) return;
+    const cards = document.querySelectorAll(`.${styles.projectCard}`);
+    if (!cards.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.getAttribute("data-idx"));
+            setVisibleCards((prev) => new Set(prev).add(idx));
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
+  }, [mounted]);
 
   /* Cursor-following glow */
   const handleMouseMove = useCallback(
@@ -160,6 +196,63 @@ export default function PortfolioPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ Portfolio Grid ═══ */}
+      <section className={styles.portfolioSection}>
+        <div className={styles.portfolioInner}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>
+              Featured <span>Projects</span>
+            </h2>
+            <p className={styles.sectionSub}>
+              A curated selection of websites we&apos;ve designed and developed for clients across the globe.
+            </p>
+          </div>
+
+          <div ref={gridRef} className={styles.projectsGrid}>
+            {PROJECTS.map((project, i) => (
+              <a
+                key={`project-${i}`}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.projectCard} ${visibleCards.has(i) ? styles.projectCardVisible : ""}`}
+                data-idx={i}
+                style={{ transitionDelay: `${(i % 3) * 0.12}s` }}
+              >
+                <div className={styles.projectImageWrap}>
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  {/* Hover overlay */}
+                  <div className={styles.projectOverlay}>
+                    <span className={styles.overlayIcon}>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                    </span>
+                    <span className={styles.overlayText}>Visit Site</span>
+                  </div>
+                </div>
+
+                {/* Card footer */}
+                <div className={styles.projectInfo}>
+                  <h3 className={styles.projectName}>{project.name}</h3>
+                  <span className={styles.projectUrl}>
+                    {project.url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
+                  </span>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
