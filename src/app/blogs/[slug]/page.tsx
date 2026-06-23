@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBlogBySlug } from "@/lib/blogs";
 import ContactSection from "@/components/sections/ContactSection";
+import Footer from "@/components/ui/Footer";
 import TableOfContents, { type TocItem } from "@/components/blog/TableOfContents";
 import ScheduleInterviewForm from "@/components/blog/ScheduleInterviewForm";
 import styles from "@/components/blog/ArticleLayout.module.css";
@@ -109,6 +110,7 @@ export default async function BlogDetailPage({ params }: Props) {
       </section>
 
       <ContactSection />
+      <Footer showSchedule={false} />
     </main>
   );
 }

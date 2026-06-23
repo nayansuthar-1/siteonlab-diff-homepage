@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./CaseStudies.module.css";
 import ContactSection from "@/components/sections/ContactSection";
+import Footer from "@/components/ui/Footer";
 import { getAllCaseStudies } from "@/lib/case-studies";
 import type { CSSProperties } from "react";
 
@@ -79,6 +80,7 @@ export default async function CaseStudiesPage() {
       </section>
 
       <ContactSection />
+      <Footer showSchedule={false} />
     </main>
   );
 }

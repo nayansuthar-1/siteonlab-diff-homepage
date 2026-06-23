@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Blogs.module.css";
 import ContactSection from "@/components/sections/ContactSection";
+import Footer from "@/components/ui/Footer";
 import { getAllBlogs } from "@/lib/blogs";
 import type { CSSProperties } from "react";
 
@@ -78,6 +79,7 @@ export default async function BlogsPage() {
 
       {/* Second Section - Contact Form */}
       <ContactSection />
+      <Footer showSchedule={false} />
     </main>
   );
 }

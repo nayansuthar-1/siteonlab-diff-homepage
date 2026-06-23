@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
+import Footer from "@/components/ui/Footer";
 import styles from "./portfolio.module.css";
 
 /* ─── Particle config (deterministic) ─── */
@@ -256,6 +257,8 @@ export default function PortfolioPage() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </main>
   );
 }
