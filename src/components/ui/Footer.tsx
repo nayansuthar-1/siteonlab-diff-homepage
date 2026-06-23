@@ -115,17 +115,17 @@ const Footer = ({ showSchedule = true }: FooterProps) => {
           <div className={styles.footerColumn}>
             <h3 className={styles.columnTitle}>Our Services</h3>
             <ul className={styles.columnList}>
-              <li><Link href="/services/branding">Branding</Link></li>
-              <li><Link href="/services/seo">SEO Services</Link></li>
-              <li><Link href="/services/ppc">PPC Management</Link></li>
-              <li><Link href="/services/social-media">Social Media Marketing</Link></li>
-              <li><Link href="/services/advertising">Advertising Services</Link></li>
+              <li><Link href="/services/branding-services">Branding</Link></li>
+              <li><Link href="/services/seo-service">SEO Services</Link></li>
+              <li><Link href="/services/ppc-management">PPC Management</Link></li>
+              <li><Link href="/services/social-media-marketing">Social Media Marketing</Link></li>
+              <li><Link href="/services/advertising-services">Advertising Services</Link></li>
               <li><Link href="/services/website-design">Website Design</Link></li>
               <li><Link href="/services/website-development">Website Development</Link></li>
-              <li><Link href="/services/wordpress">WordPress Development</Link></li>
-              <li><Link href="/services/shopify">Shopify Development</Link></li>
-              <li><Link href="/services/ecommerce">eCommerce Development</Link></li>
-              <li><Link href="/services/content-writing">Content Writing</Link></li>
+              <li><Link href="/services/wordpress-development">WordPress Development</Link></li>
+              <li><Link href="/services/shopify-development">Shopify Development</Link></li>
+              <li><Link href="/services/ecommerce-development">eCommerce Development</Link></li>
+              <li><Link href="/services">Content Writing</Link></li>
             </ul>
           </div>
 

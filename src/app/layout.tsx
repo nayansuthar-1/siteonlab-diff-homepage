@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/ui/Header";
+import SiteNavbar from "@/components/ui/SiteNavbar";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 
 const geistSans = Geist({
@@ -38,7 +38,7 @@ export default function RootLayout({
     >
       <body className={`${plusJakarta.className} min-h-full flex flex-col`}>
         <SmoothScroll>
-          <Header />
+          <SiteNavbar />
           {children}
         </SmoothScroll>
       </body>

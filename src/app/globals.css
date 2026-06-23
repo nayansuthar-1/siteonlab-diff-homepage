@@ -4,8 +4,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@theme {
+  /* Display font reuses the Plus Jakarta Sans loaded via next/font */
+  --font-display: var(--font-plus-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand accent colors used by the homepage sections */
+  --color-brand-red: #ea580c;
+  --color-brand-orange: #f97316;
+}
+
 html,
 body {
   background-color: black;
   color: white;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
