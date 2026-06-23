@@ -407,44 +407,64 @@ const principles = [
 ];
 
 const executives = [
-  { 
-    name: "Oleks Mykolaienko", 
-    title: "Founding partner & CEO",
-    bio: "Oleks brings over 15 years of experience in strategic leadership and software architecture, driving innovation across the enterprise."
+  {
+    name: "Hitesh Solanki",
+    title: "Co-Founder, Head of Client Acquisition",
+    bio: "As co-founder, Hitesh leads client acquisition at SiteonLab, building partnerships and connecting brands with the right digital solutions."
   },
-  { 
-    name: "Serge Nekipelov", 
-    title: "Founding partner & President",
-    bio: "Serge has been working with globally-recognized brands for more than 20 years. He is a process-oriented digital marketing expert and UX perfectionist."
+  {
+    name: "Kartik Malviya",
+    title: "Co-Founder, Head of Tech",
+    bio: "Co-founder and head of technology, Kartik drives SiteonLab's engineering direction and technical architecture across every project."
   },
-  { 
-    name: "Henrik Åsén", 
-    title: "Partner & CIO",
-    bio: "Henrik specializes in complex infrastructure and information security, ensuring our technical foundations are world-class."
+  {
+    name: "Kalpesh Kumar",
+    title: "Head of Finance",
+    bio: "Kalpesh oversees SiteonLab's finances, keeping the business healthy, transparent, and ready to scale."
   },
-  { 
-    name: "Christian Schaffner", 
-    title: "Partner & CCO",
-    bio: "Christian leads our client relations with a focus on long-term value creation and transparent communication strategies."
+  {
+    name: "Bhavesh Malviya",
+    title: "Sr. Graphics Designer",
+    bio: "Bhavesh crafts the visual identity behind SiteonLab's work, turning ideas into striking, on-brand designs."
   },
-  { 
-    name: "Vitalii Aizen", 
-    title: "Partner & CBDO",
-    bio: "Vitalii is responsible for global business expansion and identifying high-impact partnership opportunities in emerging markets."
+  {
+    name: "Kabir",
+    title: "Head of Operations",
+    bio: "Kabir keeps SiteonLab running smoothly, aligning teams and processes to deliver work on time."
   },
-  { 
-    name: "Filipp Danylchenko", 
-    title: "Head of PMO",
-    bio: "Filipp ensures operational excellence across all projects, implementing agile methodologies that guarantee on-time delivery."
+  {
+    name: "Manav Parihar",
+    title: "Web Development Lead",
+    bio: "Manav leads web development at SiteonLab, turning designs into fast, reliable, and scalable websites."
   },
-  { 
-    name: "Oleksandra Klymyk", 
-    title: "HR Business Partner",
-    bio: "Oleksandra focuses on building a high-performance culture and attracting top-tier talent to our growing engineering teams."
+  {
+    name: "Ajaypal Singh",
+    title: "SEO Lead",
+    bio: "Ajaypal heads SEO strategy at SiteonLab, helping clients rank higher and grow their organic reach."
   },
-  { 
-    name: "Jens Wernborg", 
-    title: "AI Strategist/Head of Asia",
-    bio: "Jens bridges the gap between advanced AI research and practical business applications across the Asian markets."
+  {
+    name: "Nayan Suthar",
+    title: "Full Stack Developer",
+    bio: "Nayan builds end-to-end web experiences at SiteonLab, working across both front-end and back-end."
+  },
+  {
+    name: "Jayanti Suthar",
+    title: "Full Stack Developer",
+    bio: "Jayanti develops robust full-stack solutions, bringing features to life from database to interface."
+  },
+  {
+    name: "Swaroop Singh",
+    title: "Sr. SEO Expert",
+    bio: "Swaroop brings deep SEO expertise to SiteonLab, optimizing content and strategy for lasting search performance."
+  },
+  {
+    name: "Atul Purohit",
+    title: "Web Developer",
+    bio: "Atul develops clean, responsive websites that bring client visions to the web."
+  },
+  {
+    name: "Kunal Gugarwal",
+    title: "Web Developer",
+    bio: "Kunal builds and maintains web solutions, focused on performance and detail."
   },
 ];
