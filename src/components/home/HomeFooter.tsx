@@ -190,6 +190,9 @@ export default function HomeFooter() {
               <a href="mailto:hello@siteonlab.com" className="text-white font-semibold font-display text-sm hover:text-orange-400 transition-colors duration-200 block">
                 hello@siteonlab.com
               </a>
+              <a href="mailto:hitesh@siteonlab.com" className="text-white font-semibold font-display text-sm hover:text-orange-400 transition-colors duration-200 block">
+                hitesh@siteonlab.com
+              </a>
               <p className="text-[11px] text-gray-500 leading-normal mt-1 font-light">
                 Get quote via email
               </p>

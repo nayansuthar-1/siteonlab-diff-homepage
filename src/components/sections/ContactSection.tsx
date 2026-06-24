@@ -69,6 +69,7 @@ export default function ContactSection({ hideLocation = false }: ContactSectionP
               <div className={styles.contactDetails}>
                 <span>Send us an email</span>
                 <a href="mailto:hello@siteonlab.com">hello@siteonlab.com</a>
+                <a href="mailto:hitesh@siteonlab.com">hitesh@siteonlab.com</a>
               </div>
             </div>
           </div>
@@ -108,7 +109,7 @@ export default function ContactSection({ hideLocation = false }: ContactSectionP
                 const body = bodyLines.join("\r\n");
 
                 // Use Gmail's direct compose URL for a more reliable "Open Gmail" experience
-                const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=hello@siteonlab.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=hello@siteonlab.com,hitesh@siteonlab.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 
                 window.open(gmailLink, '_blank');
               }}

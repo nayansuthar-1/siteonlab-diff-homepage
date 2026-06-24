@@ -94,12 +94,12 @@ export default function SiteNavbar() {
               width={866}
               height={288}
               priority
-              className="h-9 w-auto md:h-10"
+              className="h-12 w-auto md:h-14"
             />
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-7 text-[11px] font-bold tracking-[0.14em] text-gray-400 uppercase font-display">
+          <nav className="hidden md:flex items-center gap-7 text-[11px] font-semibold tracking-[0.12em] text-gray-400 uppercase font-display">
             {navItems.map((item) =>
               item.key ? (
                 <button
@@ -136,7 +136,7 @@ export default function SiteNavbar() {
             <Link
               href="/contact"
               onMouseEnter={() => setActive(null)}
-              className="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-600 to-amber-500 text-[11px] font-bold tracking-[0.14em] text-white uppercase font-display shadow-lg shadow-orange-900/20 hover:shadow-orange-700/30 hover:brightness-110 active:scale-[0.98] duration-300 transition-all"
+              className="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-600 to-amber-500 text-[11px] font-semibold tracking-[0.12em] text-white uppercase font-display shadow-lg shadow-orange-900/20 hover:shadow-orange-700/30 hover:brightness-110 active:scale-[0.98] duration-300 transition-all"
             >
               Contact us
             </Link>
@@ -244,7 +244,7 @@ export default function SiteNavbar() {
                     <button
                       type="button"
                       onClick={() => setMobileExpanded(mobileExpanded === item.key ? null : item.key!)}
-                      className="w-full flex items-center justify-between py-4 text-sm font-semibold tracking-wider font-display uppercase text-gray-300"
+                      className="w-full flex items-center justify-between py-4 text-sm font-semibold tracking-[0.12em] font-display uppercase text-gray-300"
                       aria-expanded={mobileExpanded === item.key}
                     >
                       {item.label}
@@ -269,7 +269,7 @@ export default function SiteNavbar() {
                                 key={sub.href}
                                 href={sub.href}
                                 onClick={closeMobile}
-                                className="flex items-center gap-2 py-2 text-[13px] text-gray-400 hover:text-white transition-colors"
+                                className="flex items-center gap-2 py-2 text-[13px] font-medium text-gray-400 hover:text-white transition-colors"
                               >
                                 <span className="w-1 h-1 rounded-full bg-orange-500/70" />
                                 {sub.title}
@@ -285,7 +285,7 @@ export default function SiteNavbar() {
                     key={item.label}
                     href={item.href!}
                     onClick={closeMobile}
-                    className="py-4 text-sm font-semibold tracking-wider font-display uppercase text-gray-300 border-b border-white/[0.05]"
+                    className="py-4 text-sm font-semibold tracking-[0.12em] font-display uppercase text-gray-300 border-b border-white/[0.05]"
                   >
                     {item.label}
                   </Link>
@@ -295,7 +295,7 @@ export default function SiteNavbar() {
               <Link
                 href="/contact"
                 onClick={closeMobile}
-                className="mt-7 w-full block text-center py-3.5 bg-gradient-to-r from-orange-600 to-amber-500 text-white font-bold rounded-full text-xs uppercase tracking-widest font-display"
+                className="mt-7 w-full block text-center py-3.5 bg-gradient-to-r from-orange-600 to-amber-500 text-white font-semibold rounded-full text-xs uppercase tracking-[0.12em] font-display"
               >
                 Contact us
               </Link>
@@ -319,7 +319,7 @@ function DropdownColumn({
   children: React.ReactNode;
 }) {
   const heading = (
-    <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.2em] text-gray-500 font-display font-semibold mb-5">
+    <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.12em] text-gray-500 font-display font-semibold mb-5">
       {title}
       {indexHref && <ArrowUpRight className="w-3 h-3 opacity-60" />}
     </span>
@@ -352,7 +352,7 @@ function DropdownLink({
     <Link
       href={href}
       onClick={onNavigate}
-      className="text-[13px] text-gray-400 hover:text-white transition-colors duration-200 font-light"
+      className="text-[13px] text-gray-400 hover:text-white transition-colors duration-200 font-medium"
     >
       {children}
     </Link>

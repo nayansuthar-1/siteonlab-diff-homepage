@@ -1,18 +1,69 @@
 "use client";
 
+import type { ReactNode } from 'react';
+import Image from 'next/image';
 import { motion } from 'motion/react';
-import { Dna, Terminal, Target, Compass, Utensils, Globe, Layers, Eye } from 'lucide-react';
+
+// Inline reproduction of the BREAKPOINT brand logo (sun + wave emblem above a
+// letter-spaced wordmark). Rendered inline so it inherits the site font.
+function BreakpointLogo() {
+  return (
+    <svg
+      viewBox="0 0 280 96"
+      role="img"
+      aria-label="Breakpoint"
+      className="h-12 w-auto"
+    >
+      {/* Sun */}
+      <circle cx="140" cy="30" r="22" fill="#ecd6a3" />
+      {/* Horizon line gently waving across the mark */}
+      <path
+        d="M14 40 C 60 26 96 26 124 38 C 138 44 150 44 164 38 C 192 26 224 28 266 40"
+        fill="none"
+        stroke="#7d5a3a"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+      />
+      {/* Breaking wave with a teal underside, tucked by the sun */}
+      <path
+        d="M128 41 q 10 -16 24 -6 q 9 7 2 15 q -7 7 -17 3 q -10 -4 -9 -12 z"
+        fill="#9fb8b5"
+      />
+      <path
+        d="M128 41 q 10 -16 24 -6 q 9 7 2 15"
+        fill="none"
+        stroke="#7d5a3a"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+      />
+      {/* Wordmark */}
+      <text
+        x="140"
+        y="86"
+        textAnchor="middle"
+        fill="#ecd6a3"
+        fontFamily="inherit"
+        fontSize="26"
+        fontWeight="500"
+        letterSpacing="7"
+      >
+        BREAKPOINT
+      </text>
+    </svg>
+  );
+}
+
+type MarqueeLogo = { name: string; logo?: ReactNode; img?: { src: string; scale: number } };
 
 export default function LogoMarquee() {
-  const logos = [
-    { name: 'Biosynthesis', icon: <Dna className="w-4.5 h-4.5" /> },
-    { name: 'Command+R', icon: <Terminal className="w-4.5 h-4.5" /> },
-    { name: 'FocalPoint', icon: <Target className="w-4.5 h-4.5" /> },
-    { name: 'Acme Corp', icon: <Compass className="w-4.5 h-4.5" /> },
-    { name: 'Epicurious', icon: <Utensils className="w-4.5 h-4.5" /> },
-    { name: 'GlobalBank', icon: <Globe className="w-4.5 h-4.5" /> },
-    { name: 'Layers Space', icon: <Layers className="w-4.5 h-4.5" /> },
-    { name: 'Optic Core', icon: <Eye className="w-4.5 h-4.5" /> },
+  const logos: MarqueeLogo[] = [
+    { name: 'Breakpoint', logo: <BreakpointLogo /> },
+    { name: 'SR Industries', img: { src: '/new/Group 11.png', scale: 1 } },
+    { name: 'Client 2', img: { src: '/new/Group 12.png', scale: 0.65 } },
+    { name: 'Client 3', img: { src: '/new/Group 13.png', scale: 1 } },
+    { name: 'Client 4', img: { src: '/new/Mask group.png', scale: 1 } },
+    { name: 'Client 5', img: { src: '/new/Mask group-1.png', scale: 1 } },
+    { name: 'Client 6', img: { src: '/new/Mask group-2.png', scale: 1.5 } },
   ];
 
   // Duplicate items twice to ensure endless cycle coverage
@@ -37,14 +88,21 @@ export default function LogoMarquee() {
           {duplicatedLogos.map((logo, idx) => (
             <div
               key={`${logo.name}-${idx}`}
-              className="flex items-center gap-2.5 shrink-0 opacity-40 hover:opacity-85 transition-opacity duration-300 pointer-events-none"
+              className="flex items-center justify-center shrink-0 opacity-50 hover:opacity-90 transition-opacity duration-300 pointer-events-none"
             >
-              <div className="text-gray-400">
-                {logo.icon}
-              </div>
-              <span className="text-gray-200 font-semibold text-[11px] sm:text-xs tracking-[0.18em] font-display uppercase">
-                {logo.name}
-              </span>
+              {logo.img ? (
+                <div className="relative h-10 w-36">
+                  <Image
+                    src={logo.img.src}
+                    alt={logo.name}
+                    fill
+                    sizes="160px"
+                    style={{ objectFit: 'contain', transform: `scale(${logo.img.scale})` }}
+                  />
+                </div>
+              ) : (
+                logo.logo
+              )}
             </div>
           ))}
         </motion.div>

@@ -26,7 +26,7 @@ export default function ScheduleInterviewForm() {
       message,
     ].join("\r\n");
 
-    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=hello@siteonlab.com&su=${encodeURIComponent(
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=hello@siteonlab.com,hitesh@siteonlab.com&su=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
     window.open(gmailLink, "_blank");
