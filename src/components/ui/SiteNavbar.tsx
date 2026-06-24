@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
 import { services } from "@/lib/services";
@@ -74,7 +75,7 @@ export default function SiteNavbar() {
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
           scrolled || active
-            ? "bg-[#07090e]/90 backdrop-blur-md border-b border-white/[0.06]"
+            ? "bg-[#07090e]/90 backdrop-blur-md border-b border-white/[0.06] shadow-lg shadow-black/20"
             : "bg-transparent border-b border-transparent"
         }`}
         onMouseLeave={() => setActive(null)}
@@ -83,11 +84,18 @@ export default function SiteNavbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-1.5 font-display font-bold text-lg tracking-widest text-white"
+            className="flex items-center shrink-0"
+            aria-label="SiteOnLab home"
             onClick={() => setActive(null)}
           >
-            <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-            SiteOnLab
+            <Image
+              src="/siteon_lab-removebg-preview (1).png"
+              alt="SiteOnLab"
+              width={866}
+              height={288}
+              priority
+              className="h-9 w-auto md:h-10"
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -128,7 +136,7 @@ export default function SiteNavbar() {
             <Link
               href="/contact"
               onMouseEnter={() => setActive(null)}
-              className="hidden sm:inline-block px-5 py-2.5 rounded-full border border-gray-800 text-[11px] font-bold tracking-[0.14em] text-white uppercase font-display hover:text-orange-400 hover:border-orange-500 duration-300 transition-colors"
+              className="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-600 to-amber-500 text-[11px] font-bold tracking-[0.14em] text-white uppercase font-display shadow-lg shadow-orange-900/20 hover:shadow-orange-700/30 hover:brightness-110 active:scale-[0.98] duration-300 transition-all"
             >
               Contact us
             </Link>

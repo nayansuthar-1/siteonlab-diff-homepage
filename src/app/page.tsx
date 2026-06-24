@@ -7,7 +7,8 @@ import PortfolioGrid from "@/components/home/PortfolioGrid";
 import Testimonials from "@/components/home/Testimonials";
 import BlogSection from "@/components/home/BlogSection";
 import ContactFormSection from "@/components/home/ContactFormSection";
-import Footer from "@/components/home/HomeFooter";
+import BookGrowthCall from "@/components/home/BookGrowthCall";
+import Footer from "@/components/ui/Footer";
 
 export default function Home() {
   return (
@@ -46,7 +47,10 @@ export default function Home() {
         <ContactFormSection />
       </main>
 
-      {/* Footer (new design, site nav options) */}
+      {/* Book A Growth Call — home page only, sits just above the footer */}
+      <BookGrowthCall />
+
+      {/* Footer (shared site footer used across all pages) */}
       <Footer />
     </div>
   );

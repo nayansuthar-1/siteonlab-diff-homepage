@@ -5,12 +5,19 @@
 @tailwind utilities;
 
 @theme {
-  /* Display font reuses the Plus Jakarta Sans loaded via next/font */
-  --font-display: var(--font-plus-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  /* Poppins is loaded via next/font and used across the whole site */
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 
   /* Brand accent colors used by the homepage sections */
   --color-brand-red: #ea580c;
   --color-brand-orange: #f97316;
+}
+
+/* Legacy alias: many CSS modules reference --font-plus-jakarta directly.
+   Map it to Poppins so the new font applies everywhere without per-file edits. */
+:root {
+  --font-plus-jakarta: var(--font-poppins);
 }
 
 html,

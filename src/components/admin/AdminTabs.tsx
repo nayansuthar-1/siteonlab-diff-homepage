@@ -40,12 +40,24 @@ interface AuditLead {
   createdAt: string;
 }
 
-type Tab = "blogs" | "case-studies" | "audit-leads";
+interface GrowthLead {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  website: string;
+  service: string;
+  referral: string;
+  createdAt: string;
+}
+
+type Tab = "blogs" | "case-studies" | "audit-leads" | "growth-leads";
 
 interface Props {
   blogs: Blog[];
   caseStudies: CaseStudy[];
   auditLeads: AuditLead[];
+  growthLeads: GrowthLead[];
 }
 
 function scoreColor(score: number | null): string {
@@ -67,7 +79,7 @@ function ScoreBadge({ score, label }: { score: number | null; label: string }) {
   );
 }
 
-export default function AdminTabs({ blogs, caseStudies, auditLeads }: Props) {
+export default function AdminTabs({ blogs, caseStudies, auditLeads, growthLeads }: Props) {
   const [activeTab, setActiveTab] = useState<Tab>("blogs");
 
   const tabs: { id: Tab; label: string; count: number; icon: React.ReactNode }[] = [
@@ -105,6 +117,16 @@ export default function AdminTabs({ blogs, caseStudies, auditLeads }: Props) {
           <circle cx="9" cy="7" r="4" />
           <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
           <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      ),
+    },
+    {
+      id: "growth-leads",
+      label: "Growth Calls",
+      count: growthLeads.length,
+      icon: (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
         </svg>
       ),
     },
@@ -246,6 +268,60 @@ export default function AdminTabs({ blogs, caseStudies, auditLeads }: Props) {
                   </div>
                 </div>
               ))}
+            </div>
+          )}
+        </section>
+      )}
+
+      {activeTab === "growth-leads" && (
+        <section className={styles.sectionBlock}>
+          <div className={styles.sectionHead}>
+            <h2 className={styles.sectionTitle}>Growth Calls ({growthLeads.length})</h2>
+          </div>
+
+          {growthLeads.length === 0 ? (
+            <div className={styles.empty}>No growth call requests yet. They will appear here when visitors submit the &ldquo;Book A Growth Call&rdquo; form.</div>
+          ) : (
+            <div className={styles.list}>
+              {growthLeads.map((lead) => {
+                const name = `${lead.firstName} ${lead.lastName}`.trim() || lead.email;
+                return (
+                  <div key={lead.id} className={styles.item}>
+                    <div className={styles.leadIcon}>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                      </svg>
+                    </div>
+                    <div className={styles.itemMain}>
+                      <div className={styles.itemTitle}>{name}</div>
+                      <div className={styles.itemMeta}>
+                        {lead.email} · {lead.website} · {lead.service}
+                      </div>
+                      <div className={styles.itemMeta}>
+                        {new Date(lead.createdAt).toLocaleDateString()}
+                        {lead.referral ? ` · Heard via: ${lead.referral}` : ""}
+                      </div>
+                    </div>
+                    <div className={styles.itemActions}>
+                      <a
+                        href={`mailto:${lead.email}`}
+                        className={`${styles.btn} ${styles.btnGhost}`}
+                      >
+                        Email
+                      </a>
+                      <a
+                        href={lead.website.startsWith("http") ? lead.website : `https://${lead.website}`}
+                        className={`${styles.btn} ${styles.btnGhost}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Visit
+                      </a>
+                      <DeleteButton endpoint={`/api/admin/growth-leads/${lead.id}`} label={`growth call from "${name}"`} />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           )}
         </section>
