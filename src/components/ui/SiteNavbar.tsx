@@ -80,7 +80,7 @@ export default function SiteNavbar() {
         }`}
         onMouseLeave={() => setActive(null)}
       >
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-12 h-[72px] flex items-center justify-between">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-12 h-21 flex items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
@@ -94,12 +94,12 @@ export default function SiteNavbar() {
               width={866}
               height={288}
               priority
-              className="h-12 w-auto md:h-14"
+              className="h-14 w-auto md:h-16"
             />
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-7 text-[11px] font-semibold tracking-[0.12em] text-gray-400 uppercase font-display">
+          <nav className="hidden md:flex items-center gap-7 text-[13px] font-semibold tracking-[0.12em] text-gray-400 uppercase font-display">
             {navItems.map((item) =>
               item.key ? (
                 <button
@@ -123,7 +123,7 @@ export default function SiteNavbar() {
                   key={item.label}
                   href={item.href!}
                   onMouseEnter={() => setActive(null)}
-                  className="hover:text-white transition-colors duration-200"
+                  className="normal-case hover:text-white transition-colors duration-200"
                 >
                   {item.label}
                 </Link>
@@ -136,7 +136,7 @@ export default function SiteNavbar() {
             <Link
               href="/contact"
               onMouseEnter={() => setActive(null)}
-              className="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-600 to-amber-500 text-[11px] font-semibold tracking-[0.12em] text-white uppercase font-display shadow-lg shadow-orange-900/20 hover:shadow-orange-700/30 hover:brightness-110 active:scale-[0.98] duration-300 transition-all"
+              className="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-orange-600 to-amber-500 text-[13px] font-semibold tracking-[0.12em] text-white uppercase font-display shadow-lg shadow-orange-900/20 hover:shadow-orange-700/30 hover:brightness-110 active:scale-[0.98] duration-300 transition-all"
             >
               Contact us
             </Link>
@@ -235,7 +235,7 @@ export default function SiteNavbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden fixed inset-0 top-[72px] z-40 bg-[#07090e]/98 backdrop-blur-md overflow-y-auto"
+            className="md:hidden fixed inset-0 top-21 z-40 bg-[#07090e]/98 backdrop-blur-md overflow-y-auto"
           >
             <nav className="flex flex-col px-6 py-6">
               {navItems.map((item) =>
@@ -285,7 +285,7 @@ export default function SiteNavbar() {
                     key={item.label}
                     href={item.href!}
                     onClick={closeMobile}
-                    className="py-4 text-sm font-semibold tracking-[0.12em] font-display uppercase text-gray-300 border-b border-white/[0.05]"
+                    className="py-4 text-sm font-semibold tracking-[0.12em] font-display normal-case text-gray-300 border-b border-white/[0.05]"
                   >
                     {item.label}
                   </Link>

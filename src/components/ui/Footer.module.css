@@ -224,7 +224,32 @@
 
 .left {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
   justify-content: flex-start;
+}
+
+.legalLinks {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.legalLinks a {
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.legalLinks a:hover {
+  color: #fff;
+}
+
+.legalDivider {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 12px;
 }
 
 .right {
@@ -326,6 +351,7 @@
 
   .left, .right {
     justify-content: center;
+    align-items: center;
   }
 
   .ctaSection {
@@ -408,6 +434,7 @@
 
   .left, .center, .right {
     justify-content: center;
+    align-items: center;
   }
 
   .copyright {

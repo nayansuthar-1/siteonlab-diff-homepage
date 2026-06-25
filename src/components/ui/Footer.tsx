@@ -174,6 +174,11 @@ const Footer = ({ showSchedule = true }: FooterProps) => {
             <p className={styles.copyright}>
               © 2026 Siteon Lab. All Rights reserved
             </p>
+            <nav className={styles.legalLinks} aria-label="Legal">
+              <Link href="/terms-and-conditions">Terms and Conditions</Link>
+              <span className={styles.legalDivider} aria-hidden="true">•</span>
+              <Link href="/privacy-policy">Privacy Policy</Link>
+            </nav>
           </div>
 
           <div className={styles.right}>
